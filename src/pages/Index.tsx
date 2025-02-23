@@ -75,64 +75,60 @@ const Index = () => {
         </div>
       </div>
 
-      <div className="flex transition-all duration-300">
-        {/* Menu Panel */}
-        <div className={`relative ${isMenuOpen ? "w-[300px]" : "w-0"} transition-all duration-300`}>
-          <div className="fixed left-[120px] top-0 h-screen w-[300px] bg-black/90">
-            <nav className="h-full flex items-center justify-center">
-              <div className="space-y-6 w-full px-12">
-                {menuItems.map((item, index) => (
-                  <div key={index} className="flex justify-center">
-                    <a
-                      href="#"
-                      className="text-[1.8rem] leading-none font-extrabold text-white hover:text-[#5CC6D0] transition-colors whitespace-nowrap"
-                    >
-                      {item}
-                    </a>
-                  </div>
-                ))}
-              </div>
-            </nav>
-          </div>
-        </div>
-
-        {/* Main Content */}
-        <div className="ml-[120px]">
-          <div
-            className="fixed inset-0 bg-cover bg-center transition-all duration-300"
-            style={{
-              backgroundImage: `url(${
-                hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage
-              })`,
-              marginLeft: isMenuOpen ? "420px" : "120px",
-            }}
-          >
-            <div className="absolute inset-0 bg-black/40" />
-          </div>
-
-          <div 
-            className="flex h-screen relative z-10 transition-all duration-300"
-            style={{ 
-              marginLeft: isMenuOpen ? "300px" : "0",
-            }}
-          >
-            {panels.map((panel, index) => (
-              <div
-                key={index}
-                className="relative group cursor-pointer border-r border-white/20 last:border-r-0 flex-shrink-0"
-                style={{ width: basePanelWidth }}
-                onMouseEnter={() => setHoveredPanel(index)}
-                onMouseLeave={() => setHoveredPanel(null)}
-              >
-                <div className="relative h-full flex flex-col justify-end p-8 text-white">
-                  <div className="transition-transform duration-300 transform group-hover:-translate-y-[150px]">
-                    <h2 className="text-2xl font-bold mb-2">{panel.title}</h2>
-                    <p className="text-sm opacity-80">{panel.subtitle}</p>
-                  </div>
-                </div>
+      {/* Menu Panel */}
+      <div className={`fixed left-[120px] w-[300px] h-full bg-black/90 transition-transform duration-300 z-20`}
+           style={{ transform: isMenuOpen ? 'translateX(0)' : 'translateX(-100%)' }}>
+        <nav className="h-full flex items-center justify-center">
+          <div className="space-y-6 w-full px-12">
+            {menuItems.map((item, index) => (
+              <div key={index} className="flex justify-center">
+                <a
+                  href="#"
+                  className="text-[1.8rem] leading-none font-extrabold text-white hover:text-[#5CC6D0] transition-colors whitespace-nowrap"
+                >
+                  {item}
+                </a>
               </div>
             ))}
           </div>
+        </nav>
+      </div>
+
+      {/* Main Content */}
+      <div 
+        className="relative ml-[120px] transition-all duration-300 w-[calc(100vw-120px)]"
+        style={{ transform: isMenuOpen ? 'translateX(300px)' : 'translateX(0)' }}
+      >
+        <div
+          className="fixed inset-0 bg-cover bg-center transition-all duration-300"
+          style={{
+            backgroundImage: `url(${
+              hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage
+            })`,
+            left: '120px',
+            transform: isMenuOpen ? 'translateX(300px)' : 'translateX(0)',
+          }}
+        >
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+
+        <div className="flex h-screen relative z-10">
+          {panels.map((panel, index) => (
+            <div
+              key={index}
+              className="relative group cursor-pointer border-r border-white/20 last:border-r-0 flex-shrink-0"
+              style={{ width: basePanelWidth }}
+              onMouseEnter={() => setHoveredPanel(index)}
+              onMouseLeave={() => setHoveredPanel(null)}
+            >
+              <div className="relative h-full flex flex-col justify-end p-8 text-white">
+                <div className="transition-transform duration-300 transform group-hover:-translate-y-[150px]">
+                  <h2 className="text-2xl font-bold mb-2">{panel.title}</h2>
+                  <p className="text-sm opacity-80">{panel.subtitle}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
