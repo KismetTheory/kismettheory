@@ -37,7 +37,6 @@ const Index = () => {
   const [hoveredPanel, setHoveredPanel] = useState<number | null>(null);
   const defaultImage = "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0";
 
-  // Calculate fixed width for each panel based on viewport width - sidebar
   const basePanelWidth = `calc((100vw - 120px) / ${panels.length})`;
 
   return (
@@ -102,13 +101,30 @@ const Index = () => {
         style={{ transform: isMenuOpen ? 'translateX(300px)' : 'translateX(0)' }}
       >
         {/* Background Image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage})`,
-          }}
-        >
-          <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0">
+          {/* Default Image */}
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-opacity duration-500"
+            style={{
+              backgroundImage: `url(${defaultImage})`,
+              opacity: hoveredPanel === null ? 1 : 0,
+            }}
+          >
+            <div className="absolute inset-0 bg-black/40" />
+          </div>
+          
+          {/* Hovered Panel Image */}
+          {hoveredPanel !== null && (
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-opacity duration-500"
+              style={{
+                backgroundImage: `url(${panels[hoveredPanel].image})`,
+                opacity: 1,
+              }}
+            >
+              <div className="absolute inset-0 bg-black/40" />
+            </div>
+          )}
         </div>
 
         {/* Panels Container */}
