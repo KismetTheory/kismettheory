@@ -1,4 +1,3 @@
-
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
@@ -102,29 +101,15 @@ const Index = () => {
       >
         {/* Background Image */}
         <div className="absolute inset-0">
-          {/* Default Image */}
           <div
-            className="absolute inset-0 bg-cover bg-center transition-opacity duration-500"
+            className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-in-out"
             style={{
-              backgroundImage: `url(${defaultImage})`,
-              opacity: hoveredPanel === null ? 1 : 0,
+              backgroundImage: `url(${hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage})`,
+              opacity: 1,
             }}
           >
-            <div className="absolute inset-0 bg-black/40" />
+            <div className="absolute inset-0 bg-black/40 transition-opacity duration-700 ease-in-out" />
           </div>
-          
-          {/* Hovered Panel Image */}
-          {hoveredPanel !== null && (
-            <div
-              className="absolute inset-0 bg-cover bg-center transition-opacity duration-500"
-              style={{
-                backgroundImage: `url(${panels[hoveredPanel].image})`,
-                opacity: 1,
-              }}
-            >
-              <div className="absolute inset-0 bg-black/40" />
-            </div>
-          )}
         </div>
 
         {/* Panels Container */}
