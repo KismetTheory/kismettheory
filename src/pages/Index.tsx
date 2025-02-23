@@ -102,14 +102,25 @@ const Index = () => {
       >
         {/* Background Image */}
         <div className="absolute inset-0 overflow-hidden">
+          {/* Default Image */}
           <div
-            className="absolute inset-0 transition-opacity duration-700 ease-out"
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${defaultImage})`,
+              opacity: hoveredPanel === null ? 1 : 0,
+              transition: 'opacity 0.7s ease-in',
+            }}
+          >
+            <div className="absolute inset-0 bg-black/40" />
+          </div>
+
+          {/* Hovered Image */}
+          <div
+            className="absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage: `url(${hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              transform: 'none',
-              willChange: 'opacity',
+              opacity: hoveredPanel !== null ? 1 : 0,
+              transition: 'opacity 0.7s ease-in',
             }}
           >
             <div className="absolute inset-0 bg-black/40" />
