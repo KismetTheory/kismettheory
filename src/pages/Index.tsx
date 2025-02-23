@@ -40,7 +40,7 @@ const Index = () => {
       {/* Sidebar */}
       <div
         className={`fixed left-0 top-0 h-full bg-black text-white transition-all duration-300 z-50 ${
-          isSidebarOpen ? "w-64" : "w-0"
+          isSidebarOpen ? "w-48" : "w-0"
         }`}
       >
         <div className="p-6">
@@ -84,7 +84,7 @@ const Index = () => {
       </div>
 
       {/* Main Content */}
-      <div className={`flex-1 ${isSidebarOpen ? "ml-[256px]" : "ml-0"}`}>
+      <div className={`flex-1 ${isSidebarOpen ? "ml-48" : "ml-0"}`}>
         {/* Menu Toggle Button */}
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -100,7 +100,7 @@ const Index = () => {
             backgroundImage: `url(${
               hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage
             })`,
-            marginLeft: isSidebarOpen ? "256px" : "0",
+            marginLeft: isSidebarOpen ? "192px" : "0",
           }}
         >
           <div className="absolute inset-0 bg-black/40" />
