@@ -1,3 +1,4 @@
+
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
@@ -184,7 +185,7 @@ const Index = () => {
           {panels.map((panel, index) => (
             <div
               key={index}
-              className="relative group cursor-pointer border-b md:border-b-0 md:border-r border-white/20 last:border-b-0 md:last:border-r-0 flex-shrink-0 h-[calc((100vh-4rem)/5)] md:h-full w-full md:w-[calc((100vw-120px)/5)]"
+              className="relative group cursor-pointer border-b md:border-b-0 md:border-r border-white/20 last:border-b-0 md:last:border-r-0 flex-shrink-0 h-[calc(100vh-4rem)] md:h-full w-full md:w-[calc((100vw-120px)/5)]"
               onMouseEnter={() => setHoveredPanel(index)}
               onMouseLeave={() => setHoveredPanel(null)}
             >
