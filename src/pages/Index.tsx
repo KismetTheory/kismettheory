@@ -74,8 +74,8 @@ const Index = () => {
 
       <div className="flex transition-all duration-300">
         {/* Menu Panel */}
-        <div className={`w-0 overflow-hidden transition-all duration-300 ${isMenuOpen ? "w-[300px]" : ""}`}>
-          <div className={`h-screen flex items-center justify-center bg-black/90 w-[300px]`}>
+        <div className={`fixed top-0 right-0 h-screen ${isMenuOpen ? "w-[300px]" : "w-0"} transition-all duration-300 z-20`}>
+          <div className="h-full w-[300px] bg-black/90 flex items-center justify-center">
             <nav className="space-y-6 w-full px-8">
               {menuItems.map((item, index) => (
                 <div key={index} className="flex justify-center">
