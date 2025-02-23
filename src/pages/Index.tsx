@@ -31,7 +31,7 @@ const panels = [
 ];
 
 const Index = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [hoveredPanel, setHoveredPanel] = useState<number | null>(null);
   const defaultImage = "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0";
 
@@ -42,12 +42,12 @@ const Index = () => {
           isSidebarOpen ? "w-[120px]" : "w-0"
         }`}
       >
-        <div className="p-6">
+        <div className={`p-6 ${!isSidebarOpen ? "hidden" : ""}`}>
           <div className="mb-12">
             <img
-              src="/placeholder.svg"
-              alt="Logo"
-              className="w-12 h-12 invert"
+              src="https://images.unsplash.com/photo-1542144612-1b3641ec3459"
+              alt="Tennis Logo"
+              className="w-12 h-12 rounded-full object-cover"
             />
           </div>
 
@@ -81,7 +81,7 @@ const Index = () => {
       <div className={`flex-1 ${isSidebarOpen ? "ml-[120px]" : "ml-0"}`}>
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="fixed top-6 left-6 z-50 text-white"
+          className="fixed top-1/2 -translate-y-1/2 left-6 z-50 text-white"
         >
           <Menu className="w-6 h-6" />
         </button>
