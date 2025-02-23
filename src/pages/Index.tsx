@@ -5,7 +5,7 @@ import { useState } from "react";
 const panels = [
   {
     title: "DAY TO DAY",
-    subtitle: "Mi actualidad en imágenes",
+    subtitle: "Mi actualidad",
     image: "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6",
   },
   {
