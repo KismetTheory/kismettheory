@@ -138,7 +138,7 @@ const Index = () => {
               onMouseLeave={() => setHoveredPanel(null)}
             >
               <div className="relative h-full flex flex-col justify-end p-8 text-white">
-                <div className="transition-transform duration-300 transform group-hover:-translate-y-[150px]">
+                <div className="transition-transform duration-300 transform group-hover:-translate-y-[50px]">
                   <h2 className="text-2xl font-bold mb-2">{panel.title}</h2>
                   <p className="text-sm opacity-80">{panel.subtitle}</p>
                 </div>
