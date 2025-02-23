@@ -41,7 +41,7 @@ const Index = () => {
   const basePanelWidth = `calc((100vw - 120px) / ${panels.length})`;
 
   return (
-    <div className="flex min-h-screen bg-black overflow-hidden">
+    <div className="flex min-h-screen bg-black">
       {/* Persistent Left Sidebar */}
       <div className="fixed left-0 top-0 h-full w-[120px] bg-black text-white z-30">
         <div className="h-full flex flex-col items-center">
@@ -76,8 +76,10 @@ const Index = () => {
       </div>
 
       {/* Menu Panel */}
-      <div className={`fixed left-[120px] w-[300px] h-full bg-black/90 transition-transform duration-300 z-20`}
-           style={{ transform: isMenuOpen ? 'translateX(0)' : 'translateX(-100%)' }}>
+      <div 
+        className="fixed left-[120px] w-[300px] h-full bg-black/90 z-20 transition-transform duration-300"
+        style={{ transform: isMenuOpen ? 'translateX(0)' : 'translateX(-100%)' }}
+      >
         <nav className="h-full flex items-center justify-center">
           <div className="space-y-6 w-full px-12">
             {menuItems.map((item, index) => (
@@ -94,25 +96,23 @@ const Index = () => {
         </nav>
       </div>
 
-      {/* Main Content */}
+      {/* Main Content Container */}
       <div 
-        className="relative ml-[120px] transition-all duration-300 w-[calc(100vw-120px)]"
+        className="fixed left-[120px] w-[calc(100vw-120px)] h-screen transition-transform duration-300"
         style={{ transform: isMenuOpen ? 'translateX(300px)' : 'translateX(0)' }}
       >
+        {/* Background Image */}
         <div
-          className="fixed inset-0 bg-cover bg-center transition-all duration-300"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url(${
-              hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage
-            })`,
-            left: '120px',
-            transform: isMenuOpen ? 'translateX(300px)' : 'translateX(0)',
+            backgroundImage: `url(${hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage})`,
           }}
         >
           <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        <div className="flex h-screen relative z-10">
+        {/* Panels Container */}
+        <div className="flex h-full relative z-10">
           {panels.map((panel, index) => (
             <div
               key={index}
