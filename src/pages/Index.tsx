@@ -11,12 +11,12 @@ const panels = [
   {
     title: "ABOUT",
     subtitle: "Todo sobre mí",
-    image: "https://images.unsplash.com/photo-1546404477-d5c9d204aef4",
+    image: "https://images.unsplash.com/photo-1499084732479-de2c02d45fcc",
   },
   {
     title: "QUOTES",
     subtitle: "Citando lo aprendido",
-    image: "https://images.unsplash.com/photo-1625823007435-6b7c8c1e6787",
+    image: "https://images.unsplash.com/photo-1483546363825-7ebf25fb7513",
   },
   {
     title: "FANS",
