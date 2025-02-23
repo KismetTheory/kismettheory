@@ -93,12 +93,12 @@ const Index = () => {
         {/* Main Content */}
         <div className="ml-[120px]">
           <div
-            className="fixed inset-0 bg-cover bg-center transition-[background-image] duration-300"
+            className="fixed inset-0 bg-cover bg-center transition-all duration-300"
             style={{
               backgroundImage: `url(${
                 hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage
               })`,
-              marginLeft: "120px",
+              marginLeft: isMenuOpen ? "420px" : "120px", // 120px (sidebar) + 300px (menu when open)
             }}
           >
             <div className="absolute inset-0 bg-black/40" />
