@@ -65,9 +65,9 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Sliding Menu Panel */}
+      {/* Menu Panel */}
       <div
-        className={`fixed left-[120px] top-0 h-full bg-black text-white transition-all duration-300 z-20 ${
+        className={`h-full bg-black text-white transition-all duration-300 ${
           isMenuOpen ? "w-[300px]" : "w-0"
         }`}
       >
@@ -94,7 +94,7 @@ const Index = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 ml-[120px]">
+      <div className="flex-1">
         <div
           className="fixed inset-0 bg-cover bg-center transition-[background-image] duration-300"
           style={{
