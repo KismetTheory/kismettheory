@@ -41,8 +41,8 @@ const Index = () => {
 
   return (
     <div className="flex min-h-screen bg-black">
-      {/* Persistent Left Sidebar */}
-      <div className="fixed left-0 top-0 h-full w-[120px] bg-black text-white z-30">
+      {/* Persistent Left Sidebar - Hidden on Mobile */}
+      <div className="fixed left-0 top-0 h-full w-[120px] bg-black text-white z-30 hidden md:block">
         <div className="h-full flex flex-col items-center">
           <div className="mt-6">
             <svg
@@ -90,12 +90,46 @@ const Index = () => {
         </div>
       </div>
 
+      {/* Mobile Header */}
+      <div className="fixed top-0 left-0 w-full h-16 bg-black text-white z-40 flex items-center justify-between px-4 md:hidden">
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 48 48"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="text-[#5CC6D0]"
+        >
+          <path
+            d="M24 4C12.954 4 4 12.954 4 24s8.954 20 20 20 20-8.954 20-20S35.046 4 24 4zm0 2c9.941 0 18 8.059 18 18s-8.059 18-18 18S6 33.941 6 24 14.059 6 24 6z"
+            fill="currentColor"
+          />
+          <path
+            d="M24 12c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10z"
+            fill="currentColor"
+          />
+          <path
+            d="M24 20c-2.209 0-4 1.791-4 4s1.791 4 4 4 4-1.791 4-4-1.791-4-4-4zm0 2c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2z"
+            fill="currentColor"
+          />
+        </svg>
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="text-[#5CC6D0] hover:text-white transition-colors"
+        >
+          {isMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+        </button>
+      </div>
+
       {/* Menu Panel */}
       <div 
-        className="fixed left-[120px] w-[300px] h-full bg-black/90 z-20 transition-transform duration-300"
-        style={{ transform: isMenuOpen ? 'translateX(0)' : 'translateX(-100%)' }}
+        className={`fixed w-full md:w-[300px] h-full bg-black/90 z-20 transition-all duration-300 ${
+          isMenuOpen 
+            ? 'left-0 md:left-[120px]' 
+            : '-left-full md:left-[-300px]'
+        }`}
       >
-        <nav className="h-full flex items-center justify-center">
+        <nav className="h-full flex items-center justify-center pt-16 md:pt-0">
           <div className="space-y-6 w-full px-12">
             {menuItems.map((item, index) => (
               <div key={index} className="flex justify-center">
@@ -113,8 +147,13 @@ const Index = () => {
 
       {/* Main Content Container */}
       <div 
-        className="fixed left-[120px] w-[calc(100vw-120px)] h-screen transition-transform duration-300"
-        style={{ transform: isMenuOpen ? 'translateX(300px)' : 'translateX(0)' }}
+        className={`fixed w-full md:w-[calc(100vw-120px)] h-screen transition-transform duration-300 ${
+          isMenuOpen 
+            ? 'translate-x-full md:translate-x-[300px]' 
+            : 'translate-x-0'
+        } ${
+          'md:left-[120px]'
+        }`}
       >
         {/* Background Image */}
         <div className="absolute inset-0 overflow-hidden">
@@ -144,12 +183,12 @@ const Index = () => {
         </div>
 
         {/* Panels Container */}
-        <div className="flex h-full relative z-10">
+        <div className="flex flex-col md:flex-row h-full relative z-10 pt-16 md:pt-0">
           {panels.map((panel, index) => (
             <div
               key={index}
-              className="relative group cursor-pointer border-r border-white/20 last:border-r-0 flex-shrink-0"
-              style={{ width: basePanelWidth }}
+              className="relative group cursor-pointer border-b md:border-b-0 md:border-r border-white/20 last:border-b-0 md:last:border-r-0 flex-shrink-0 h-[calc(20vh-3.2rem)] md:h-full"
+              style={{ width: '100%', md: { width: basePanelWidth } }}
               onMouseEnter={() => setHoveredPanel(index)}
               onMouseLeave={() => setHoveredPanel(null)}
             >
