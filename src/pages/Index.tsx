@@ -74,19 +74,21 @@ const Index = () => {
 
       <div className="flex transition-all duration-300">
         {/* Menu Panel */}
-        <div className={`fixed left-[120px] top-0 h-screen ${isMenuOpen ? "w-[300px]" : "w-0"} transition-all duration-300 z-20`}>
-          <div className="h-full w-[300px] bg-black/90 flex items-center justify-center">
-            <nav className="space-y-6 w-full px-8">
-              {menuItems.map((item, index) => (
-                <div key={index} className="flex justify-center">
-                  <a
-                    href="#"
-                    className="text-[1.8rem] leading-none font-extrabold text-white hover:text-[#5CC6D0] transition-colors whitespace-nowrap"
-                  >
-                    {item}
-                  </a>
-                </div>
-              ))}
+        <div className={`relative ${isMenuOpen ? "w-[300px]" : "w-0"} transition-all duration-300`}>
+          <div className="fixed left-[120px] top-0 h-screen w-[300px] bg-black/90">
+            <nav className="h-full flex items-center justify-center">
+              <div className="space-y-6 w-full px-12">
+                {menuItems.map((item, index) => (
+                  <div key={index} className="flex justify-center">
+                    <a
+                      href="#"
+                      className="text-[1.8rem] leading-none font-extrabold text-white hover:text-[#5CC6D0] transition-colors whitespace-nowrap"
+                    >
+                      {item}
+                    </a>
+                  </div>
+                ))}
+              </div>
             </nav>
           </div>
         </div>
