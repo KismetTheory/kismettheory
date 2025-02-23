@@ -1,4 +1,3 @@
-
 import { Menu } from "lucide-react";
 import { useState } from "react";
 
@@ -6,45 +5,43 @@ const panels = [
   {
     title: "DAY TO DAY",
     subtitle: "Mi actualidad en imágenes",
-    image: "https://images.unsplash.com/photo-1554068865-24cecd4e34b8",
+    image: "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6",
   },
   {
     title: "ABOUT",
     subtitle: "Todo sobre mí",
-    image: "https://images.unsplash.com/photo-1499084732479-de2c02d45fcc",
+    image: "https://images.unsplash.com/photo-1531315396756-905d68d21b56",
   },
   {
     title: "QUOTES",
     subtitle: "Citando lo aprendido",
-    image: "https://images.unsplash.com/photo-1483546363825-7ebf25fb7513",
+    image: "https://images.unsplash.com/photo-1592656094267-764a45160876",
   },
   {
     title: "FANS",
     subtitle: "Vosotros y yo",
-    image: "https://images.unsplash.com/photo-1511067007398-7e4b90cfa4bc",
+    image: "https://images.unsplash.com/photo-1599586120429-48281b6f0ece",
   },
   {
     title: "SHOP",
     subtitle: "Tienda oficial",
-    image: "https://images.unsplash.com/photo-1576618148400-f54bed99fcfd",
+    image: "https://images.unsplash.com/photo-1542144582-7e5d5ca7b122",
   },
 ];
 
 const Index = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [hoveredPanel, setHoveredPanel] = useState<number | null>(null);
-  const defaultImage = "https://images.unsplash.com/photo-1506744038136-46273834b3fb";
+  const defaultImage = "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0";
 
   return (
     <div className="flex min-h-screen bg-black">
-      {/* Sidebar */}
       <div
         className={`fixed left-0 top-0 h-full bg-black text-white transition-all duration-300 z-50 ${
           isSidebarOpen ? "w-48" : "w-0"
         }`}
       >
         <div className="p-6">
-          {/* Logo */}
           <div className="mb-12">
             <img
               src="/placeholder.svg"
@@ -53,7 +50,6 @@ const Index = () => {
             />
           </div>
 
-          {/* Menu Items */}
           <nav className="space-y-6">
             <div className="text-sm font-medium text-gray-400">MENU</div>
             <div className="space-y-4">
@@ -69,12 +65,10 @@ const Index = () => {
             </div>
           </nav>
 
-          {/* Sponsors Section */}
           <div className="mt-12">
             <div className="text-sm font-medium text-gray-400 mb-4">
               SPONSORS
             </div>
-            {/* Language Toggle */}
             <div className="flex gap-4 text-sm mt-8">
               <button className="text-cyan-400">ES</button>
               <button className="text-gray-400">EN</button>
@@ -83,9 +77,7 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className={`flex-1 ${isSidebarOpen ? "ml-48" : "ml-0"}`}>
-        {/* Menu Toggle Button */}
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           className="fixed top-6 left-6 z-50 text-white"
@@ -93,7 +85,6 @@ const Index = () => {
           <Menu className="w-6 h-6" />
         </button>
 
-        {/* Background Image */}
         <div
           className="fixed inset-0 bg-cover bg-center transition-[background-image] duration-300"
           style={{
@@ -106,7 +97,6 @@ const Index = () => {
           <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        {/* Vertical Panels */}
         <div className="flex h-screen relative z-10">
           {panels.map((panel, index) => (
             <div
@@ -115,7 +105,6 @@ const Index = () => {
               onMouseEnter={() => setHoveredPanel(index)}
               onMouseLeave={() => setHoveredPanel(null)}
             >
-              {/* Content */}
               <div className="relative h-full flex flex-col justify-end p-8 text-white">
                 <h2 className="text-2xl font-bold mb-2">{panel.title}</h2>
                 <p className="text-sm opacity-80">{panel.subtitle}</p>
