@@ -72,57 +72,55 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Menu Panel */}
-      <div 
-        className={`fixed left-[120px] top-0 h-full bg-black/90 backdrop-blur-sm text-white transition-all duration-300 z-20 ${
-          isMenuOpen ? "w-[300px] opacity-100" : "w-0 opacity-0"
-        }`}
-      >
-        <div className={`p-12 ${!isMenuOpen ? "hidden" : ""}`}>
-          <nav className="space-y-8">
-            {menuItems.map((item, index) => (
-              <a
+      <div className="flex transition-all duration-300">
+        {/* Menu Panel */}
+        <div className={`w-0 transition-all duration-300 ${isMenuOpen ? "w-[300px]" : ""}`}>
+          <div className={`h-full bg-black/90 p-12 ${!isMenuOpen ? "hidden" : ""}`}>
+            <nav className="space-y-8">
+              {menuItems.map((item, index) => (
+                <a
+                  key={index}
+                  href="#"
+                  className="block text-2xl font-bold text-white hover:text-[#5CC6D0] transition-colors"
+                >
+                  {item}
+                </a>
+              ))}
+            </nav>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="ml-[120px]">
+          <div
+            className="fixed inset-0 bg-cover bg-center transition-[background-image] duration-300"
+            style={{
+              backgroundImage: `url(${
+                hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage
+              })`,
+              marginLeft: "120px",
+            }}
+          >
+            <div className="absolute inset-0 bg-black/40" />
+          </div>
+
+          <div className="flex h-screen relative z-10">
+            {panels.map((panel, index) => (
+              <div
                 key={index}
-                href="#"
-                className="block text-2xl font-bold text-white hover:text-[#5CC6D0] transition-colors"
+                className="flex-1 relative group cursor-pointer border-r border-white/20 last:border-r-0"
+                onMouseEnter={() => setHoveredPanel(index)}
+                onMouseLeave={() => setHoveredPanel(null)}
               >
-                {item}
-              </a>
-            ))}
-          </nav>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1 ml-[120px]">
-        <div
-          className="fixed inset-0 bg-cover bg-center transition-[background-image] duration-300"
-          style={{
-            backgroundImage: `url(${
-              hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage
-            })`,
-            marginLeft: "120px",
-          }}
-        >
-          <div className="absolute inset-0 bg-black/40" />
-        </div>
-
-        <div className="flex h-screen relative z-10">
-          {panels.map((panel, index) => (
-            <div
-              key={index}
-              className="flex-1 relative group cursor-pointer border-r border-white/20 last:border-r-0"
-              onMouseEnter={() => setHoveredPanel(index)}
-              onMouseLeave={() => setHoveredPanel(null)}
-            >
-              <div className="relative h-full flex flex-col justify-end p-8 text-white">
-                <div className="transition-transform duration-300 transform group-hover:-translate-y-[150px]">
-                  <h2 className="text-2xl font-bold mb-2">{panel.title}</h2>
-                  <p className="text-sm opacity-80">{panel.subtitle}</p>
+                <div className="relative h-full flex flex-col justify-end p-8 text-white">
+                  <div className="transition-transform duration-300 transform group-hover:-translate-y-[150px]">
+                    <h2 className="text-2xl font-bold mb-2">{panel.title}</h2>
+                    <p className="text-sm opacity-80">{panel.subtitle}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
