@@ -6,38 +6,34 @@ const panels = [
   {
     title: "DAY TO DAY",
     subtitle: "Mi actualidad en imágenes",
-    defaultImage: "https://images.unsplash.com/photo-1554068865-24cecd4e34b8",
-    hoverImage: "https://images.unsplash.com/photo-1622279457989-5c5c1c9b5dc3",
+    image: "https://images.unsplash.com/photo-1554068865-24cecd4e34b8",
   },
   {
     title: "ABOUT",
     subtitle: "Todo sobre mí",
-    defaultImage: "https://images.unsplash.com/photo-1546404477-d5c9d204aef4",
-    hoverImage: "https://images.unsplash.com/photo-1531315396756-905d68d21b56",
+    image: "https://images.unsplash.com/photo-1546404477-d5c9d204aef4",
   },
   {
     title: "QUOTES",
     subtitle: "Citando lo aprendido",
-    defaultImage: "https://images.unsplash.com/photo-1625823007435-6b7c8c1e6787",
-    hoverImage: "https://images.unsplash.com/photo-1622279457989-5c5c1c9b5dc3",
+    image: "https://images.unsplash.com/photo-1625823007435-6b7c8c1e6787",
   },
   {
     title: "FANS",
     subtitle: "Vosotros y yo",
-    defaultImage: "https://images.unsplash.com/photo-1511067007398-7e4b90cfa4bc",
-    hoverImage: "https://images.unsplash.com/photo-1531315630201-bb15abeb1653",
+    image: "https://images.unsplash.com/photo-1511067007398-7e4b90cfa4bc",
   },
   {
     title: "SHOP",
     subtitle: "Tienda oficial",
-    defaultImage: "https://images.unsplash.com/photo-1576618148400-f54bed99fcfd",
-    hoverImage: "https://images.unsplash.com/photo-1576618148191-0f31a3d3f379",
+    image: "https://images.unsplash.com/photo-1576618148400-f54bed99fcfd",
   },
 ];
 
 const Index = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [hoveredPanel, setHoveredPanel] = useState<number | null>(null);
+  const defaultImage = "https://images.unsplash.com/photo-1506744038136-46273834b3fb";
 
   return (
     <div className="flex min-h-screen bg-black">
@@ -97,27 +93,28 @@ const Index = () => {
           <Menu className="w-6 h-6" />
         </button>
 
+        {/* Background Image */}
+        <div
+          className="fixed inset-0 bg-cover bg-center transition-all duration-700"
+          style={{
+            backgroundImage: `url(${
+              hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage
+            })`,
+            marginLeft: isSidebarOpen ? "256px" : "0",
+          }}
+        >
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+
         {/* Vertical Panels */}
-        <div className="flex h-screen">
+        <div className="flex h-screen relative z-10">
           {panels.map((panel, index) => (
             <div
               key={index}
-              className="flex-1 relative group cursor-pointer transition-all duration-500"
+              className="flex-1 relative group cursor-pointer"
               onMouseEnter={() => setHoveredPanel(index)}
               onMouseLeave={() => setHoveredPanel(null)}
             >
-              {/* Background Image */}
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
-                style={{
-                  backgroundImage: `url(${
-                    hoveredPanel === index ? panel.hoverImage : panel.defaultImage
-                  })`,
-                }}
-              >
-                <div className="absolute inset-0 bg-black/40" />
-              </div>
-
               {/* Content */}
               <div className="relative h-full flex flex-col justify-end p-8 text-white">
                 <h2 className="text-2xl font-bold mb-2">{panel.title}</h2>
