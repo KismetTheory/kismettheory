@@ -154,10 +154,10 @@ const Index = () => {
         }`}
       >
         {/* Background Image */}
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 md:fixed overflow-hidden">
           {/* Default Image */}
           <div
-            className="absolute inset-0 bg-cover bg-center md:fixed"
+            className="absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage: `url(${defaultImage})`,
               opacity: hoveredPanel === null ? 1 : 0,
@@ -169,7 +169,7 @@ const Index = () => {
 
           {/* Hovered Image */}
           <div
-            className="absolute inset-0 bg-cover bg-center md:fixed"
+            className="absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage: `url(${hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage})`,
               opacity: hoveredPanel !== null ? 1 : 0,
@@ -189,6 +189,14 @@ const Index = () => {
               onMouseEnter={() => setHoveredPanel(index)}
               onMouseLeave={() => setHoveredPanel(null)}
             >
+              <div
+                className="absolute inset-0 bg-cover bg-center md:hidden"
+                style={{
+                  backgroundImage: `url(${panel.image})`,
+                }}
+              >
+                <div className="absolute inset-0 bg-black/40" />
+              </div>
               <div className="relative h-full flex flex-col justify-end p-8 text-white">
                 <div className="transition-transform duration-300 transform group-hover:-translate-y-[50px]">
                   <h2 className="text-2xl font-bold mb-2">{panel.title}</h2>
