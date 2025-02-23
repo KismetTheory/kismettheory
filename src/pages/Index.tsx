@@ -88,7 +88,7 @@ const Index = () => {
       </div>
 
       {/* Main Content */}
-      <div className={`flex-1 ${isSidebarOpen ? "ml-64" : "ml-0"}`}>
+      <div className={`flex-1 ${isSidebarOpen ? "ml-[256px]" : "ml-0"}`}>
         {/* Menu Toggle Button */}
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
