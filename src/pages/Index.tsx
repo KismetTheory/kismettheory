@@ -41,8 +41,8 @@ const Index = () => {
     <div className="flex min-h-screen bg-black">
       {/* Persistent Left Sidebar */}
       <div className="fixed left-0 top-0 h-full w-[120px] bg-black text-white z-30">
-        <div className="p-6">
-          <div className="mb-12">
+        <div className="h-full flex flex-col items-center">
+          <div className="mt-6">
             <img
               src="/lovable-uploads/5b9c1c5c-e57b-48fe-baa2-a92391387130.png"
               alt="Logo"
@@ -51,13 +51,13 @@ const Index = () => {
           </div>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-[#5CC6D0] hover:text-white transition-colors"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#5CC6D0] hover:text-white transition-colors"
           >
             {isMenuOpen ? (
               <X className="w-8 h-8" />
             ) : (
               <>
-                <span className="block text-sm mb-2">MENU</span>
+                <span className="block text-sm mb-2 text-center">MENU</span>
                 <Menu className="w-8 h-8" />
               </>
             )}
