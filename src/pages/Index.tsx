@@ -26,7 +26,7 @@ const panels = [
   {
     title: "SHOP",
     subtitle: "Tienda oficial",
-    image: "https://images.unsplash.com/photo-1542144582-7e5d5ca7b122",
+    image: "https://images.unsplash.com/photo-1576618148400-f54bed99fcfd", // New tennis shop/equipment image
   },
 ];
 
