@@ -16,7 +16,7 @@ const panels = [
   {
     title: "QUOTES",
     subtitle: "Citando lo aprendido",
-    image: "https://images.unsplash.com/photo-1587280501635-68a0ba4fda3f", // Updated to a tennis court image
+    image: "https://images.unsplash.com/photo-1595475207225-428b62bda831", // Updated to a different tennis court image
   },
   {
     title: "FANS",
