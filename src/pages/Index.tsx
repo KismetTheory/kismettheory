@@ -111,7 +111,7 @@ const Index = () => {
           {panels.map((panel, index) => (
             <div
               key={index}
-              className="flex-1 relative group cursor-pointer"
+              className="flex-1 relative group cursor-pointer border-r border-white/20 last:border-r-0"
               onMouseEnter={() => setHoveredPanel(index)}
               onMouseLeave={() => setHoveredPanel(null)}
             >
