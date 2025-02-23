@@ -157,7 +157,7 @@ const Index = () => {
         <div className="absolute inset-0 overflow-hidden">
           {/* Default Image */}
           <div
-            className="absolute inset-0 bg-cover bg-center fixed"
+            className="absolute inset-0 bg-cover bg-center md:fixed"
             style={{
               backgroundImage: `url(${defaultImage})`,
               opacity: hoveredPanel === null ? 1 : 0,
@@ -169,7 +169,7 @@ const Index = () => {
 
           {/* Hovered Image */}
           <div
-            className="absolute inset-0 bg-cover bg-center fixed"
+            className="absolute inset-0 bg-cover bg-center md:fixed"
             style={{
               backgroundImage: `url(${hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage})`,
               opacity: hoveredPanel !== null ? 1 : 0,
@@ -181,11 +181,11 @@ const Index = () => {
         </div>
 
         {/* Panels Container */}
-        <div className="flex flex-col md:flex-row min-h-screen relative z-10 pt-16 md:pt-0">
+        <div className="flex flex-col md:flex-row h-full relative z-10 pt-16 md:pt-0">
           {panels.map((panel, index) => (
             <div
               key={index}
-              className="relative group cursor-pointer border-b md:border-b-0 md:border-r border-white/20 last:border-b-0 md:last:border-r-0 flex-shrink-0 h-[calc(100vh-4rem)] md:h-full w-full md:w-[calc((100vw-120px)/5)]"
+              className="relative group cursor-pointer border-b md:border-b-0 md:border-r border-white/20 last:border-b-0 md:last:border-r-0 flex-shrink-0 h-[calc(100vh-4rem)] md:h-screen w-full md:w-[calc((100vw-120px)/5)]"
               onMouseEnter={() => setHoveredPanel(index)}
               onMouseLeave={() => setHoveredPanel(null)}
             >
