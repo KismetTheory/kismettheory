@@ -1,3 +1,4 @@
+
 import { Menu } from "lucide-react";
 import { useState } from "react";
 
@@ -38,7 +39,7 @@ const Index = () => {
     <div className="flex min-h-screen bg-black">
       <div
         className={`fixed left-0 top-0 h-full bg-black text-white transition-all duration-300 z-50 ${
-          isSidebarOpen ? "w-48" : "w-0"
+          isSidebarOpen ? "w-[120px]" : "w-0"
         }`}
       >
         <div className="p-6">
@@ -77,7 +78,7 @@ const Index = () => {
         </div>
       </div>
 
-      <div className={`flex-1 ${isSidebarOpen ? "ml-48" : "ml-0"}`}>
+      <div className={`flex-1 ${isSidebarOpen ? "ml-[120px]" : "ml-0"}`}>
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           className="fixed top-6 left-6 z-50 text-white"
@@ -91,7 +92,7 @@ const Index = () => {
             backgroundImage: `url(${
               hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage
             })`,
-            marginLeft: isSidebarOpen ? "192px" : "0",
+            marginLeft: isSidebarOpen ? "120px" : "0",
           }}
         >
           <div className="absolute inset-0 bg-black/40" />
