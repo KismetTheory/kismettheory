@@ -198,7 +198,7 @@ const Index = () => {
                 <div className="absolute inset-0 bg-black/40" />
               </div>
               <div className="relative h-full flex flex-col justify-end p-8 text-white">
-                <div className="transition-transform duration-300 transform group-hover:-translate-y-[50px]">
+                <div className="transition-transform duration-300 transform group-hover:-translate-y-[50px] min-h-[120px] flex flex-col justify-end">
                   <h2 className="text-2xl font-bold mb-2">{panel.title}</h2>
                   <p className="text-sm opacity-80">{panel.subtitle}</p>
                 </div>
