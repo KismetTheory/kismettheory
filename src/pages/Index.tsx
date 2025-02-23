@@ -62,13 +62,20 @@ const Index = () => {
               </>
             )}
           </button>
+          <div className="absolute bottom-8 text-white">
+            <div className="text-sm font-bold mb-4">SPONSORS</div>
+            <div className="flex gap-4">
+              <button className="text-[#5CC6D0]">ES</button>
+              <button className="text-white opacity-50 hover:opacity-100">EN</button>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Menu Panel */}
-      <div
-        className={`h-full bg-black text-white transition-all duration-300 ${
-          isMenuOpen ? "w-[300px]" : "w-0"
+      <div 
+        className={`fixed left-[120px] top-0 h-full bg-black/90 backdrop-blur-sm text-white transition-all duration-300 z-20 ${
+          isMenuOpen ? "w-[300px] opacity-100" : "w-0 opacity-0"
         }`}
       >
         <div className={`p-12 ${!isMenuOpen ? "hidden" : ""}`}>
@@ -83,18 +90,11 @@ const Index = () => {
               </a>
             ))}
           </nav>
-          <div className="mt-auto pt-12">
-            <div className="text-xl font-bold mb-6 text-white">SPONSORS</div>
-            <div className="flex gap-4 text-lg">
-              <button className="text-[#5CC6D0]">ES</button>
-              <button className="text-white opacity-50 hover:opacity-100">EN</button>
-            </div>
-          </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1">
+      <div className="flex-1 ml-[120px]">
         <div
           className="fixed inset-0 bg-cover bg-center transition-[background-image] duration-300"
           style={{
