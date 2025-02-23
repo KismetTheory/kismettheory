@@ -104,11 +104,12 @@ const Index = () => {
             <div className="absolute inset-0 bg-black/40" />
           </div>
 
-          <div className="flex h-screen relative z-10">
+          <div className="flex h-screen relative z-10" style={{ width: `calc(100vw - ${isMenuOpen ? '420px' : '120px'})` }}>
             {panels.map((panel, index) => (
               <div
                 key={index}
-                className="flex-1 relative group cursor-pointer border-r border-white/20 last:border-r-0"
+                className="relative group cursor-pointer border-r border-white/20 last:border-r-0"
+                style={{ width: `${100 / panels.length}%` }}
                 onMouseEnter={() => setHoveredPanel(index)}
                 onMouseLeave={() => setHoveredPanel(null)}
               >
