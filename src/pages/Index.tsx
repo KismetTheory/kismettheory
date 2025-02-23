@@ -1,5 +1,5 @@
 
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
 const panels = [
@@ -30,44 +30,78 @@ const panels = [
   },
 ];
 
+const menuItems = ["Day To Day", "About", "Quotes", "Fans", "Rafa Nadal Shop"];
+
 const Index = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoveredPanel, setHoveredPanel] = useState<number | null>(null);
   const defaultImage = "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0";
 
   return (
     <div className="flex min-h-screen bg-black">
-      <div
-        className={`fixed left-0 top-0 h-full bg-black text-white transition-all duration-300 z-50 ${
-          isSidebarOpen ? "w-[120px]" : "w-0"
-        }`}
-      >
-        <div className={`p-6 ${!isSidebarOpen ? "hidden" : ""}`}>
+      {/* Persistent Left Sidebar */}
+      <div className="fixed left-0 top-0 h-full w-[120px] bg-black text-white z-30">
+        <div className="p-6">
           <div className="mb-12">
             <img
-              src="https://images.unsplash.com/photo-1542144612-1b3641ec3459"
-              alt="Tennis Logo"
-              className="w-12 h-12 rounded-full object-cover"
+              src="/lovable-uploads/5b9c1c5c-e57b-48fe-baa2-a92391387130.png"
+              alt="Logo"
+              className="w-12 h-12 object-contain"
             />
+          </div>
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-[#5CC6D0] hover:text-white transition-colors"
+          >
+            {isMenuOpen ? (
+              <X className="w-8 h-8" />
+            ) : (
+              <>
+                <span className="block text-sm mb-2">MENU</span>
+                <Menu className="w-8 h-8" />
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Sliding Menu Panel */}
+      <div
+        className={`fixed left-[120px] top-0 h-full bg-black text-white transition-all duration-300 z-20 ${
+          isMenuOpen ? "w-[300px]" : "w-0"
+        }`}
+      >
+        <div className={`p-12 ${!isMenuOpen ? "hidden" : ""}`}>
+          <nav className="space-y-8">
+            {menuItems.map((item, index) => (
+              <a
+                key={index}
+                href="#"
+                className="block text-2xl font-bold text-white hover:text-[#5CC6D0] transition-colors"
+              >
+                {item}
+              </a>
+            ))}
+          </nav>
+          <div className="mt-auto pt-12">
+            <div className="text-xl font-bold mb-6 text-white">SPONSORS</div>
+            <div className="flex gap-4 text-lg">
+              <button className="text-[#5CC6D0]">ES</button>
+              <button className="text-white opacity-50 hover:opacity-100">EN</button>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className={`flex-1 ${isSidebarOpen ? "ml-[120px]" : "ml-0"}`}>
-        <button
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="fixed top-1/2 -translate-y-1/2 left-6 z-50 text-white"
-        >
-          <Menu className="w-6 h-6" />
-        </button>
-
+      {/* Main Content */}
+      <div className="flex-1 ml-[120px]">
         <div
           className="fixed inset-0 bg-cover bg-center transition-[background-image] duration-300"
           style={{
             backgroundImage: `url(${
               hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage
             })`,
-            marginLeft: isSidebarOpen ? "120px" : "0",
+            marginLeft: "120px",
           }}
         >
           <div className="absolute inset-0 bg-black/40" />
