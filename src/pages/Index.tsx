@@ -16,7 +16,7 @@ const panels = [
   {
     title: "QUOTES",
     subtitle: "Citando lo aprendido",
-    image: "https://images.unsplash.com/photo-1592656094267-764a45160876",
+    image: "https://images.unsplash.com/photo-1587280501635-68a0ba4fda3f", // Updated to a tennis court image
   },
   {
     title: "FANS",
@@ -26,7 +26,7 @@ const panels = [
   {
     title: "SHOP",
     subtitle: "Tienda oficial",
-    image: "https://images.unsplash.com/photo-1542144612-1b3641ec3459", // Different tennis equipment image
+    image: "https://images.unsplash.com/photo-1542144612-1b3641ec3459", // Tennis equipment image
   },
 ];
 
