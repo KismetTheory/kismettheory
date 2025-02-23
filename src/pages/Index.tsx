@@ -16,7 +16,7 @@ const panels = [
   {
     title: "QUOTES",
     subtitle: "Citando lo aprendido",
-    image: "https://images.unsplash.com/photo-1595475207225-428b62bda831", // Updated to a different tennis court image
+    image: "https://images.unsplash.com/photo-1595475207225-428b62bda831",
   },
   {
     title: "FANS",
@@ -26,7 +26,7 @@ const panels = [
   {
     title: "SHOP",
     subtitle: "Tienda oficial",
-    image: "https://images.unsplash.com/photo-1542144612-1b3641ec3459", // Tennis equipment image
+    image: "https://images.unsplash.com/photo-1542144612-1b3641ec3459",
   },
 ];
 
@@ -107,8 +107,10 @@ const Index = () => {
               onMouseLeave={() => setHoveredPanel(null)}
             >
               <div className="relative h-full flex flex-col justify-end p-8 text-white">
-                <h2 className="text-2xl font-bold mb-2">{panel.title}</h2>
-                <p className="text-sm opacity-80">{panel.subtitle}</p>
+                <div className="transition-transform duration-300 transform group-hover:-translate-y-[150px]">
+                  <h2 className="text-2xl font-bold mb-2">{panel.title}</h2>
+                  <p className="text-sm opacity-80">{panel.subtitle}</p>
+                </div>
               </div>
             </div>
           ))}
