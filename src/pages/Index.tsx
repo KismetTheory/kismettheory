@@ -50,31 +50,6 @@ const Index = () => {
               className="w-12 h-12 rounded-full object-cover"
             />
           </div>
-
-          <nav className="space-y-6">
-            <div className="text-sm font-medium text-gray-400">MENU</div>
-            <div className="space-y-4">
-              {["HOME", "ABOUT", "NEWS", "CONTACT"].map((item) => (
-                <a
-                  key={item}
-                  href="#"
-                  className="block text-gray-300 hover:text-white transition-colors"
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-          </nav>
-
-          <div className="mt-12">
-            <div className="text-sm font-medium text-gray-400 mb-4">
-              SPONSORS
-            </div>
-            <div className="flex gap-4 text-sm mt-8">
-              <button className="text-cyan-400">ES</button>
-              <button className="text-gray-400">EN</button>
-            </div>
-          </div>
         </div>
       </div>
 
