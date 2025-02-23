@@ -37,8 +37,11 @@ const Index = () => {
   const [hoveredPanel, setHoveredPanel] = useState<number | null>(null);
   const defaultImage = "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0";
 
+  // Calculate the base width for each panel (total viewport width minus sidebar) divided by number of panels
+  const basePanelWidth = `${100 / panels.length}vw`;
+
   return (
-    <div className="flex min-h-screen bg-black">
+    <div className="flex min-h-screen bg-black overflow-hidden">
       {/* Persistent Left Sidebar */}
       <div className="fixed left-0 top-0 h-full w-[120px] bg-black text-white z-30">
         <div className="h-full flex flex-col items-center">
@@ -101,18 +104,24 @@ const Index = () => {
               backgroundImage: `url(${
                 hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage
               })`,
-              marginLeft: isMenuOpen ? "420px" : "120px", // 120px (sidebar) + 300px (menu when open)
+              marginLeft: isMenuOpen ? "420px" : "120px",
             }}
           >
             <div className="absolute inset-0 bg-black/40" />
           </div>
 
-          <div className="flex h-screen relative z-10" style={{ width: `calc(100vw - ${isMenuOpen ? '420px' : '120px'})` }}>
+          <div 
+            className="flex h-screen relative z-10 transition-transform duration-300"
+            style={{ 
+              transform: isMenuOpen ? `translateX(300px)` : "translateX(0)",
+              width: `calc(100vw - 120px)` // Fixed width based on viewport minus sidebar
+            }}
+          >
             {panels.map((panel, index) => (
               <div
                 key={index}
-                className="relative group cursor-pointer border-r border-white/20 last:border-r-0"
-                style={{ width: `${100 / panels.length}%` }}
+                className="relative group cursor-pointer border-r border-white/20 last:border-r-0 flex-shrink-0"
+                style={{ width: basePanelWidth }}
                 onMouseEnter={() => setHoveredPanel(index)}
                 onMouseLeave={() => setHoveredPanel(null)}
               >
