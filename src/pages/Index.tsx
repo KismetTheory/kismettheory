@@ -95,7 +95,7 @@ const Index = () => {
 
         {/* Background Image */}
         <div
-          className="fixed inset-0 bg-cover bg-center transition-all duration-700"
+          className="fixed inset-0 bg-cover bg-center transition-[background-image] duration-300"
           style={{
             backgroundImage: `url(${
               hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage
