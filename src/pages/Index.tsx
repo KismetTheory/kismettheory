@@ -145,7 +145,7 @@ const Index = () => {
 
       {/* Main Content Container */}
       <div 
-        className={`fixed w-full md:w-[calc(100vw-120px)] h-screen transition-transform duration-300 ${
+        className={`fixed w-full md:w-[calc(100vw-120px)] h-screen transition-transform duration-300 overflow-y-auto md:overflow-hidden ${
           isMenuOpen 
             ? 'translate-x-full md:translate-x-[300px]' 
             : 'translate-x-0'
@@ -157,7 +157,7 @@ const Index = () => {
         <div className="absolute inset-0 overflow-hidden">
           {/* Default Image */}
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-0 bg-cover bg-center fixed"
             style={{
               backgroundImage: `url(${defaultImage})`,
               opacity: hoveredPanel === null ? 1 : 0,
@@ -169,7 +169,7 @@ const Index = () => {
 
           {/* Hovered Image */}
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-0 bg-cover bg-center fixed"
             style={{
               backgroundImage: `url(${hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage})`,
               opacity: hoveredPanel !== null ? 1 : 0,
@@ -181,7 +181,7 @@ const Index = () => {
         </div>
 
         {/* Panels Container */}
-        <div className="flex flex-col md:flex-row h-full relative z-10 pt-16 md:pt-0">
+        <div className="flex flex-col md:flex-row min-h-screen relative z-10 pt-16 md:pt-0">
           {panels.map((panel, index) => (
             <div
               key={index}
