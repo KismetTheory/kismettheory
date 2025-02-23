@@ -35,6 +35,7 @@ const menuItems = ["Day To Day", "About", "Quotes", "Fans", "Rafa Nadal Shop"];
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoveredPanel, setHoveredPanel] = useState<number | null>(null);
+  const [hoveredMenuItem, setHoveredMenuItem] = useState<number | null>(null);
   const defaultImage = "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0";
 
   return (
@@ -134,6 +135,8 @@ const Index = () => {
                 <a
                   href="#"
                   className="text-[1.8rem] leading-none font-extrabold text-white hover:text-[#5CC6D0] transition-colors whitespace-nowrap"
+                  onMouseEnter={() => setHoveredMenuItem(index)}
+                  onMouseLeave={() => setHoveredMenuItem(null)}
                 >
                   {item}
                 </a>
@@ -160,7 +163,7 @@ const Index = () => {
             className="absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage: `url(${defaultImage})`,
-              opacity: hoveredPanel === null ? 1 : 0,
+              opacity: hoveredPanel === null && hoveredMenuItem === null ? 1 : 0,
               transition: 'opacity 0.7s ease-in',
             }}
           >
@@ -171,8 +174,14 @@ const Index = () => {
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: `url(${hoveredPanel !== null ? panels[hoveredPanel].image : defaultImage})`,
-              opacity: hoveredPanel !== null ? 1 : 0,
+              backgroundImage: `url(${
+                hoveredMenuItem !== null 
+                  ? panels[hoveredMenuItem].image 
+                  : hoveredPanel !== null 
+                    ? panels[hoveredPanel].image 
+                    : defaultImage
+              })`,
+              opacity: (hoveredMenuItem !== null || hoveredPanel !== null) ? 1 : 0,
               transition: 'opacity 0.7s ease-in',
             }}
           >
