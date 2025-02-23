@@ -37,8 +37,8 @@ const Index = () => {
   const [hoveredPanel, setHoveredPanel] = useState<number | null>(null);
   const defaultImage = "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0";
 
-  // Calculate the base width for each panel (total viewport width minus sidebar) divided by number of panels
-  const basePanelWidth = `${100 / panels.length}vw`;
+  // Calculate fixed width for each panel based on viewport width - sidebar
+  const basePanelWidth = `calc((100vw - 120px) / ${panels.length})`;
 
   return (
     <div className="flex min-h-screen bg-black overflow-hidden">
@@ -111,10 +111,9 @@ const Index = () => {
           </div>
 
           <div 
-            className="flex h-screen relative z-10 transition-transform duration-300"
+            className="flex h-screen relative z-10 transition-all duration-300"
             style={{ 
-              transform: isMenuOpen ? `translateX(300px)` : "translateX(0)",
-              width: `calc(100vw - 120px)` // Fixed width based on viewport minus sidebar
+              marginLeft: isMenuOpen ? "300px" : "0",
             }}
           >
             {panels.map((panel, index) => (
