@@ -76,12 +76,12 @@ const Index = () => {
         {/* Menu Panel */}
         <div className={`w-0 overflow-hidden transition-all duration-300 ${isMenuOpen ? "w-[300px]" : ""}`}>
           <div className={`h-screen flex items-center justify-center bg-black/90 w-[300px]`}>
-            <nav className="space-y-12 w-full">
+            <nav className="space-y-6 w-full">
               {menuItems.map((item, index) => (
                 <div key={index} className="flex justify-center">
                   <a
                     href="#"
-                    className="text-[2.5rem] font-extrabold text-white hover:text-[#5CC6D0] transition-colors whitespace-nowrap"
+                    className="text-[1.8rem] leading-none font-extrabold text-white hover:text-[#5CC6D0] transition-colors whitespace-nowrap"
                   >
                     {item}
                   </a>
