@@ -27,8 +27,9 @@ const PhotoJournal = () => {
   const { data: posts, error } = useQuery({
     queryKey: ["photo-journal-posts"],
     queryFn: async () => {
+      // Removed the category filter to get all posts with featured media
       const response = await fetch(
-        "https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=3"
+        "https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed"
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
