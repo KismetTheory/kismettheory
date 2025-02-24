@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const panels = [
   {
-    title: "SKETCHES",
+    title: "PHOTO JOURNAL",
     subtitle: "Mi actualidad",
     image: "/lovable-uploads/4bb2b978-de5c-4a35-8880-467438168f2a.png",
   },
@@ -29,7 +29,7 @@ const panels = [
   },
 ];
 
-const menuItems = ["Sketches", "About", "Quotes", "Fans", "Rafa Nadal Shop"];
+const menuItems = ["Photo Journal", "About", "Quotes", "Fans", "Rafa Nadal Shop"];
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
