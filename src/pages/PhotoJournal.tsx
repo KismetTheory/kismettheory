@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { format, parse, startOfMonth, endOfMonth } from "date-fns";
@@ -16,7 +17,7 @@ const PhotoJournal = () => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const { data: posts, error } = useQuery({
+  const { data: posts, error } = useQuery<WordPressImage[]>({
     queryKey: ["photo-journal-posts"],
     queryFn: async () => {
       // Get all posts without pagination first
@@ -74,7 +75,7 @@ const PhotoJournal = () => {
   };
 
   // Get unique months from posts and sort them in reverse chronological order
-  const availableMonths = posts
+  const availableMonths: string[] = posts
     ? Array.from(new Set(posts.map(post => format(new Date(post.date), 'yyyy-MM'))))
         .sort((a, b) => b.localeCompare(a))
     : [];
