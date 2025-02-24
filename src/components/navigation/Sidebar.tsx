@@ -1,20 +1,17 @@
 
-import { Link, useLocation } from "react-router-dom";
-import { Home, Image, List } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
 
 const Sidebar = () => {
-  const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const isActive = (path: string) => location.pathname === path;
-
-  const menuItems = [
-    { path: "/", icon: Home, label: "Home" },
-    { path: "/photo-journal", icon: Image, label: "Photos" },
-    { path: "/posts", icon: List, label: "Posts" },
-  ];
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-[120px] bg-black text-white z-30 hidden md:block">
+    <aside className="fixed left-0 top-0 h-full w-[120px] bg-black text-white z-30 hidden md:block" role="complementary" aria-label="Sidebar navigation">
       <div className="h-full flex flex-col items-center">
         <div className="mt-6">
           <Link to="/">
@@ -43,24 +40,22 @@ const Sidebar = () => {
             </svg>
           </Link>
         </div>
-
-        <nav className="mt-12 flex flex-col items-center gap-8">
-          {menuItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`flex flex-col items-center gap-2 p-3 rounded-lg transition-colors ${
-                isActive(item.path)
-                  ? "text-[#5CC6D0]"
-                  : "text-white/70 hover:text-white"
-              }`}
-            >
-              <item.icon size={24} />
-              <span className="text-xs font-medium">{item.label}</span>
-            </Link>
-          ))}
-        </nav>
-
+        <button
+          onClick={toggleMenu}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#5CC6D0] hover:text-white transition-colors"
+          aria-expanded={isMenuOpen}
+          aria-controls="main-menu"
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        >
+          {isMenuOpen ? (
+            <X className="w-8 h-8" aria-hidden="true" />
+          ) : (
+            <>
+              <span className="block text-sm mb-2 text-center">MENU</span>
+              <Menu className="w-8 h-8" aria-hidden="true" />
+            </>
+          )}
+        </button>
         <div className="absolute bottom-8 text-white">
           <div className="text-sm font-bold mb-4" id="sponsors-label">
             SPONSORS
