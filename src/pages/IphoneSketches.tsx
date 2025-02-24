@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import Sidebar from "@/components/navigation/Sidebar";
 import MobileHeader from "@/components/navigation/MobileHeader";
@@ -44,22 +45,31 @@ const IphoneSketches = () => {
             A collection of architectural and artistic sketches created on iPhone, exploring the intersection of technology and creativity.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {sketches.map((sketch) => (
               <div
                 key={sketch.id}
-                className="group relative aspect-square cursor-pointer overflow-hidden rounded-lg"
+                className="group relative cursor-pointer mx-auto"
                 onClick={() => setSelectedSketch(sketch.id)}
               >
-                <img
-                  src={sketch.src}
-                  alt={sketch.title}
-                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-0 p-6">
-                    <h3 className="text-xl font-semibold text-white mb-2">{sketch.title}</h3>
-                    <p className="text-gray-300 text-sm">{sketch.description}</p>
+                {/* iPhone Frame */}
+                <div className="relative w-[280px] h-[580px] rounded-[45px] bg-[#1f1f1f] shadow-xl p-3 overflow-hidden">
+                  {/* Notch */}
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[120px] h-[25px] bg-black rounded-b-[20px] z-10"></div>
+                  {/* Screen */}
+                  <div className="relative w-full h-full rounded-[35px] overflow-hidden bg-black">
+                    <img
+                      src={sketch.src}
+                      alt={sketch.title}
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-0 p-6">
+                        <h3 className="text-xl font-semibold text-white mb-2">{sketch.title}</h3>
+                        <p className="text-gray-300 text-sm">{sketch.description}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -73,12 +83,18 @@ const IphoneSketches = () => {
             className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
             onClick={() => setSelectedSketch(null)}
           >
-            <div className="relative max-w-4xl w-full p-4">
-              <img
-                src={sketches.find(s => s.id === selectedSketch)?.src}
-                alt={sketches.find(s => s.id === selectedSketch)?.title}
-                className="w-full h-auto rounded-lg"
-              />
+            <div className="relative max-w-sm w-full p-4">
+              {/* iPhone Frame in Lightbox */}
+              <div className="relative w-full max-w-[320px] mx-auto aspect-[9/19.5] rounded-[45px] bg-[#1f1f1f] shadow-xl p-3">
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[120px] h-[25px] bg-black rounded-b-[20px] z-10"></div>
+                <div className="relative w-full h-full rounded-[35px] overflow-hidden bg-black">
+                  <img
+                    src={sketches.find(s => s.id === selectedSketch)?.src}
+                    alt={sketches.find(s => s.id === selectedSketch)?.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
               <button
                 className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
                 onClick={() => setSelectedSketch(null)}
