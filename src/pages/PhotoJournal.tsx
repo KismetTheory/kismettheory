@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { format, parse, startOfMonth, endOfMonth } from "date-fns";
 import Sidebar from "@/components/navigation/Sidebar";
 import MobileHeader from "@/components/navigation/MobileHeader";
 import NavigationMenu from "@/components/navigation/NavigationMenu";
@@ -12,6 +13,7 @@ const PhotoJournal = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const [currentMonth, setCurrentMonth] = useState(format(new Date(), 'yyyy-MM'));
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -32,12 +34,12 @@ const PhotoJournal = () => {
   });
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (!posts || selectedImageIndex === null) return;
+    if (!filteredPosts || selectedImageIndex === null) return;
     
     if (e.key === 'ArrowRight') {
-      setSelectedImageIndex((selectedImageIndex + 1) % posts.length);
+      setSelectedImageIndex((selectedImageIndex + 1) % filteredPosts.length);
     } else if (e.key === 'ArrowLeft') {
-      setSelectedImageIndex((selectedImageIndex - 1 + posts.length) % posts.length);
+      setSelectedImageIndex((selectedImageIndex - 1 + filteredPosts.length) % filteredPosts.length);
     } else if (e.key === 'Escape') {
       setSelectedImageIndex(null);
     }
@@ -48,26 +50,75 @@ const PhotoJournal = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedImageIndex, posts]);
 
-  const selectedImage = selectedImageIndex !== null && posts ? posts[selectedImageIndex] : null;
+  // Filter posts by current month
+  const filteredPosts = posts?.filter(post => {
+    const postDate = new Date(post.date);
+    const monthStart = startOfMonth(parse(currentMonth, 'yyyy-MM', new Date()));
+    const monthEnd = endOfMonth(monthStart);
+    return postDate >= monthStart && postDate <= monthEnd;
+  });
+
+  const selectedImage = selectedImageIndex !== null && filteredPosts ? filteredPosts[selectedImageIndex] : null;
 
   const navigateImage = (direction: 'prev' | 'next') => {
-    if (!posts || selectedImageIndex === null) return;
+    if (!filteredPosts || selectedImageIndex === null) return;
     
     const newIndex = direction === 'next' 
-      ? (selectedImageIndex + 1) % posts.length
-      : (selectedImageIndex - 1 + posts.length) % posts.length;
+      ? (selectedImageIndex + 1) % filteredPosts.length
+      : (selectedImageIndex - 1 + filteredPosts.length) % filteredPosts.length;
     setSelectedImageIndex(newIndex);
+  };
+
+  // Get unique months from posts
+  const availableMonths = posts
+    ? Array.from(new Set(posts.map(post => format(new Date(post.date), 'yyyy-MM'))))
+        .sort((a, b) => b.localeCompare(a))
+    : [];
+
+  const navigateMonth = (direction: 'prev' | 'next') => {
+    const currentIndex = availableMonths.indexOf(currentMonth);
+    if (currentIndex === -1) return;
+
+    const newIndex = direction === 'next'
+      ? Math.min(currentIndex + 1, availableMonths.length - 1)
+      : Math.max(currentIndex - 1, 0);
+    
+    setCurrentMonth(availableMonths[newIndex]);
+    setSelectedImageIndex(null);
   };
 
   const mainContent = (
     <div className="min-h-screen bg-black text-white p-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">Photo Journal</h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">Photo Journal</h1>
+          {!isLoading && !error && (
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => navigateMonth('prev')}
+                disabled={currentMonth === availableMonths[availableMonths.length - 1]}
+                className="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Previous Month
+              </button>
+              <span className="text-xl font-medium">
+                {format(parse(currentMonth, 'yyyy-MM', new Date()), 'MMMM yyyy')}
+              </span>
+              <button
+                onClick={() => navigateMonth('next')}
+                disabled={currentMonth === availableMonths[0]}
+                className="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Next Month
+              </button>
+            </div>
+          )}
+        </div>
         
         {error ? (
           <p className="text-red-500">Error loading photos. Please try again later.</p>
         ) : isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[...Array(6)].map((_, index) => (
               <div
                 key={index}
@@ -75,11 +126,13 @@ const PhotoJournal = () => {
               />
             ))}
           </div>
-        ) : (
+        ) : filteredPosts && filteredPosts.length > 0 ? (
           <PhotoGrid
-            posts={posts}
+            posts={filteredPosts}
             onImageClick={(index) => setSelectedImageIndex(index)}
           />
+        ) : (
+          <p className="text-center text-white/70 py-12">No photos found for this month.</p>
         )}
       </div>
 
