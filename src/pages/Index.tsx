@@ -1,4 +1,3 @@
-
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
@@ -38,10 +37,14 @@ const Index = () => {
   const [hoveredMenuItem, setHoveredMenuItem] = useState<number | null>(null);
   const defaultImage = "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0";
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <div className="flex min-h-screen bg-black">
+    <div className="flex min-h-screen bg-black" role="main">
       {/* Persistent Left Sidebar - Hidden on Mobile */}
-      <div className="fixed left-0 top-0 h-full w-[120px] bg-black text-white z-30 hidden md:block">
+      <aside className="fixed left-0 top-0 h-full w-[120px] bg-black text-white z-30 hidden md:block" role="complementary" aria-label="Sidebar navigation">
         <div className="h-full flex flex-col items-center">
           <div className="mt-6">
             <svg
@@ -51,6 +54,8 @@ const Index = () => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               className="text-[#5CC6D0]"
+              role="img"
+              aria-label="Logo"
             >
               <path
                 d="M24 4C12.954 4 4 12.954 4 24s8.954 20 20 20 20-8.954 20-20S35.046 4 24 4zm0 2c9.941 0 18 8.059 18 18s-8.059 18-18 18S6 33.941 6 24 14.059 6 24 6z"
@@ -67,30 +72,33 @@ const Index = () => {
             </svg>
           </div>
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={toggleMenu}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#5CC6D0] hover:text-white transition-colors"
+            aria-expanded={isMenuOpen}
+            aria-controls="main-menu"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMenuOpen ? (
-              <X className="w-8 h-8" />
+              <X className="w-8 h-8" aria-hidden="true" />
             ) : (
               <>
                 <span className="block text-sm mb-2 text-center">MENU</span>
-                <Menu className="w-8 h-8" />
+                <Menu className="w-8 h-8" aria-hidden="true" />
               </>
             )}
           </button>
           <div className="absolute bottom-8 text-white">
-            <div className="text-sm font-bold mb-4">SPONSORS</div>
-            <div className="flex gap-4">
-              <button className="text-[#5CC6D0]">ES</button>
-              <button className="text-white opacity-50 hover:opacity-100">EN</button>
+            <div className="text-sm font-bold mb-4" id="sponsors-label">SPONSORS</div>
+            <div className="flex gap-4" role="group" aria-labelledby="sponsors-label">
+              <button className="text-[#5CC6D0]" aria-label="Switch to Spanish">ES</button>
+              <button className="text-white opacity-50 hover:opacity-100" aria-label="Switch to English">EN</button>
             </div>
           </div>
         </div>
-      </div>
+      </aside>
 
       {/* Mobile Header */}
-      <div className="fixed top-0 left-0 w-full h-16 bg-black text-white z-40 flex items-center justify-between px-4 md:hidden">
+      <header className="fixed top-0 left-0 w-full h-16 bg-black text-white z-40 flex items-center justify-between px-4 md:hidden" role="banner">
         <svg
           width="32"
           height="32"
@@ -98,6 +106,8 @@ const Index = () => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="text-[#5CC6D0]"
+          role="img"
+          aria-label="Logo"
         >
           <path
             d="M24 4C12.954 4 4 12.954 4 24s8.954 20 20 20 20-8.954 20-20S35.046 4 24 4zm0 2c9.941 0 18 8.059 18 18s-8.059 18-18 18S6 33.941 6 24 14.059 6 24 6z"
@@ -113,41 +123,50 @@ const Index = () => {
           />
         </svg>
         <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          onClick={toggleMenu}
           className="text-[#5CC6D0] hover:text-white transition-colors"
+          aria-expanded={isMenuOpen}
+          aria-controls="main-menu"
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
-          {isMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+          {isMenuOpen ? <X className="w-8 h-8" aria-hidden="true" /> : <Menu className="w-8 h-8" aria-hidden="true" />}
         </button>
-      </div>
+      </header>
 
       {/* Menu Panel */}
-      <div 
+      <nav 
+        id="main-menu"
         className={`fixed w-full md:w-[300px] h-full bg-black/90 z-20 transition-all duration-300 ${
           isMenuOpen 
             ? 'left-0 md:left-[120px]' 
             : '-left-full md:left-[-300px]'
         }`}
+        role="navigation"
+        aria-label="Main navigation"
+        aria-hidden={!isMenuOpen}
       >
-        <nav className="h-full flex items-center justify-center pt-16 md:pt-0">
-          <div className="space-y-6 w-full px-12">
+        <div className="h-full flex items-center justify-center pt-16 md:pt-0">
+          <ul className="space-y-6 w-full px-12">
             {menuItems.map((item, index) => (
-              <div key={index} className="flex justify-center">
+              <li key={index} className="flex justify-center">
                 <a
-                  href="#"
+                  href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
                   className="text-[1.8rem] leading-none font-extrabold text-white hover:text-[#5CC6D0] transition-colors whitespace-nowrap"
                   onMouseEnter={() => setHoveredMenuItem(index)}
                   onMouseLeave={() => setHoveredMenuItem(null)}
+                  onFocus={() => setHoveredMenuItem(index)}
+                  onBlur={() => setHoveredMenuItem(null)}
                 >
                   {item}
                 </a>
-              </div>
+              </li>
             ))}
-          </div>
-        </nav>
-      </div>
+          </ul>
+        </div>
+      </nav>
 
       {/* Main Content Container */}
-      <div 
+      <main 
         className={`fixed w-full md:w-[calc(100vw-120px)] h-screen transition-transform duration-300 overflow-y-auto md:overflow-hidden ${
           isMenuOpen 
             ? 'translate-x-full md:translate-x-[300px]' 
@@ -155,9 +174,11 @@ const Index = () => {
         } ${
           'md:left-[120px]'
         }`}
+        role="region"
+        aria-label="Main content"
       >
         {/* Background Image */}
-        <div className="absolute inset-0 md:fixed overflow-hidden">
+        <div className="absolute inset-0 md:fixed overflow-hidden" aria-hidden="true">
           {/* Default Image */}
           <div
             className="absolute inset-0 bg-cover bg-center"
@@ -192,17 +213,23 @@ const Index = () => {
         {/* Panels Container */}
         <div className="flex flex-col md:flex-row h-full relative z-10 pt-16 md:pt-0">
           {panels.map((panel, index) => (
-            <div
+            <article
               key={index}
               className="relative group cursor-pointer border-b md:border-b-0 md:border-r border-white/20 last:border-b-0 md:last:border-r-0 flex-shrink-0 h-[calc(100vh-4rem)] md:h-screen w-full md:w-[calc((100vw-120px)/5)]"
               onMouseEnter={() => setHoveredPanel(index)}
               onMouseLeave={() => setHoveredPanel(null)}
+              onFocus={() => setHoveredPanel(index)}
+              onBlur={() => setHoveredPanel(null)}
+              tabIndex={0}
+              role="button"
+              aria-label={`${panel.title} - ${panel.subtitle}`}
             >
               <div
                 className="absolute inset-0 bg-cover bg-center md:hidden"
                 style={{
                   backgroundImage: `url(${panel.image})`,
                 }}
+                aria-hidden="true"
               >
                 <div className="absolute inset-0 bg-black/40" />
               </div>
@@ -214,10 +241,10 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
-      </div>
+      </main>
     </div>
   );
 };
