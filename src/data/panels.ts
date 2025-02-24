@@ -10,6 +10,7 @@ export const panels = [
     title: "IPHONE",
     subtitle: "Todo sobre mí",
     image: "https://images.unsplash.com/photo-1531315396756-905d68d21b56",
+    path: "/iphone-sketches"
   },
   {
     title: "QUOTES",
@@ -29,4 +30,4 @@ export const panels = [
 ];
 
 export const menuItems = ["Journal", "Iphone", "Quotes", "Fans", "Rafa Nadal Shop"];
-export const menuPaths = ["/photo-journal", "#iphone", "#quotes", "#fans", "#shop"];
+export const menuPaths = ["/photo-journal", "/iphone-sketches", "#quotes", "#fans", "#shop"];
