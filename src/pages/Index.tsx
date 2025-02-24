@@ -1,11 +1,14 @@
+
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const panels = [
   {
     title: "PHOTO JOURNAL",
     subtitle: "Mi actualidad",
     image: "/lovable-uploads/4bb2b978-de5c-4a35-8880-467438168f2a.png",
+    path: "/photo-journal"
   },
   {
     title: "ABOUT",
@@ -30,6 +33,7 @@ const panels = [
 ];
 
 const menuItems = ["Photo Journal", "About", "Quotes", "Fans", "Rafa Nadal Shop"];
+const menuPaths = ["/photo-journal", "#about", "#quotes", "#fans", "#shop"];
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -149,16 +153,29 @@ const Index = () => {
           <ul className="space-y-6 w-full px-12">
             {menuItems.map((item, index) => (
               <li key={index} className="flex justify-center">
-                <a
-                  href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="text-[1.8rem] leading-none font-extrabold text-white hover:text-[#5CC6D0] transition-colors whitespace-nowrap"
-                  onMouseEnter={() => setHoveredMenuItem(index)}
-                  onMouseLeave={() => setHoveredMenuItem(null)}
-                  onFocus={() => setHoveredMenuItem(index)}
-                  onBlur={() => setHoveredMenuItem(null)}
-                >
-                  {item}
-                </a>
+                {menuPaths[index].startsWith('#') ? (
+                  <a
+                    href={menuPaths[index]}
+                    className="text-[1.8rem] leading-none font-extrabold text-white hover:text-[#5CC6D0] transition-colors whitespace-nowrap"
+                    onMouseEnter={() => setHoveredMenuItem(index)}
+                    onMouseLeave={() => setHoveredMenuItem(null)}
+                    onFocus={() => setHoveredMenuItem(index)}
+                    onBlur={() => setHoveredMenuItem(null)}
+                  >
+                    {item}
+                  </a>
+                ) : (
+                  <Link
+                    to={menuPaths[index]}
+                    className="text-[1.8rem] leading-none font-extrabold text-white hover:text-[#5CC6D0] transition-colors whitespace-nowrap"
+                    onMouseEnter={() => setHoveredMenuItem(index)}
+                    onMouseLeave={() => setHoveredMenuItem(null)}
+                    onFocus={() => setHoveredMenuItem(index)}
+                    onBlur={() => setHoveredMenuItem(null)}
+                  >
+                    {item}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
@@ -224,23 +241,47 @@ const Index = () => {
               role="button"
               aria-label={`${panel.title} - ${panel.subtitle}`}
             >
-              <div
-                className="absolute inset-0 bg-cover bg-center md:hidden"
-                style={{
-                  backgroundImage: `url(${panel.image})`,
-                }}
-                aria-hidden="true"
-              >
-                <div className="absolute inset-0 bg-black/40" />
-              </div>
-              <div className="relative h-full flex flex-col justify-end p-8 text-white">
-                <div className="transition-transform duration-300 transform group-hover:-translate-y-[50px] min-h-[120px] flex flex-col items-start">
-                  <div className="mt-auto">
-                    <h2 className="text-2xl font-bold mb-2 whitespace-nowrap">{panel.title}</h2>
-                    <p className="text-sm opacity-80">{panel.subtitle}</p>
+              {panel.path ? (
+                <Link to={panel.path} className="block h-full">
+                  <div
+                    className="absolute inset-0 bg-cover bg-center md:hidden"
+                    style={{
+                      backgroundImage: `url(${panel.image})`,
+                    }}
+                    aria-hidden="true"
+                  >
+                    <div className="absolute inset-0 bg-black/40" />
                   </div>
-                </div>
-              </div>
+                  <div className="relative h-full flex flex-col justify-end p-8 text-white">
+                    <div className="transition-transform duration-300 transform group-hover:-translate-y-[50px] min-h-[120px] flex flex-col items-start">
+                      <div className="mt-auto">
+                        <h2 className="text-2xl font-bold mb-2 whitespace-nowrap">{panel.title}</h2>
+                        <p className="text-sm opacity-80">{panel.subtitle}</p>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ) : (
+                <>
+                  <div
+                    className="absolute inset-0 bg-cover bg-center md:hidden"
+                    style={{
+                      backgroundImage: `url(${panel.image})`,
+                    }}
+                    aria-hidden="true"
+                  >
+                    <div className="absolute inset-0 bg-black/40" />
+                  </div>
+                  <div className="relative h-full flex flex-col justify-end p-8 text-white">
+                    <div className="transition-transform duration-300 transform group-hover:-translate-y-[50px] min-h-[120px] flex flex-col items-start">
+                      <div className="mt-auto">
+                        <h2 className="text-2xl font-bold mb-2 whitespace-nowrap">{panel.title}</h2>
+                        <p className="text-sm opacity-80">{panel.subtitle}</p>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
             </article>
           ))}
         </div>
