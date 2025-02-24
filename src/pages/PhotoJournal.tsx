@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { format, parse, startOfMonth, endOfMonth } from "date-fns";
@@ -24,6 +25,7 @@ const PhotoJournal = () => {
         "https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5&per_page=1"
       );
       const totalPosts = parseInt(initialResponse.headers.get('X-WP-Total') || '0');
+      console.log('Total posts:', totalPosts);
       
       // Then fetch all posts in batches of 100
       const allPosts: WordPressImage[] = [];
@@ -36,9 +38,14 @@ const PhotoJournal = () => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
-          return await response.json();
+          const data = await response.json();
+          if (!Array.isArray(data)) {
+            throw new Error('Invalid response format');
+          }
+          return data;
         } catch (error) {
           if (retries > 0) {
+            console.log(`Retrying fetch (${retries} attempts left)`);
             await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retrying
             return fetchWithRetry(url, retries - 1);
           }
@@ -46,25 +53,46 @@ const PhotoJournal = () => {
         }
       };
 
+      const fetchPromises = [];
       for (let page = 1; page <= totalPages; page++) {
-        try {
-          const data = await fetchWithRetry(
-            `https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5&per_page=${batchSize}&page=${page}`
-          );
-          allPosts.push(...data);
-          console.log(`Fetched page ${page}/${totalPages}, got ${data.length} posts`);
-        } catch (error) {
-          console.error(`Failed to fetch page ${page} after retries:`, error);
-        }
+        const promise = (async () => {
+          try {
+            const data = await fetchWithRetry(
+              `https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5&per_page=${batchSize}&page=${page}`
+            );
+            console.log(`Successfully fetched page ${page}/${totalPages}, got ${data.length} posts`);
+            return data;
+          } catch (error) {
+            console.error(`Failed to fetch page ${page} after all retries:`, error);
+            return [];
+          }
+        })();
+        fetchPromises.push(promise);
       }
+
+      // Wait for all fetches to complete
+      const results = await Promise.all(fetchPromises);
+      results.forEach((batch, index) => {
+        if (batch.length > 0) {
+          allPosts.push(...batch);
+        } else {
+          console.error(`Batch ${index + 1} failed to fetch any posts`);
+        }
+      });
       
       setIsLoading(false);
       console.log('Total posts fetched:', allPosts.length);
       console.log('Expected total posts:', totalPosts);
+      
+      if (allPosts.length < totalPosts) {
+        console.error(`Missing ${totalPosts - allPosts.length} posts`);
+      }
+      
       return allPosts;
     },
     retry: 3,
     retryDelay: 1000,
+    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
   });
 
   const handleKeyDown = (e: KeyboardEvent) => {
