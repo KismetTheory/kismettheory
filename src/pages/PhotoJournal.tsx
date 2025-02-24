@@ -1,8 +1,9 @@
-
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { format } from "date-fns";
 
 interface WordPressImage {
   id: number;
@@ -23,6 +24,7 @@ const PhotoJournal = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoveredMenuItem, setHoveredMenuItem] = useState<number | null>(null);
+  const [selectedImage, setSelectedImage] = useState<WordPressImage | null>(null);
 
   const { data: posts, error } = useQuery({
     queryKey: ["photo-journal-posts"],
@@ -66,11 +68,16 @@ const PhotoJournal = () => {
             {posts?.map((post) => {
               const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
               const imageAlt = post._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || post.title.rendered;
+              const postDate = format(new Date(post.date), 'MMMM d, yyyy');
 
               if (!imageUrl) return null;
 
               return (
-                <div key={post.id} className="group relative">
+                <div 
+                  key={post.id} 
+                  className="group relative cursor-pointer"
+                  onClick={() => setSelectedImage(post)}
+                >
                   <div className="aspect-square overflow-hidden rounded-lg">
                     <img
                       src={imageUrl}
@@ -78,8 +85,9 @@ const PhotoJournal = () => {
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                     />
                   </div>
-                  <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <h3 className="text-white font-medium">{post.title.rendered}</h3>
+                  <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                    <h3 className="text-white font-medium mb-2">{post.title.rendered}</h3>
+                    <p className="text-white/70 text-sm">{postDate}</p>
                   </div>
                 </div>
               );
@@ -87,12 +95,33 @@ const PhotoJournal = () => {
           </div>
         )}
       </div>
+
+      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+        <DialogContent className="max-w-4xl bg-black border-none p-0">
+          {selectedImage && (
+            <div className="relative">
+              <img
+                src={selectedImage._embedded?.["wp:featuredmedia"]?.[0]?.source_url}
+                alt={selectedImage._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || selectedImage.title.rendered}
+                className="w-full h-auto max-h-[80vh] object-contain"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                <h2 className="text-white text-xl font-medium mb-2">
+                  {selectedImage.title.rendered}
+                </h2>
+                <p className="text-white/70">
+                  {format(new Date(selectedImage.date), 'MMMM d, yyyy')}
+                </p>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 
   return (
     <div className="flex min-h-screen bg-black">
-      {/* Persistent Left Sidebar - Hidden on Mobile */}
       <aside className="fixed left-0 top-0 h-full w-[120px] bg-black text-white z-30 hidden md:block">
         <div className="h-full flex flex-col items-center">
           <div className="mt-6">
@@ -148,7 +177,6 @@ const PhotoJournal = () => {
         </div>
       </aside>
 
-      {/* Mobile Header */}
       <header className="fixed top-0 left-0 w-full h-16 bg-black text-white z-40 flex items-center justify-between px-4 md:hidden">
         <Link to="/">
           <svg
@@ -186,7 +214,6 @@ const PhotoJournal = () => {
         </button>
       </header>
 
-      {/* Menu Panel */}
       <nav 
         id="main-menu"
         className={`fixed w-full md:w-[300px] h-full bg-black/90 z-20 transition-all duration-300 ${
@@ -231,7 +258,6 @@ const PhotoJournal = () => {
         </div>
       </nav>
 
-      {/* Main Content */}
       <main 
         className={`w-full md:w-[calc(100vw-120px)] min-h-screen transition-transform duration-300 ${
           isMenuOpen 
