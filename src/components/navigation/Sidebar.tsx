@@ -44,22 +44,24 @@ const Sidebar = ({
             </div>
           </Link>
         </div>
-        <button 
-          onClick={toggleMenu} 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 dark:text-[#5CC6D0] dark:hover:text-white text-black hover:text-[#5CC6D0] transition-colors" 
-          aria-expanded={isMenuOpen} 
-          aria-controls="main-menu" 
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        >
-          {isMenuOpen ? (
-            <X className="w-8 h-8" aria-hidden="true" />
-          ) : (
-            <>
-              <span className="block text-sm mb-2 text-center">MENU</span>
-              <Menu className="w-8 h-8" aria-hidden="true" />
-            </>
-          )}
-        </button>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+          <button 
+            onClick={toggleMenu} 
+            className="dark:text-[#5CC6D0] dark:hover:text-white text-black hover:text-[#5CC6D0] transition-colors flex flex-col items-center" 
+            aria-expanded={isMenuOpen} 
+            aria-controls="main-menu" 
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          >
+            {isMenuOpen ? (
+              <X className="w-8 h-8" aria-hidden="true" />
+            ) : (
+              <>
+                <span className="block text-sm mb-2">MENU</span>
+                <Menu className="w-8 h-8" aria-hidden="true" />
+              </>
+            )}
+          </button>
+        </div>
         <div className="absolute bottom-8">
           <button
             onClick={toggleTheme}
