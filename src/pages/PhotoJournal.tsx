@@ -26,18 +26,26 @@ const PhotoJournal = () => {
       );
       const totalPosts = parseInt(initialResponse.headers.get('X-WP-Total') || '0');
       
-      // Then fetch all posts
-      const response = await fetch(
-        `https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5&per_page=${totalPosts}`
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      // Then fetch all posts in batches of 100
+      const allPosts: WordPressImage[] = [];
+      const batchSize = 100;
+      const totalPages = Math.ceil(totalPosts / batchSize);
+      
+      for (let page = 1; page <= totalPages; page++) {
+        const response = await fetch(
+          `https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5&per_page=${batchSize}&page=${page}`
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        allPosts.push(...data);
       }
-      const data = await response.json();
+      
       setIsLoading(false);
-      console.log('WordPress API response:', data);
+      console.log('WordPress API response:', allPosts);
       console.log('Total posts:', totalPosts);
-      return data as WordPressImage[];
+      return allPosts;
     },
   });
 
