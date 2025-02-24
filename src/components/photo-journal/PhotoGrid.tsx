@@ -10,28 +10,41 @@ interface PhotoGridProps {
 const PhotoGrid = ({ posts, onImageClick }: PhotoGridProps) => {
   console.log('PhotoGrid received posts:', posts.length);
   
+  const getImageFromContent = (content: string): string | null => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(content, 'text/html');
+    const img = doc.querySelector('img');
+    return img?.src || null;
+  };
+  
   // Debug log for each post's media
   posts?.forEach((post, index) => {
+    const featuredImage = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+    const contentImage = getImageFromContent(post.content.rendered);
     console.log(`Post ${index + 1}: "${post.title.rendered}"`, {
       hasEmbedded: !!post._embedded,
-      hasMedia: !!post._embedded?.["wp:featuredmedia"],
-      mediaLength: post._embedded?.["wp:featuredmedia"]?.length,
-      sourceUrl: post._embedded?.["wp:featuredmedia"]?.[0]?.source_url
+      hasFeaturedMedia: !!featuredImage,
+      hasContentImage: !!contentImage,
+      featuredImageUrl: featuredImage,
+      contentImageUrl: contentImage
     });
   });
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {posts?.map((post, index) => {
-        const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+        const featuredImageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+        const contentImageUrl = getImageFromContent(post.content.rendered);
+        const imageUrl = featuredImageUrl || contentImageUrl;
         const imageAlt = post._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || post.title.rendered;
         const postDate = format(new Date(post.date), 'MMMM d, yyyy');
 
         if (!imageUrl) {
-          console.log('Post missing image:', {
+          console.log('Post missing both featured and content images:', {
             title: post.title.rendered,
             embedded: post._embedded,
-            featuredMedia: post._embedded?.["wp:featuredmedia"]
+            featuredMedia: post._embedded?.["wp:featuredmedia"],
+            content: post.content.rendered
           });
           return null;
         }
