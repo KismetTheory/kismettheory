@@ -1,30 +1,19 @@
+
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { format } from "date-fns";
-
-interface WordPressImage {
-  id: number;
-  date: string;
-  title: { rendered: string };
-  _embedded?: {
-    "wp:featuredmedia"?: Array<{
-      source_url: string;
-      alt_text?: string;
-    }>;
-  };
-}
-
-const menuItems = ["Photo Journal", "About", "Quotes", "Fans", "Rafa Nadal Shop"];
-const menuPaths = ["/photo-journal", "#about", "#quotes", "#fans", "#shop"];
+import { useState, useEffect } from "react";
+import Sidebar from "@/components/navigation/Sidebar";
+import MobileHeader from "@/components/navigation/MobileHeader";
+import NavigationMenu from "@/components/navigation/NavigationMenu";
+import PhotoGrid from "@/components/photo-journal/PhotoGrid";
+import PhotoLightbox from "@/components/photo-journal/PhotoLightbox";
+import { WordPressImage } from "@/components/photo-journal/types";
 
 const PhotoJournal = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [hoveredMenuItem, setHoveredMenuItem] = useState<number | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const { data: posts, error } = useQuery({
     queryKey: ["photo-journal-posts"],
@@ -54,8 +43,7 @@ const PhotoJournal = () => {
     }
   };
 
-  // Add keyboard navigation
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedImageIndex, posts]);
@@ -88,230 +76,28 @@ const PhotoJournal = () => {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts?.map((post, index) => {
-              const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
-              const imageAlt = post._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || post.title.rendered;
-              const postDate = format(new Date(post.date), 'MMMM d, yyyy');
-
-              if (!imageUrl) return null;
-
-              return (
-                <div 
-                  key={post.id} 
-                  className="group relative cursor-pointer"
-                  onClick={() => setSelectedImageIndex(index)}
-                >
-                  <div className="aspect-square overflow-hidden rounded-lg">
-                    <img
-                      src={imageUrl}
-                      alt={imageAlt}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                    />
-                  </div>
-                  <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                    <h3 className="text-white font-medium mb-2">{post.title.rendered}</h3>
-                    <p className="text-white/70 text-sm">{postDate}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <PhotoGrid
+            posts={posts}
+            onImageClick={(index) => setSelectedImageIndex(index)}
+          />
         )}
       </div>
 
-      <Dialog open={selectedImageIndex !== null} onOpenChange={() => setSelectedImageIndex(null)}>
-        <DialogContent className="max-w-6xl bg-black border-none p-0">
-          {selectedImage && (
-            <div 
-              className="relative flex items-center justify-center"
-              onClick={(e) => {
-                // Close dialog when clicking outside the image
-                if (e.target === e.currentTarget) {
-                  setSelectedImageIndex(null);
-                }
-              }}
-            >
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigateImage('prev');
-                }}
-                className="absolute left-4 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
-                aria-label="Previous image"
-              >
-                ←
-              </button>
-              <div className="relative">
-                <img
-                  src={selectedImage._embedded?.["wp:featuredmedia"]?.[0]?.source_url}
-                  alt={selectedImage._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || selectedImage.title.rendered}
-                  className="w-full h-auto max-h-[80vh] object-contain"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                  <h2 className="text-white text-xl font-medium mb-2">
-                    {selectedImage.title.rendered}
-                  </h2>
-                  <p className="text-white/70">
-                    {format(new Date(selectedImage.date), 'MMMM d, yyyy')}
-                  </p>
-                </div>
-              </div>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigateImage('next');
-                }}
-                className="absolute right-4 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
-                aria-label="Next image"
-              >
-                →
-              </button>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
+      <PhotoLightbox
+        selectedImage={selectedImage}
+        selectedImageIndex={selectedImageIndex}
+        onClose={() => setSelectedImageIndex(null)}
+        onNavigate={navigateImage}
+      />
     </div>
   );
 
   return (
     <div className="flex min-h-screen bg-black">
-      <aside className="fixed left-0 top-0 h-full w-[120px] bg-black text-white z-30 hidden md:block">
-        <div className="h-full flex flex-col items-center">
-          <div className="mt-6">
-            <Link to="/">
-              <svg
-                width="48"
-                height="48"
-                viewBox="0 0 48 48"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-[#5CC6D0]"
-                role="img"
-                aria-label="Logo"
-              >
-                <path
-                  d="M24 4C12.954 4 4 12.954 4 24s8.954 20 20 20 20-8.954 20-20S35.046 4 24 4zm0 2c9.941 0 18 8.059 18 18s-8.059 18-18 18S6 33.941 6 24 14.059 6 24 6z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M24 12c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M24 20c-2.209 0-4 1.791-4 4s1.791 4 4 4 4-1.791 4-4-1.791-4-4-4zm0 2c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2z"
-                  fill="currentColor"
-                />
-              </svg>
-            </Link>
-          </div>
-          <button
-            onClick={toggleMenu}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#5CC6D0] hover:text-white transition-colors"
-            aria-expanded={isMenuOpen}
-            aria-controls="main-menu"
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          >
-            {isMenuOpen ? (
-              <X className="w-8 h-8" aria-hidden="true" />
-            ) : (
-              <>
-                <span className="block text-sm mb-2 text-center">MENU</span>
-                <Menu className="w-8 h-8" aria-hidden="true" />
-              </>
-            )}
-          </button>
-          <div className="absolute bottom-8 text-white">
-            <div className="text-sm font-bold mb-4" id="sponsors-label">SPONSORS</div>
-            <div className="flex gap-4" role="group" aria-labelledby="sponsors-label">
-              <button className="text-[#5CC6D0]" aria-label="Switch to Spanish">ES</button>
-              <button className="text-white opacity-50 hover:opacity-100" aria-label="Switch to English">EN</button>
-            </div>
-          </div>
-        </div>
-      </aside>
-
-      <header className="fixed top-0 left-0 w-full h-16 bg-black text-white z-40 flex items-center justify-between px-4 md:hidden">
-        <Link to="/">
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 48 48"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="text-[#5CC6D0]"
-            role="img"
-            aria-label="Logo"
-          >
-            <path
-              d="M24 4C12.954 4 4 12.954 4 24s8.954 20 20 20 20-8.954 20-20S35.046 4 24 4zm0 2c9.941 0 18 8.059 18 18s-8.059 18-18 18S6 33.941 6 24 14.059 6 24 6z"
-              fill="currentColor"
-            />
-            <path
-              d="M24 12c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10z"
-              fill="currentColor"
-            />
-            <path
-              d="M24 20c-2.209 0-4 1.791-4 4s1.791 4 4 4 4-1.791 4-4-1.791-4-4-4zm0 2c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2z"
-              fill="currentColor"
-            />
-          </svg>
-        </Link>
-        <button
-          onClick={toggleMenu}
-          className="text-[#5CC6D0] hover:text-white transition-colors"
-          aria-expanded={isMenuOpen}
-          aria-controls="main-menu"
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        >
-          {isMenuOpen ? <X className="w-8 h-8" aria-hidden="true" /> : <Menu className="w-8 h-8" aria-hidden="true" />}
-        </button>
-      </header>
-
-      <nav 
-        id="main-menu"
-        className={`fixed w-full md:w-[300px] h-full bg-black/90 z-20 transition-all duration-300 ${
-          isMenuOpen 
-            ? 'left-0 md:left-[120px]' 
-            : '-left-full md:left-[-300px]'
-        }`}
-        role="navigation"
-        aria-label="Main navigation"
-        aria-hidden={!isMenuOpen}
-      >
-        <div className="h-full flex items-center justify-center pt-16 md:pt-0">
-          <ul className="space-y-6 w-full px-12">
-            {menuItems.map((item, index) => (
-              <li key={index} className="flex justify-center">
-                {menuPaths[index].startsWith('#') ? (
-                  <Link
-                    to="/"
-                    className="text-[1.8rem] leading-none font-extrabold text-white hover:text-[#5CC6D0] transition-colors whitespace-nowrap"
-                    onMouseEnter={() => setHoveredMenuItem(index)}
-                    onMouseLeave={() => setHoveredMenuItem(null)}
-                    onFocus={() => setHoveredMenuItem(index)}
-                    onBlur={() => setHoveredMenuItem(null)}
-                  >
-                    {item}
-                  </Link>
-                ) : (
-                  <Link
-                    to={menuPaths[index]}
-                    className="text-[1.8rem] leading-none font-extrabold text-white hover:text-[#5CC6D0] transition-colors whitespace-nowrap"
-                    onMouseEnter={() => setHoveredMenuItem(index)}
-                    onMouseLeave={() => setHoveredMenuItem(null)}
-                    onFocus={() => setHoveredMenuItem(index)}
-                    onBlur={() => setHoveredMenuItem(null)}
-                  >
-                    {item}
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
-
+      <Sidebar />
+      <MobileHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+      <NavigationMenu isMenuOpen={isMenuOpen} />
+      
       <main 
         className={`w-full md:w-[calc(100vw-120px)] min-h-screen transition-transform duration-300 ${
           isMenuOpen 
