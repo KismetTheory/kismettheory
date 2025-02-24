@@ -64,15 +64,15 @@ const PhotoJournal = () => {
     if (currentIndex === -1) return;
 
     const newIndex = direction === 'prev'
-      ? Math.min(currentIndex + 1, availableMonths.length - 1)  // Go forward in array to get previous month
-      : Math.max(currentIndex - 1, 0);  // Go backward in array to get next month
+      ? Math.min(currentIndex + 1, availableMonths.length - 1)
+      : Math.max(currentIndex - 1, 0);
     
     setCurrentMonth(availableMonths[newIndex]);
     setSelectedImageIndex(null);
   };
 
   const mainContent = (
-    <div className="min-h-screen bg-black text-white p-8">
+    <div className="min-h-screen bg-background text-foreground p-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
           <h1 className="text-3xl font-bold">Journal</h1>
@@ -86,7 +86,7 @@ const PhotoJournal = () => {
         </div>
         
         {error ? (
-          <p className="text-red-500">Error loading photos. Please try again later.</p>
+          <p className="text-destructive">Error loading photos. Please try again later.</p>
         ) : !posts ? (
           <PhotoGridSkeleton />
         ) : filteredPosts && filteredPosts.length > 0 ? (
@@ -95,7 +95,7 @@ const PhotoJournal = () => {
             onImageClick={(index) => setSelectedImageIndex(index)}
           />
         ) : (
-          <p className="text-center text-white/70 py-12">No photos found for this month.</p>
+          <p className="text-muted-foreground py-12 text-center">No photos found for this month.</p>
         )}
       </div>
 
@@ -109,7 +109,7 @@ const PhotoJournal = () => {
   );
 
   return (
-    <div className="flex min-h-screen bg-black">
+    <div className="flex min-h-screen bg-background">
       <Sidebar toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
       <MobileHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       <NavigationMenu isMenuOpen={isMenuOpen} />
