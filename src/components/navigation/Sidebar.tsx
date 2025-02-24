@@ -60,8 +60,7 @@ const Sidebar = ({
             </>
           )}
         </button>
-        <div className="absolute bottom-8 text-foreground">
-          <div className="text-sm font-bold mb-4">THEME</div>
+        <div className="absolute bottom-8">
           <button
             onClick={toggleTheme}
             className="dark:text-[#5CC6D0] dark:hover:text-white text-black hover:text-[#5CC6D0] transition-colors"
