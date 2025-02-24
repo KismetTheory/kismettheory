@@ -13,8 +13,36 @@ const PhotoGrid = ({ posts, onImageClick }: PhotoGridProps) => {
   const getImageFromContent = (content: string): string | null => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(content, 'text/html');
-    const img = doc.querySelector('img');
-    return img?.src || null;
+    
+    // Try different ways to find images
+    const possibleImages = [
+      // Try direct img tags
+      ...Array.from(doc.querySelectorAll('img')),
+      // Try figure tags with img inside
+      ...Array.from(doc.querySelectorAll('figure img')),
+      // Try wp-block-image class
+      ...Array.from(doc.querySelectorAll('.wp-block-image img')),
+      // Try looking for data-large-file attribute
+      ...Array.from(doc.querySelectorAll('[data-large-file]'))
+    ];
+
+    // Try different sources for the image URL
+    for (const img of possibleImages) {
+      // Check different attributes where the URL might be stored
+      const url = img.getAttribute('src') || 
+                 img.getAttribute('data-large-file') ||
+                 img.getAttribute('data-src') ||
+                 img.getAttribute('data-full-url');
+      
+      if (url) {
+        console.log('Found image URL in content:', url);
+        return url;
+      }
+    }
+    
+    // If no image found, log the content for debugging
+    console.log('No image found in content:', content);
+    return null;
   };
   
   // Debug log for each post's media
@@ -26,7 +54,8 @@ const PhotoGrid = ({ posts, onImageClick }: PhotoGridProps) => {
       hasFeaturedMedia: !!featuredImage,
       hasContentImage: !!contentImage,
       featuredImageUrl: featuredImage,
-      contentImageUrl: contentImage
+      contentImageUrl: contentImage,
+      content: post.content.rendered // Log the full content for debugging
     });
   });
 
