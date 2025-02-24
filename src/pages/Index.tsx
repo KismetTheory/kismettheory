@@ -1,3 +1,4 @@
+
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
@@ -5,7 +6,7 @@ const panels = [
   {
     title: "DAY TO DAY",
     subtitle: "Mi actualidad",
-    image: "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6",
+    image: "/lovable-uploads/4bb2b978-de5c-4a35-8880-467438168f2a.png",
   },
   {
     title: "ABOUT",
