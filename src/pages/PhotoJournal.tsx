@@ -1,72 +1,24 @@
+
 import React, { useState, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { format, parse, startOfMonth, endOfMonth } from "date-fns";
 import Sidebar from "@/components/navigation/Sidebar";
 import MobileHeader from "@/components/navigation/MobileHeader";
 import NavigationMenu from "@/components/navigation/NavigationMenu";
 import PhotoGrid from "@/components/photo-journal/PhotoGrid";
 import PhotoLightbox from "@/components/photo-journal/PhotoLightbox";
+import PhotoGridSkeleton from "@/components/photo-journal/PhotoGridSkeleton";
+import MonthNavigator from "@/components/photo-journal/MonthNavigator";
+import { usePhotoJournalPosts } from "@/hooks/usePhotoJournalPosts";
 import { WordPressImage } from "@/components/photo-journal/types";
 
 const PhotoJournal = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   const [currentMonth, setCurrentMonth] = useState(format(new Date(), 'yyyy-MM'));
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const { data: posts, error } = useQuery<WordPressImage[]>({
-    queryKey: ["photo-journal-posts"],
-    queryFn: async () => {
-      let allPosts: WordPressImage[] = [];
-      let page = 1;
-      let hasMorePosts = true;
-
-      while (hasMorePosts) {
-        const response = await fetch(
-          `https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5&per_page=20&page=${page}`
-        );
-
-        if (response.status === 400) {
-          hasMorePosts = false;
-          break;
-        }
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        if (!Array.isArray(data) || data.length === 0) {
-          hasMorePosts = false;
-          break;
-        }
-
-        allPosts = [...allPosts, ...data];
-        console.log(`Fetched page ${page}, got ${data.length} posts. Total so far: ${allPosts.length}`);
-        
-        if (data.length < 20) {
-          hasMorePosts = false;
-        }
-        
-        page++;
-      }
-
-      console.log('Final total posts fetched:', allPosts.length);
-      setIsLoading(false);
-      return allPosts;
-    },
-    retry: 3,
-    retryDelay: 1000,
-    staleTime: 5 * 60 * 1000,
-  });
-
-  useEffect(() => {
-    if (posts) {
-      console.log('All posts dates:', posts.map(post => post.date));
-    }
-  }, [posts]);
+  const { data: posts, error } = usePhotoJournalPosts();
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (!filteredPosts || selectedImageIndex === null) return;
@@ -91,14 +43,6 @@ const PhotoJournal = () => {
     const monthEnd = endOfMonth(monthStart);
     return postDate >= monthStart && postDate <= monthEnd;
   });
-
-  useEffect(() => {
-    if (filteredPosts) {
-      console.log('Filtered posts count:', filteredPosts.length);
-      console.log('Current month:', currentMonth);
-      console.log('Filtered posts dates:', filteredPosts.map(post => post.date));
-    }
-  }, [filteredPosts, currentMonth]);
 
   const selectedImage = selectedImageIndex !== null && filteredPosts ? filteredPosts[selectedImageIndex] : null;
 
@@ -133,40 +77,19 @@ const PhotoJournal = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
           <h1 className="text-3xl font-bold">Photo Journal</h1>
-          {!isLoading && !error && availableMonths.length > 0 && (
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => navigateMonth('prev')}
-                disabled={currentMonth === availableMonths[availableMonths.length - 1]}
-                className="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Previous Month
-              </button>
-              <span className="text-xl font-medium min-w-[200px] text-center">
-                {format(parse(currentMonth, 'yyyy-MM', new Date()), 'MMMM yyyy')}
-              </span>
-              <button
-                onClick={() => navigateMonth('next')}
-                disabled={currentMonth === availableMonths[0]}
-                className="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Next Month
-              </button>
-            </div>
+          {!error && availableMonths.length > 0 && (
+            <MonthNavigator
+              currentMonth={currentMonth}
+              availableMonths={availableMonths}
+              onNavigate={navigateMonth}
+            />
           )}
         </div>
         
         {error ? (
           <p className="text-red-500">Error loading photos. Please try again later.</p>
-        ) : isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[...Array(6)].map((_, index) => (
-              <div
-                key={index}
-                className="aspect-square bg-gray-800 animate-pulse rounded-lg"
-              />
-            ))}
-          </div>
+        ) : !posts ? (
+          <PhotoGridSkeleton />
         ) : filteredPosts && filteredPosts.length > 0 ? (
           <PhotoGrid
             posts={filteredPosts}
