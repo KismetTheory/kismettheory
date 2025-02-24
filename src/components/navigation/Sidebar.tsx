@@ -13,9 +13,9 @@ const Sidebar = ({ isMenuOpen, toggleMenu }: SidebarProps) => {
       <div className="h-full flex flex-col items-center">
         <div className="mt-6">
           <Link to="/" className="text-[#5CC6D0] hover:text-white transition-colors">
-            <div className="text-center font-sans">
-              <div className="text-xl font-medium">Jamie</div>
-              <div className="text-xl font-medium -mt-1">Marsland</div>
+            <div className="text-center">
+              <div className="text-xl font-sans">Jamie</div>
+              <div className="text-xl font-sans">Marsland</div>
             </div>
           </Link>
         </div>

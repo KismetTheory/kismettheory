@@ -11,9 +11,9 @@ const MobileHeader = ({ isMenuOpen, toggleMenu }: MobileHeaderProps) => {
   return (
     <header className="fixed top-0 left-0 w-full h-16 bg-black text-white z-40 flex items-center justify-between px-4 md:hidden">
       <Link to="/">
-        <div className="text-center font-sans text-[#5CC6D0] hover:text-white transition-colors">
-          <div className="text-lg font-medium">Jamie</div>
-          <div className="text-lg font-medium -mt-1">Marsland</div>
+        <div className="text-center text-[#5CC6D0] hover:text-white transition-colors">
+          <div className="text-lg font-sans">Jamie</div>
+          <div className="text-lg font-sans">Marsland</div>
         </div>
       </Link>
       <button
