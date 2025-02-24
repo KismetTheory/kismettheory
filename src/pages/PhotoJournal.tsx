@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { format, parse, startOfMonth, endOfMonth } from "date-fns";
@@ -65,6 +64,12 @@ const PhotoJournal = () => {
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
   });
 
+  useEffect(() => {
+    if (posts) {
+      console.log('All posts dates:', posts.map(post => post.date));
+    }
+  }, [posts]);
+
   const handleKeyDown = (e: KeyboardEvent) => {
     if (!filteredPosts || selectedImageIndex === null) return;
     
@@ -82,13 +87,24 @@ const PhotoJournal = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedImageIndex, posts]);
 
-  // Filter posts by current month
   const filteredPosts = posts?.filter(post => {
     const postDate = new Date(post.date);
     const monthStart = startOfMonth(parse(currentMonth, 'yyyy-MM', new Date()));
     const monthEnd = endOfMonth(monthStart);
-    return postDate >= monthStart && postDate <= monthEnd;
+    
+    const isInRange = postDate >= monthStart && postDate <= monthEnd;
+    console.log(`Post date: ${post.date}, monthStart: ${monthStart}, monthEnd: ${monthEnd}, isInRange: ${isInRange}`);
+    
+    return isInRange;
   });
+
+  useEffect(() => {
+    if (filteredPosts) {
+      console.log('Filtered posts count:', filteredPosts.length);
+      console.log('Current month:', currentMonth);
+      console.log('Filtered posts dates:', filteredPosts.map(post => post.date));
+    }
+  }, [filteredPosts, currentMonth]);
 
   const selectedImage = selectedImageIndex !== null && filteredPosts ? filteredPosts[selectedImageIndex] : null;
 
@@ -101,7 +117,6 @@ const PhotoJournal = () => {
     setSelectedImageIndex(newIndex);
   };
 
-  // Get unique months from posts and sort them in reverse chronological order
   const availableMonths: string[] = posts
     ? Array.from(new Set(posts.map(post => format(new Date(post.date), 'yyyy-MM'))))
         .sort((a, b) => b.localeCompare(a))
