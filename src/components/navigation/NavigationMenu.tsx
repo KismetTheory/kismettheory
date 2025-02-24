@@ -30,7 +30,7 @@ const NavigationMenu = ({ isMenuOpen }: NavigationMenuProps) => {
               {menuPaths[index].startsWith('#') ? (
                 <Link
                   to="/"
-                  className="text-[1.8rem] leading-none font-extrabold text-white hover:text-[#5CC6D0] transition-colors whitespace-nowrap"
+                  className="text-[1.8rem] leading-none font-extrabold dark:text-white dark:hover:text-[#5CC6D0] text-black hover:text-[#5CC6D0] transition-colors whitespace-nowrap"
                   onMouseEnter={() => setHoveredMenuItem(index)}
                   onMouseLeave={() => setHoveredMenuItem(null)}
                   onFocus={() => setHoveredMenuItem(index)}
@@ -41,7 +41,7 @@ const NavigationMenu = ({ isMenuOpen }: NavigationMenuProps) => {
               ) : (
                 <Link
                   to={menuPaths[index]}
-                  className="text-[1.8rem] leading-none font-extrabold text-white hover:text-[#5CC6D0] transition-colors whitespace-nowrap"
+                  className="text-[1.8rem] leading-none font-extrabold dark:text-white dark:hover:text-[#5CC6D0] text-black hover:text-[#5CC6D0] transition-colors whitespace-nowrap"
                   onMouseEnter={() => setHoveredMenuItem(index)}
                   onMouseLeave={() => setHoveredMenuItem(null)}
                   onFocus={() => setHoveredMenuItem(index)}

@@ -37,7 +37,7 @@ const Sidebar = ({
     <aside className="fixed left-0 top-0 h-full w-[120px] bg-background text-foreground z-30 hidden md:block" role="complementary" aria-label="Sidebar navigation">
       <div className="h-full flex flex-col items-center">
         <div className="mt-6">
-          <Link to="/" className="text-[#5CC6D0] hover:text-white transition-colors">
+          <Link to="/" className="dark:text-[#5CC6D0] dark:hover:text-white text-black hover:text-[#5CC6D0] transition-colors">
             <div className="text-center">
               <div className="text-small font-sans">Jamie</div>
               <div className="text-small font-sans">Marsland</div>
@@ -46,7 +46,7 @@ const Sidebar = ({
         </div>
         <button 
           onClick={toggleMenu} 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#5CC6D0] hover:text-white transition-colors" 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 dark:text-[#5CC6D0] dark:hover:text-white text-black hover:text-[#5CC6D0] transition-colors" 
           aria-expanded={isMenuOpen} 
           aria-controls="main-menu" 
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -64,7 +64,7 @@ const Sidebar = ({
           <div className="text-sm font-bold mb-4">THEME</div>
           <button
             onClick={toggleTheme}
-            className="flex items-center space-x-2 text-[#5CC6D0] hover:text-white transition-colors"
+            className="dark:text-[#5CC6D0] dark:hover:text-white text-black hover:text-[#5CC6D0] transition-colors"
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           >
             {theme === 'dark' ? (
