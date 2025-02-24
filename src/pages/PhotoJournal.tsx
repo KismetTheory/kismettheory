@@ -64,9 +64,9 @@ const PhotoJournal = () => {
     const currentIndex = availableMonths.indexOf(currentMonth);
     if (currentIndex === -1) return;
 
-    const newIndex = direction === 'next'
-      ? Math.min(currentIndex + 1, availableMonths.length - 1)
-      : Math.max(currentIndex - 1, 0);
+    const newIndex = direction === 'prev'
+      ? Math.min(currentIndex + 1, availableMonths.length - 1)  // Go forward in array to get previous month
+      : Math.max(currentIndex - 1, 0);  // Go backward in array to get next month
     
     setCurrentMonth(availableMonths[newIndex]);
     setSelectedImageIndex(null);
