@@ -1,15 +1,13 @@
 
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
 
-const Sidebar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+interface SidebarProps {
+  isMenuOpen: boolean;
+  toggleMenu: () => void;
+}
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
+const Sidebar = ({ isMenuOpen, toggleMenu }: SidebarProps) => {
   return (
     <aside className="fixed left-0 top-0 h-full w-[120px] bg-black text-white z-30 hidden md:block" role="complementary" aria-label="Sidebar navigation">
       <div className="h-full flex flex-col items-center">

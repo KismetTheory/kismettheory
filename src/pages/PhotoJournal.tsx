@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { format, parse, startOfMonth, endOfMonth } from "date-fns";
 import Sidebar from "@/components/navigation/Sidebar";
@@ -9,7 +8,6 @@ import PhotoLightbox from "@/components/photo-journal/PhotoLightbox";
 import PhotoGridSkeleton from "@/components/photo-journal/PhotoGridSkeleton";
 import MonthNavigator from "@/components/photo-journal/MonthNavigator";
 import { usePhotoJournalPosts } from "@/hooks/usePhotoJournalPosts";
-import { WordPressImage } from "@/components/photo-journal/types";
 
 const PhotoJournal = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -111,7 +109,7 @@ const PhotoJournal = () => {
 
   return (
     <div className="flex min-h-screen bg-black">
-      <Sidebar />
+      <Sidebar toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
       <MobileHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       <NavigationMenu isMenuOpen={isMenuOpen} />
       
