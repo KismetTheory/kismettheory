@@ -91,11 +91,7 @@ const PhotoJournal = () => {
     const postDate = new Date(post.date);
     const monthStart = startOfMonth(parse(currentMonth, 'yyyy-MM', new Date()));
     const monthEnd = endOfMonth(monthStart);
-    
-    const isInRange = postDate >= monthStart && postDate <= monthEnd;
-    console.log(`Post date: ${post.date}, monthStart: ${monthStart}, monthEnd: ${monthEnd}, isInRange: ${isInRange}`);
-    
-    return isInRange;
+    return postDate >= monthStart && postDate <= monthEnd;
   });
 
   useEffect(() => {
