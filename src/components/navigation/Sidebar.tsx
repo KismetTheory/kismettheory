@@ -34,7 +34,7 @@ const Sidebar = ({
   };
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-[120px] bg-black text-white z-30 hidden md:block" role="complementary" aria-label="Sidebar navigation">
+    <aside className="fixed left-0 top-0 h-full w-[120px] bg-background text-foreground z-30 hidden md:block" role="complementary" aria-label="Sidebar navigation">
       <div className="h-full flex flex-col items-center">
         <div className="mt-6">
           <Link to="/" className="text-[#5CC6D0] hover:text-white transition-colors">
@@ -60,7 +60,7 @@ const Sidebar = ({
             </>
           )}
         </button>
-        <div className="absolute bottom-8 text-white">
+        <div className="absolute bottom-8 text-foreground">
           <div className="text-sm font-bold mb-4">THEME</div>
           <button
             onClick={toggleTheme}
