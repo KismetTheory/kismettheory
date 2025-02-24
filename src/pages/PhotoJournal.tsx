@@ -28,7 +28,6 @@ const PhotoJournal = () => {
           `https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5&per_page=20&page=${page}`
         );
 
-        // Check if we've reached the end of available pages
         if (response.status === 400) {
           hasMorePosts = false;
           break;
@@ -47,7 +46,6 @@ const PhotoJournal = () => {
         allPosts = [...allPosts, ...data];
         console.log(`Fetched page ${page}, got ${data.length} posts. Total so far: ${allPosts.length}`);
         
-        // Check if we got fewer posts than requested, meaning this is the last page
         if (data.length < 20) {
           hasMorePosts = false;
         }
@@ -61,7 +59,7 @@ const PhotoJournal = () => {
     },
     retry: 3,
     retryDelay: 1000,
-    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+    staleTime: 5 * 60 * 1000,
   });
 
   useEffect(() => {
@@ -170,15 +168,10 @@ const PhotoJournal = () => {
             ))}
           </div>
         ) : filteredPosts && filteredPosts.length > 0 ? (
-          <>
-            <PhotoGrid
-              posts={filteredPosts}
-              onImageClick={(index) => setSelectedImageIndex(index)}
-            />
-            <div className="mt-4 text-center text-white/70">
-              Showing {filteredPosts.length} photos for {format(parse(currentMonth, 'yyyy-MM', new Date()), 'MMMM yyyy')}
-            </div>
-          </>
+          <PhotoGrid
+            posts={filteredPosts}
+            onImageClick={(index) => setSelectedImageIndex(index)}
+          />
         ) : (
           <p className="text-center text-white/70 py-12">No photos found for this month.</p>
         )}
