@@ -12,7 +12,7 @@ const MonthNavigator = ({ currentMonth, availableMonths, onNavigate }: MonthNavi
     <div className="flex items-center gap-4">
       <button
         onClick={() => onNavigate('prev')}
-        disabled={currentMonth === availableMonths[availableMonths.length - 1]}
+        disabled={currentMonth === availableMonths[0]}
         className="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         Previous Month
@@ -22,7 +22,7 @@ const MonthNavigator = ({ currentMonth, availableMonths, onNavigate }: MonthNavi
       </span>
       <button
         onClick={() => onNavigate('next')}
-        disabled={currentMonth === availableMonths[0]}
+        disabled={currentMonth === availableMonths[availableMonths.length - 1]}
         className="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         Next Month
