@@ -1,6 +1,7 @@
 
 import { Dialog, DialogPortal } from "@/components/ui/dialog";
 import { format } from "date-fns";
+import { X } from "lucide-react";
 import { WordPressImage } from "./types";
 
 interface PhotoLightboxProps {
@@ -18,13 +19,21 @@ const PhotoLightbox = ({ selectedImage, selectedImageIndex, onClose, onNavigate 
       <DialogPortal>
         <div className="fixed inset-0 z-50">
           <div 
-            className="relative flex items-center justify-center w-full h-full backdrop-blur-xl bg-black/30"
+            className="relative flex items-center justify-center w-full h-full backdrop-blur-xl bg-black/30 cursor-pointer"
             onClick={(e) => {
               if (e.target === e.currentTarget) {
                 onClose();
               }
             }}
           >
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+              aria-label="Close lightbox"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -35,7 +44,8 @@ const PhotoLightbox = ({ selectedImage, selectedImageIndex, onClose, onNavigate 
             >
               ←
             </button>
-            <div className="relative max-w-7xl mx-auto px-4 w-full h-full flex items-center justify-center">
+
+            <div className="relative max-w-7xl mx-auto px-4 w-full h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
               <img
                 src={selectedImage._embedded?.["wp:featuredmedia"]?.[0]?.source_url}
                 alt={selectedImage._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || selectedImage.title.rendered}
@@ -50,6 +60,7 @@ const PhotoLightbox = ({ selectedImage, selectedImageIndex, onClose, onNavigate 
                 </p>
               </div>
             </div>
+
             <button
               onClick={(e) => {
                 e.stopPropagation();
