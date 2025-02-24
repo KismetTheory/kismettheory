@@ -24,12 +24,11 @@ const PhotoJournal = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoveredMenuItem, setHoveredMenuItem] = useState<number | null>(null);
-  const [selectedImage, setSelectedImage] = useState<WordPressImage | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 
   const { data: posts, error } = useQuery({
     queryKey: ["photo-journal-posts"],
     queryFn: async () => {
-      // Updated to filter for the "photos" category (ID: 5)
       const response = await fetch(
         "https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5"
       );
@@ -38,13 +37,38 @@ const PhotoJournal = () => {
       }
       const data = await response.json();
       setIsLoading(false);
-      console.log('WordPress API response:', data); // Debug log
+      console.log('WordPress API response:', data);
       return data as WordPressImage[];
     },
   });
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (!posts || selectedImageIndex === null) return;
+    
+    if (e.key === 'ArrowRight') {
+      setSelectedImageIndex((selectedImageIndex + 1) % posts.length);
+    } else if (e.key === 'ArrowLeft') {
+      setSelectedImageIndex((selectedImageIndex - 1 + posts.length) % posts.length);
+    } else if (e.key === 'Escape') {
+      setSelectedImageIndex(null);
+    }
+  };
+
+  // Add keyboard navigation
+  React.useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImageIndex, posts]);
+
+  const selectedImage = selectedImageIndex !== null && posts ? posts[selectedImageIndex] : null;
+
+  const navigateImage = (direction: 'prev' | 'next') => {
+    if (!posts || selectedImageIndex === null) return;
+    
+    const newIndex = direction === 'next' 
+      ? (selectedImageIndex + 1) % posts.length
+      : (selectedImageIndex - 1 + posts.length) % posts.length;
+    setSelectedImageIndex(newIndex);
   };
 
   const mainContent = (
@@ -65,7 +89,7 @@ const PhotoJournal = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts?.map((post) => {
+            {posts?.map((post, index) => {
               const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
               const imageAlt = post._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || post.title.rendered;
               const postDate = format(new Date(post.date), 'MMMM d, yyyy');
@@ -76,7 +100,7 @@ const PhotoJournal = () => {
                 <div 
                   key={post.id} 
                   className="group relative cursor-pointer"
-                  onClick={() => setSelectedImage(post)}
+                  onClick={() => setSelectedImageIndex(index)}
                 >
                   <div className="aspect-square overflow-hidden rounded-lg">
                     <img
@@ -96,23 +120,53 @@ const PhotoJournal = () => {
         )}
       </div>
 
-      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
-        <DialogContent className="max-w-4xl bg-black border-none p-0">
+      <Dialog open={selectedImageIndex !== null} onOpenChange={() => setSelectedImageIndex(null)}>
+        <DialogContent className="max-w-6xl bg-black border-none p-0">
           {selectedImage && (
-            <div className="relative">
-              <img
-                src={selectedImage._embedded?.["wp:featuredmedia"]?.[0]?.source_url}
-                alt={selectedImage._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || selectedImage.title.rendered}
-                className="w-full h-auto max-h-[80vh] object-contain"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                <h2 className="text-white text-xl font-medium mb-2">
-                  {selectedImage.title.rendered}
-                </h2>
-                <p className="text-white/70">
-                  {format(new Date(selectedImage.date), 'MMMM d, yyyy')}
-                </p>
+            <div 
+              className="relative flex items-center justify-center"
+              onClick={(e) => {
+                // Close dialog when clicking outside the image
+                if (e.target === e.currentTarget) {
+                  setSelectedImageIndex(null);
+                }
+              }}
+            >
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigateImage('prev');
+                }}
+                className="absolute left-4 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                aria-label="Previous image"
+              >
+                ←
+              </button>
+              <div className="relative">
+                <img
+                  src={selectedImage._embedded?.["wp:featuredmedia"]?.[0]?.source_url}
+                  alt={selectedImage._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || selectedImage.title.rendered}
+                  className="w-full h-auto max-h-[80vh] object-contain"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                  <h2 className="text-white text-xl font-medium mb-2">
+                    {selectedImage.title.rendered}
+                  </h2>
+                  <p className="text-white/70">
+                    {format(new Date(selectedImage.date), 'MMMM d, yyyy')}
+                  </p>
+                </div>
               </div>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigateImage('next');
+                }}
+                className="absolute right-4 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                aria-label="Next image"
+              >
+                →
+              </button>
             </div>
           )}
         </DialogContent>
