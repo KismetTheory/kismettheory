@@ -20,18 +20,45 @@ const PhotoJournal = () => {
   const { data: posts, error } = useQuery<WordPressImage[]>({
     queryKey: ["photo-journal-posts"],
     queryFn: async () => {
-      // Get all posts without pagination first
-      const response = await fetch(
-        "https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5&per_page=100"
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      let allPosts: WordPressImage[] = [];
+      let page = 1;
+      let hasMorePosts = true;
+
+      while (hasMorePosts) {
+        const response = await fetch(
+          `https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5&per_page=20&page=${page}`
+        );
+
+        // Check if we've reached the end of available pages
+        if (response.status === 400) {
+          hasMorePosts = false;
+          break;
+        }
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (!Array.isArray(data) || data.length === 0) {
+          hasMorePosts = false;
+          break;
+        }
+
+        allPosts = [...allPosts, ...data];
+        console.log(`Fetched page ${page}, got ${data.length} posts. Total so far: ${allPosts.length}`);
+        
+        // Check if we got fewer posts than requested, meaning this is the last page
+        if (data.length < 20) {
+          hasMorePosts = false;
+        }
+        
+        page++;
       }
-      const data = await response.json();
-      console.log('Total posts fetched:', data.length);
-      
+
+      console.log('Final total posts fetched:', allPosts.length);
       setIsLoading(false);
-      return data;
+      return allPosts;
     },
     retry: 3,
     retryDelay: 1000,
