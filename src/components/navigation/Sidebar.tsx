@@ -14,7 +14,7 @@ const Sidebar = ({
           <Link to="/" className="text-[#5CC6D0] hover:text-white transition-colors">
             <div className="text-center">
               <div className="text-small font-sans">Jamie</div>
-              <div className="text-xl font-sans">Marsland</div>
+              <div className="text-small font-sans">Marsland</div>
             </div>
           </Link>
         </div>
