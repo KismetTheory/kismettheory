@@ -19,14 +19,27 @@ const PhotoLightbox = ({ selectedImage, selectedImageIndex, onClose, onNavigate 
     const featuredImage = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
     if (featuredImage) return featuredImage;
 
-    // Fall back to content image
+    // Parse the content HTML and look for image sources
     const parser = new DOMParser();
     const doc = parser.parseFromString(post.content.rendered, 'text/html');
-    const img = doc.querySelector('img');
-    return img?.getAttribute('src') || 
-           img?.getAttribute('data-opt-src') || 
-           img?.getAttribute('data-src') || 
-           null;
+    
+    // Try different possible image elements and their attributes
+    const possibleImages = [
+      ...Array.from(doc.querySelectorAll('img')),
+      ...Array.from(doc.querySelectorAll('figure img')),
+      ...Array.from(doc.querySelectorAll('.wp-block-image img'))
+    ];
+
+    for (const img of possibleImages) {
+      // Try different possible source attributes
+      const url = img.getAttribute('data-opt-src') || 
+                 img.getAttribute('src') || 
+                 img.getAttribute('data-src');
+      
+      if (url) return url;
+    }
+    
+    return null;
   };
 
   const imageUrl = getImageUrl(selectedImage);
