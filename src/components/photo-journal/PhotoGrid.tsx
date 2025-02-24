@@ -9,6 +9,17 @@ interface PhotoGridProps {
 
 const PhotoGrid = ({ posts, onImageClick }: PhotoGridProps) => {
   console.log('PhotoGrid received posts:', posts.length);
+  
+  // Debug log for each post's media
+  posts?.forEach((post, index) => {
+    console.log(`Post ${index + 1}: "${post.title.rendered}"`, {
+      hasEmbedded: !!post._embedded,
+      hasMedia: !!post._embedded?.["wp:featuredmedia"],
+      mediaLength: post._embedded?.["wp:featuredmedia"]?.length,
+      sourceUrl: post._embedded?.["wp:featuredmedia"]?.[0]?.source_url
+    });
+  });
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {posts?.map((post, index) => {
@@ -17,7 +28,11 @@ const PhotoGrid = ({ posts, onImageClick }: PhotoGridProps) => {
         const postDate = format(new Date(post.date), 'MMMM d, yyyy');
 
         if (!imageUrl) {
-          console.log('Post missing image:', post.title.rendered);
+          console.log('Post missing image:', {
+            title: post.title.rendered,
+            embedded: post._embedded,
+            featuredMedia: post._embedded?.["wp:featuredmedia"]
+          });
           return null;
         }
 
