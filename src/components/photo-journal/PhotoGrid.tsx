@@ -9,7 +9,7 @@ interface PhotoGridProps {
 
 const PhotoGrid = ({ posts, onImageClick }: PhotoGridProps) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
       {posts?.map((post, index) => {
         const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
         const imageAlt = post._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || post.title.rendered;
@@ -27,12 +27,12 @@ const PhotoGrid = ({ posts, onImageClick }: PhotoGridProps) => {
               <img
                 src={imageUrl}
                 alt={imageAlt}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
-            <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-              <h3 className="text-white font-medium mb-2">{post.title.rendered}</h3>
-              <p className="text-white/70 text-sm">{postDate}</p>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6">
+              <h3 className="text-white font-medium text-xl mb-2">{post.title.rendered}</h3>
+              <p className="text-white/80 text-sm">{postDate}</p>
             </div>
           </div>
         );
