@@ -1,7 +1,18 @@
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { Home, Image, List } from "lucide-react";
 
 const Sidebar = () => {
+  const location = useLocation();
+
+  const isActive = (path: string) => location.pathname === path;
+
+  const menuItems = [
+    { path: "/", icon: Home, label: "Home" },
+    { path: "/photo-journal", icon: Image, label: "Photos" },
+    { path: "/posts", icon: List, label: "Posts" },
+  ];
+
   return (
     <aside className="fixed left-0 top-0 h-full w-[120px] bg-black text-white z-30 hidden md:block">
       <div className="h-full flex flex-col items-center">
@@ -32,11 +43,45 @@ const Sidebar = () => {
             </svg>
           </Link>
         </div>
+
+        <nav className="mt-12 flex flex-col items-center gap-8">
+          {menuItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`flex flex-col items-center gap-2 p-3 rounded-lg transition-colors ${
+                isActive(item.path)
+                  ? "text-[#5CC6D0]"
+                  : "text-white/70 hover:text-white"
+              }`}
+            >
+              <item.icon size={24} />
+              <span className="text-xs font-medium">{item.label}</span>
+            </Link>
+          ))}
+        </nav>
+
         <div className="absolute bottom-8 text-white">
-          <div className="text-sm font-bold mb-4" id="sponsors-label">SPONSORS</div>
-          <div className="flex gap-4" role="group" aria-labelledby="sponsors-label">
-            <button className="text-[#5CC6D0]" aria-label="Switch to Spanish">ES</button>
-            <button className="text-white opacity-50 hover:opacity-100" aria-label="Switch to English">EN</button>
+          <div className="text-sm font-bold mb-4" id="sponsors-label">
+            SPONSORS
+          </div>
+          <div
+            className="flex gap-4"
+            role="group"
+            aria-labelledby="sponsors-label"
+          >
+            <button
+              className="text-[#5CC6D0]"
+              aria-label="Switch to Spanish"
+            >
+              ES
+            </button>
+            <button
+              className="text-white opacity-50 hover:opacity-100"
+              aria-label="Switch to English"
+            >
+              EN
+            </button>
           </div>
         </div>
       </div>
