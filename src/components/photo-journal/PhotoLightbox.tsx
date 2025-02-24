@@ -14,6 +14,24 @@ interface PhotoLightboxProps {
 const PhotoLightbox = ({ selectedImage, selectedImageIndex, onClose, onNavigate }: PhotoLightboxProps) => {
   if (!selectedImage) return null;
 
+  const getImageUrl = (post: WordPressImage): string | null => {
+    // Try featured media first
+    const featuredImage = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+    if (featuredImage) return featuredImage;
+
+    // Fall back to content image
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(post.content.rendered, 'text/html');
+    const img = doc.querySelector('img');
+    return img?.getAttribute('src') || 
+           img?.getAttribute('data-opt-src') || 
+           img?.getAttribute('data-src') || 
+           null;
+  };
+
+  const imageUrl = getImageUrl(selectedImage);
+  if (!imageUrl) return null;
+
   return (
     <Dialog open={selectedImageIndex !== null} onOpenChange={onClose}>
       <DialogPortal>
@@ -45,9 +63,11 @@ const PhotoLightbox = ({ selectedImage, selectedImageIndex, onClose, onNavigate 
               ←
             </button>
 
-            <div className="relative max-w-7xl mx-auto px-4 w-full h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+            <div 
+              className="relative max-w-7xl mx-auto px-4 w-full h-full flex items-center justify-center"
+            >
               <img
-                src={selectedImage._embedded?.["wp:featuredmedia"]?.[0]?.source_url}
+                src={imageUrl}
                 alt={selectedImage._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || selectedImage.title.rendered}
                 className="max-w-full max-h-[90vh] h-auto object-contain"
               />
