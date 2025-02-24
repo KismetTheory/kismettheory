@@ -1,10 +1,9 @@
-
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
 const panels = [
   {
-    title: "DAY TO DAY",
+    title: "SKETCHES",
     subtitle: "Mi actualidad",
     image: "/lovable-uploads/4bb2b978-de5c-4a35-8880-467438168f2a.png",
   },
@@ -30,7 +29,7 @@ const panels = [
   },
 ];
 
-const menuItems = ["Day To Day", "About", "Quotes", "Fans", "Rafa Nadal Shop"];
+const menuItems = ["Sketches", "About", "Quotes", "Fans", "Rafa Nadal Shop"];
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
