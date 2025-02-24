@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import Sidebar from "@/components/navigation/Sidebar";
 import MobileHeader from "@/components/navigation/MobileHeader";
@@ -8,17 +7,22 @@ import { cn } from "@/lib/utils";
 const sketches = [
   {
     id: 1,
-    src: "https://images.unsplash.com/photo-1531315396756-905d68d21b56",
-    title: "Sketch 1",
-    description: "iPhone architectural sketch exploration"
+    src: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2021/11/IMG_7217.jpg",
+    title: "Architectural Sketch 1",
+    description: "Digital architectural exploration using iPhone"
   },
   {
     id: 2,
-    src: "https://images.unsplash.com/photo-1531315396756-905d68d21b56",
-    title: "Sketch 2",
-    description: "Digital art on iPhone"
+    src: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2021/11/IMG_7160-1.jpg",
+    title: "Architectural Sketch 2",
+    description: "Urban landscape study on iPhone"
   },
-  // Add more sketches here
+  {
+    id: 3,
+    src: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2022/01/IMG_8708.jpg",
+    title: "Architectural Sketch 3",
+    description: "Building perspective study using iPhone"
+  }
 ];
 
 const IphoneSketches = () => {
