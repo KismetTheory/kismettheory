@@ -38,7 +38,15 @@ const IphoneSketches = () => {
       <MobileHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       <NavigationMenu isMenuOpen={isMenuOpen} />
 
-      <main className="pt-16 md:pl-[120px] min-h-screen">
+      <main 
+        className={`w-full md:w-[calc(100vw-120px)] min-h-screen transition-transform duration-300 ${
+          isMenuOpen 
+            ? 'translate-x-full md:translate-x-[300px]' 
+            : 'translate-x-0'
+        } ${
+          'md:ml-[120px]'
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 py-8">
           <h1 className="text-4xl font-bold text-white mb-8">iPhone Sketches</h1>
           <p className="text-gray-400 mb-12 max-w-2xl">
