@@ -84,13 +84,15 @@ const PhotoLightbox = ({ selectedImage, selectedImageIndex, onClose, onNavigate 
                 alt={selectedImage._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || selectedImage.title.rendered}
                 className="max-w-full max-h-[90vh] h-auto object-contain"
               />
-              <div className="absolute bottom-0 left-4 right-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent backdrop-blur-sm p-6 rounded-lg">
-                <h2 className="text-white text-xl font-medium mb-2">
-                  {selectedImage.title.rendered}
-                </h2>
-                <p className="text-white/70">
-                  {format(new Date(selectedImage.date), 'MMMM d, yyyy')}
-                </p>
+              <div className="absolute bottom-0 left-0 right-0 p-3 text-center">
+                <div className="inline-block px-4 py-2 rounded-lg bg-black/40 backdrop-blur-sm">
+                  <h2 className="text-white text-lg font-medium">
+                    {selectedImage.title.rendered}
+                  </h2>
+                  <p className="text-white/70 text-sm">
+                    {format(new Date(selectedImage.date), 'MMMM d, yyyy')}
+                  </p>
+                </div>
               </div>
             </div>
 
