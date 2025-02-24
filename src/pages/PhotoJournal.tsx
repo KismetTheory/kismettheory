@@ -20,8 +20,15 @@ const PhotoJournal = () => {
   const { data: posts, error } = useQuery({
     queryKey: ["photo-journal-posts"],
     queryFn: async () => {
+      // First, get the total number of posts
+      const initialResponse = await fetch(
+        "https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5&per_page=1"
+      );
+      const totalPosts = parseInt(initialResponse.headers.get('X-WP-Total') || '0');
+      
+      // Then fetch all posts
       const response = await fetch(
-        "https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5"
+        `https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5&per_page=${totalPosts}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -29,6 +36,7 @@ const PhotoJournal = () => {
       const data = await response.json();
       setIsLoading(false);
       console.log('WordPress API response:', data);
+      console.log('Total posts:', totalPosts);
       return data as WordPressImage[];
     },
   });
@@ -69,7 +77,7 @@ const PhotoJournal = () => {
     setSelectedImageIndex(newIndex);
   };
 
-  // Get unique months from posts
+  // Get unique months from posts and sort them in reverse chronological order
   const availableMonths = posts
     ? Array.from(new Set(posts.map(post => format(new Date(post.date), 'yyyy-MM'))))
         .sort((a, b) => b.localeCompare(a))
@@ -90,9 +98,9 @@ const PhotoJournal = () => {
   const mainContent = (
     <div className="min-h-screen bg-black text-white p-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
           <h1 className="text-3xl font-bold">Photo Journal</h1>
-          {!isLoading && !error && (
+          {!isLoading && !error && availableMonths.length > 0 && (
             <div className="flex items-center gap-4">
               <button
                 onClick={() => navigateMonth('prev')}
@@ -101,7 +109,7 @@ const PhotoJournal = () => {
               >
                 Previous Month
               </button>
-              <span className="text-xl font-medium">
+              <span className="text-xl font-medium min-w-[200px] text-center">
                 {format(parse(currentMonth, 'yyyy-MM', new Date()), 'MMMM yyyy')}
               </span>
               <button
@@ -127,10 +135,15 @@ const PhotoJournal = () => {
             ))}
           </div>
         ) : filteredPosts && filteredPosts.length > 0 ? (
-          <PhotoGrid
-            posts={filteredPosts}
-            onImageClick={(index) => setSelectedImageIndex(index)}
-          />
+          <>
+            <PhotoGrid
+              posts={filteredPosts}
+              onImageClick={(index) => setSelectedImageIndex(index)}
+            />
+            <div className="mt-4 text-center text-white/70">
+              Showing {filteredPosts.length} photos for {format(parse(currentMonth, 'yyyy-MM', new Date()), 'MMMM yyyy')}
+            </div>
+          </>
         ) : (
           <p className="text-center text-white/70 py-12">No photos found for this month.</p>
         )}
