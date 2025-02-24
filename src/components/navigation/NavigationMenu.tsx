@@ -14,7 +14,7 @@ const NavigationMenu = ({ isMenuOpen }: NavigationMenuProps) => {
   return (
     <nav 
       id="main-menu"
-      className={`fixed w-full md:w-[300px] h-full bg-black/90 z-20 transition-all duration-300 ${
+      className={`fixed w-full md:w-[300px] h-full dark:bg-black/90 bg-white/90 z-20 transition-all duration-300 ${
         isMenuOpen 
           ? 'left-0 md:left-[120px]' 
           : '-left-full md:left-[-300px]'
