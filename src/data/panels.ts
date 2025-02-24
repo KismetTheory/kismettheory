@@ -1,7 +1,7 @@
 
 export const panels = [
   {
-    title: "PHOTO JOURNAL",
+    title: "JOURNAL",
     subtitle: "Mi actualidad",
     image: "/lovable-uploads/4bb2b978-de5c-4a35-8880-467438168f2a.png",
     path: "/photo-journal"
@@ -28,5 +28,5 @@ export const panels = [
   },
 ];
 
-export const menuItems = ["Photo Journal", "About", "Quotes", "Fans", "Rafa Nadal Shop"];
+export const menuItems = ["Journal", "About", "Quotes", "Fans", "Rafa Nadal Shop"];
 export const menuPaths = ["/photo-journal", "#about", "#quotes", "#fans", "#shop"];

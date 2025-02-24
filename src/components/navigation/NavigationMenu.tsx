@@ -6,11 +6,10 @@ interface NavigationMenuProps {
   isMenuOpen: boolean;
 }
 
-const menuItems = ["Photo Journal", "About", "Quotes", "Fans", "Rafa Nadal Shop"];
-const menuPaths = ["/photo-journal", "#about", "#quotes", "#fans", "#shop"];
-
 const NavigationMenu = ({ isMenuOpen }: NavigationMenuProps) => {
   const [hoveredMenuItem, setHoveredMenuItem] = useState<number | null>(null);
+  const menuItems = ["Journal", "About", "Quotes", "Fans", "Rafa Nadal Shop"];
+  const menuPaths = ["/photo-journal", "#about", "#quotes", "#fans", "#shop"];
 
   return (
     <nav 

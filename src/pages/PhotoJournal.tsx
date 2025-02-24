@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { format, parse, startOfMonth, endOfMonth } from "date-fns";
 import Sidebar from "@/components/navigation/Sidebar";
@@ -74,7 +75,7 @@ const PhotoJournal = () => {
     <div className="min-h-screen bg-black text-white p-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-          <h1 className="text-3xl font-bold">Photo Journal</h1>
+          <h1 className="text-3xl font-bold">Journal</h1>
           {!error && availableMonths.length > 0 && (
             <MonthNavigator
               currentMonth={currentMonth}
