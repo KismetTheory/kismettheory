@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { format, parse, startOfMonth, endOfMonth } from "date-fns";
@@ -20,75 +19,18 @@ const PhotoJournal = () => {
   const { data: posts, error } = useQuery({
     queryKey: ["photo-journal-posts"],
     queryFn: async () => {
-      // First, get the total number of posts
-      const initialResponse = await fetch(
-        "https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5&per_page=1"
+      // Get all posts without pagination first
+      const response = await fetch(
+        "https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5&per_page=100"
       );
-      const totalPosts = parseInt(initialResponse.headers.get('X-WP-Total') || '0');
-      console.log('Total posts:', totalPosts);
-      
-      // Then fetch all posts in batches of 100
-      const allPosts: WordPressImage[] = [];
-      const batchSize = 100;
-      const totalPages = Math.ceil(totalPosts / batchSize);
-      
-      const fetchWithRetry = async (url: string, retries = 3): Promise<WordPressImage[]> => {
-        try {
-          const response = await fetch(url);
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          const data = await response.json();
-          if (!Array.isArray(data)) {
-            throw new Error('Invalid response format');
-          }
-          return data;
-        } catch (error) {
-          if (retries > 0) {
-            console.log(`Retrying fetch (${retries} attempts left)`);
-            await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retrying
-            return fetchWithRetry(url, retries - 1);
-          }
-          throw error;
-        }
-      };
-
-      const fetchPromises = [];
-      for (let page = 1; page <= totalPages; page++) {
-        const promise = (async () => {
-          try {
-            const data = await fetchWithRetry(
-              `https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5&per_page=${batchSize}&page=${page}`
-            );
-            console.log(`Successfully fetched page ${page}/${totalPages}, got ${data.length} posts`);
-            return data;
-          } catch (error) {
-            console.error(`Failed to fetch page ${page} after all retries:`, error);
-            return [];
-          }
-        })();
-        fetchPromises.push(promise);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
       }
-
-      // Wait for all fetches to complete
-      const results = await Promise.all(fetchPromises);
-      results.forEach((batch, index) => {
-        if (batch.length > 0) {
-          allPosts.push(...batch);
-        } else {
-          console.error(`Batch ${index + 1} failed to fetch any posts`);
-        }
-      });
+      const data = await response.json();
+      console.log('Total posts fetched:', data.length);
       
       setIsLoading(false);
-      console.log('Total posts fetched:', allPosts.length);
-      console.log('Expected total posts:', totalPosts);
-      
-      if (allPosts.length < totalPosts) {
-        console.error(`Missing ${totalPosts - allPosts.length} posts`);
-      }
-      
-      return allPosts;
+      return data;
     },
     retry: 3,
     retryDelay: 1000,
