@@ -13,9 +13,9 @@ const Sidebar = ({ isMenuOpen, toggleMenu }: SidebarProps) => {
       <div className="h-full flex flex-col items-center">
         <div className="mt-6">
           <Link to="/" className="text-[#5CC6D0] hover:text-white transition-colors">
-            <div className="text-center font-serif italic">
-              <div className="text-xl">Jamie</div>
-              <div className="text-xl -mt-1">Marsland</div>
+            <div className="text-center font-sans">
+              <div className="text-xl font-medium">Jamie</div>
+              <div className="text-xl font-medium -mt-1">Marsland</div>
             </div>
           </Link>
         </div>
@@ -36,26 +36,10 @@ const Sidebar = ({ isMenuOpen, toggleMenu }: SidebarProps) => {
           )}
         </button>
         <div className="absolute bottom-8 text-white">
-          <div className="text-sm font-bold mb-4" id="sponsors-label">
-            SPONSORS
-          </div>
-          <div
-            className="flex gap-4"
-            role="group"
-            aria-labelledby="sponsors-label"
-          >
-            <button
-              className="text-[#5CC6D0]"
-              aria-label="Switch to Spanish"
-            >
-              ES
-            </button>
-            <button
-              className="text-white opacity-50 hover:opacity-100"
-              aria-label="Switch to English"
-            >
-              EN
-            </button>
+          <div className="text-sm font-bold mb-4" id="sponsors-label">SPONSORS</div>
+          <div className="flex gap-4" role="group" aria-labelledby="sponsors-label">
+            <button className="text-[#5CC6D0]" aria-label="Switch to Spanish">ES</button>
+            <button className="text-white opacity-50 hover:opacity-100" aria-label="Switch to English">EN</button>
           </div>
         </div>
       </div>
