@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { format, parse, startOfMonth, endOfMonth } from "date-fns";
@@ -31,22 +30,41 @@ const PhotoJournal = () => {
       const batchSize = 100;
       const totalPages = Math.ceil(totalPosts / batchSize);
       
-      for (let page = 1; page <= totalPages; page++) {
-        const response = await fetch(
-          `https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5&per_page=${batchSize}&page=${page}`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+      const fetchWithRetry = async (url: string, retries = 3): Promise<WordPressImage[]> => {
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return await response.json();
+        } catch (error) {
+          if (retries > 0) {
+            await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retrying
+            return fetchWithRetry(url, retries - 1);
+          }
+          throw error;
         }
-        const data = await response.json();
-        allPosts.push(...data);
+      };
+
+      for (let page = 1; page <= totalPages; page++) {
+        try {
+          const data = await fetchWithRetry(
+            `https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5&per_page=${batchSize}&page=${page}`
+          );
+          allPosts.push(...data);
+          console.log(`Fetched page ${page}/${totalPages}, got ${data.length} posts`);
+        } catch (error) {
+          console.error(`Failed to fetch page ${page} after retries:`, error);
+        }
       }
       
       setIsLoading(false);
-      console.log('WordPress API response:', allPosts);
-      console.log('Total posts:', totalPosts);
+      console.log('Total posts fetched:', allPosts.length);
+      console.log('Expected total posts:', totalPosts);
       return allPosts;
     },
+    retry: 3,
+    retryDelay: 1000,
   });
 
   const handleKeyDown = (e: KeyboardEvent) => {
