@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { WordPressImage } from "@/components/photo-journal/types";
 
-// Hardcoded collection of photos
+// Hardcoded collection of photos with absolute URLs
 const staticPhotos: WordPressImage[] = [
   {
     id: 1,
