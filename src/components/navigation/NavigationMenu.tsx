@@ -1,6 +1,7 @@
 
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { menuItems, menuPaths } from "@/data/panels";
 
 interface NavigationMenuProps {
   isMenuOpen: boolean;
@@ -8,8 +9,6 @@ interface NavigationMenuProps {
 
 const NavigationMenu = ({ isMenuOpen }: NavigationMenuProps) => {
   const [hoveredMenuItem, setHoveredMenuItem] = useState<number | null>(null);
-  const menuItems = ["Journal", "Iphone", "Quotes", "Fans", "Rafa Nadal Shop"];
-  const menuPaths = ["/photo-journal", "#iphone", "#quotes", "#fans", "#shop"];
 
   return (
     <nav 
