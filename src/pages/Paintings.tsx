@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import Sidebar from "@/components/navigation/Sidebar";
 import MobileHeader from "@/components/navigation/MobileHeader";
 import NavigationMenu from "@/components/navigation/NavigationMenu";
+import { toast } from "@/hooks/use-toast";
 
 const Paintings = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [imageErrors, setImageErrors] = useState<{[key: number]: boolean}>({});
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -23,6 +25,15 @@ const Paintings = () => {
       description: "Oil painting of a serene lake"
     }
   ];
+
+  const handleImageError = (id: number) => {
+    setImageErrors(prev => ({...prev, [id]: true}));
+    toast({
+      title: "Image Error",
+      description: "There was a problem loading an image. Please try again later.",
+      variant: "destructive"
+    });
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -52,11 +63,19 @@ const Paintings = () => {
                 className="group relative"
               >
                 <div className="aspect-[4/3] overflow-hidden rounded-lg bg-muted">
-                  <img
-                    src={painting.src}
-                    alt={painting.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+                  {!imageErrors[painting.id] ? (
+                    <img
+                      src={painting.src}
+                      alt={painting.title}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      onError={() => handleImageError(painting.id)}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="h-full w-full flex items-center justify-center bg-muted p-4 text-center">
+                      <p className="text-muted-foreground">Image could not be loaded</p>
+                    </div>
+                  )}
                 </div>
                 <div className="mt-4">
                   <h3 className="text-xl font-medium">{painting.title}</h3>
