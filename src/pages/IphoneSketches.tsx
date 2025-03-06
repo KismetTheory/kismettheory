@@ -4,7 +4,7 @@ import Sidebar from "@/components/navigation/Sidebar";
 import MobileHeader from "@/components/navigation/MobileHeader";
 import NavigationMenu from "@/components/navigation/NavigationMenu";
 import { useIphoneSketches } from "@/hooks/useIphoneSketches";
-import { WordPressImage } from "@/components/photo-journal/types";
+import { toast } from "@/components/ui/use-toast";
 
 const IphoneSketches = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,6 +34,17 @@ const IphoneSketches = () => {
       description: "Building perspective study using iPhone"
     }
   ];
+
+  // Show a toast when there's an error
+  React.useEffect(() => {
+    if (error) {
+      toast({
+        title: "Error loading sketches",
+        description: "Using fallback images instead.",
+        variant: "destructive",
+      });
+    }
+  }, [error]);
 
   // Get images from WordPress or fallback to static images
   const displaySketches = sketches?.length 
