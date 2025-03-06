@@ -1,6 +1,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { WordPressImage } from "@/components/photo-journal/types";
+import { toast } from "@/hooks/use-toast";
 
 export const useIphoneSketches = () => {
   return useQuery<WordPressImage[]>({
@@ -8,7 +9,10 @@ export const useIphoneSketches = () => {
     queryFn: async () => {
       try {
         // First fetch the iPhone Sketches page by its slug
-        const API_BASE_URL = "https://jamiemarsland.co.uk/wp-json/wp/v2";
+        // Use direct IP address instead of domain name for API requests
+        const API_BASE_URL = "http://149.248.51.237/wp-json/wp/v2";
+        
+        console.log("Fetching iPhone sketches using API URL:", API_BASE_URL);
         
         // Get the page content directly using the slug
         const pageResponse = await fetch(
@@ -16,6 +20,7 @@ export const useIphoneSketches = () => {
         );
         
         if (!pageResponse.ok) {
+          console.error(`HTTP error! status: ${pageResponse.status}`);
           throw new Error(`HTTP error! status: ${pageResponse.status}`);
         }
         
@@ -63,6 +68,11 @@ export const useIphoneSketches = () => {
         return sketches;
       } catch (error) {
         console.error("Error fetching iPhone sketches:", error);
+        toast({
+          title: "Error loading iPhone sketches",
+          description: "Please try again later. The server might be temporarily unavailable.",
+          variant: "destructive",
+        });
         return [];
       }
     },
