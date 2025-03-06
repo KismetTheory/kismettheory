@@ -12,9 +12,8 @@ export const usePhotoJournalPosts = () => {
         let page = 1;
         let hasMorePosts = true;
 
-        // Use direct IP address instead of domain name for API requests
-        // This IP address needs to be replaced with the actual server IP
-        const API_BASE_URL = "http://149.248.51.237/wp-json/wp/v2";
+        // Update to use the new IP address
+        const API_BASE_URL = "http://79.170.40.177/wp-json/wp/v2";
         
         console.log("Fetching posts using API URL:", API_BASE_URL);
 

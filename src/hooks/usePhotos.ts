@@ -12,8 +12,8 @@ export const usePhotos = () => {
         // This would normally fetch from the WordPress API like usePhotoJournalPosts
         console.log("Returning static collection of photos:", 9);
         
-        // Use direct IP address instead of domain name for API requests
-        const API_BASE_URL = "http://149.248.51.237/wp-json/wp/v2";
+        // Update to use the new IP address
+        const API_BASE_URL = "http://79.170.40.177/wp-json/wp/v2";
 
         // In a real implementation, we would fetch photos from the API
         // For now using a hardcoded category ID that represents "Photos"

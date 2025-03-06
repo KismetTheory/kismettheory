@@ -9,8 +9,8 @@ export const useIphoneSketches = () => {
     queryFn: async () => {
       try {
         // First fetch the iPhone Sketches page by its slug
-        // Use direct IP address instead of domain name for API requests
-        const API_BASE_URL = "http://149.248.51.237/wp-json/wp/v2";
+        // Update to use the new IP address
+        const API_BASE_URL = "http://79.170.40.177/wp-json/wp/v2";
         
         console.log("Fetching iPhone sketches using API URL:", API_BASE_URL);
         
