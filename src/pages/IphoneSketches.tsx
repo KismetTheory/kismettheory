@@ -8,7 +8,6 @@ import { toast } from "@/components/ui/use-toast";
 
 const IphoneSketches = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedSketch, setSelectedSketch] = useState<number | null>(null);
   const { data: sketches, isLoading, error } = useIphoneSketches();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -100,8 +99,7 @@ const IphoneSketches = () => {
             {filteredSketches.map((sketch) => (
               <div
                 key={sketch.id}
-                className="group relative cursor-pointer mx-auto"
-                onClick={() => setSelectedSketch(sketch.id)}
+                className="group relative mx-auto"
               >
                 {/* iPhone Frame */}
                 <div className="relative w-[280px] h-[580px] rounded-[45px] bg-card shadow-xl p-3 overflow-hidden">
@@ -127,37 +125,6 @@ const IphoneSketches = () => {
             ))}
           </div>
         </div>
-
-        {/* Lightbox */}
-        {selectedSketch && (
-          <div
-            className="fixed inset-0 bg-background/90 z-50 flex items-center justify-center"
-            onClick={() => setSelectedSketch(null)}
-          >
-            <div className="relative max-w-sm w-full p-4">
-              {/* iPhone Frame in Lightbox */}
-              <div className="relative w-full max-w-[320px] mx-auto aspect-[9/19.5] rounded-[45px] bg-card shadow-xl p-3">
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[120px] h-[25px] bg-background rounded-b-[20px] z-10"></div>
-                <div className="relative w-full h-full rounded-[35px] overflow-hidden bg-background">
-                  <img
-                    src={filteredSketches.find(s => s.id === selectedSketch)?.src}
-                    alt={filteredSketches.find(s => s.id === selectedSketch)?.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-              <button
-                className="absolute top-4 right-4 text-foreground hover:text-foreground/70 transition-colors"
-                onClick={() => setSelectedSketch(null)}
-              >
-                <span className="sr-only">Close</span>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        )}
       </main>
     </div>
   );
