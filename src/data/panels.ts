@@ -9,7 +9,7 @@ export const panels = [
   {
     title: "IPHONE",
     subtitle: "Todo sobre mí",
-    image: "https://images.unsplash.com/photo-1531315396756-905d68d21b56",
+    image: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2025/02/photo-18-scaled.jpg",
     path: "/iphone-sketches"
   },
   {
