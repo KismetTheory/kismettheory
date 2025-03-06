@@ -21,7 +21,7 @@ export const panels = [
   {
     title: "PAINTINGS",
     subtitle: "Vosotros y yo",
-    image: "https://images.unsplash.com/photo-1599586120429-48281b6f0ece",
+    image: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2024/06/cliff.jpg",
   },
   {
     title: "SHOP",
