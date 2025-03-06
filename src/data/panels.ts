@@ -15,7 +15,7 @@ export const panels = [
   {
     title: "PHOTOS",
     subtitle: "Citando lo aprendido",
-    image: "https://mlkwtxmsxa0d.i.optimole.com/w:1024/h:1024/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/iPhone-Capture140.jpg",
+    image: "https://jamiemarsland.co.uk/wp-content/uploads/2025/03/Screenshot-2025-03-06-at-22.16.46.png",
     path: "/photos"
   },
   {
