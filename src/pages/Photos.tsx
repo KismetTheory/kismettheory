@@ -7,14 +7,27 @@ import PhotoGrid from "@/components/photos/PhotoGrid";
 import PhotoLightbox from "@/components/photo-journal/PhotoLightbox";
 import PhotoGridSkeleton from "@/components/photos/PhotoGridSkeleton";
 import { usePhotos } from "@/hooks/usePhotos";
+import { useToast } from "@/hooks/use-toast";
 
 const Photos = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const { toast } = useToast();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const { data: posts, error } = usePhotos();
+  const { data: posts, error, isLoading } = usePhotos();
+
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: "Error loading photos",
+        description: "Please try again later",
+        variant: "destructive",
+      });
+      console.error("Error loading photos:", error);
+    }
+  }, [error, toast]);
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (!posts || selectedImageIndex === null) return;
@@ -51,17 +64,23 @@ const Photos = () => {
           <h1 className="text-3xl font-bold">Photos</h1>
         </div>
         
-        {error ? (
-          <p className="text-destructive">Error loading photos. Please try again later.</p>
-        ) : !posts ? (
+        {isLoading ? (
           <PhotoGridSkeleton />
-        ) : posts.length > 0 ? (
+        ) : error ? (
+          <div className="text-destructive py-12 text-center">
+            <p>Error loading photos. Please try again later.</p>
+            <pre className="mt-4 text-xs text-muted-foreground">{error.toString()}</pre>
+          </div>
+        ) : !posts || posts.length === 0 ? (
+          <div className="text-muted-foreground py-12 text-center">
+            <p>No photos found.</p>
+            <p className="mt-2 text-sm">The WordPress API didn't return any photo posts.</p>
+          </div>
+        ) : (
           <PhotoGrid
             posts={posts}
             onImageClick={(index) => setSelectedImageIndex(index)}
           />
-        ) : (
-          <p className="text-muted-foreground py-12 text-center">No photos found.</p>
         )}
       </div>
 
