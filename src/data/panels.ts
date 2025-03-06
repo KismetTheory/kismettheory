@@ -3,7 +3,7 @@ export const panels = [
   {
     title: "JOURNAL",
     subtitle: "Mi actualidad",
-    image: "https://www.pootlepress.com/wp-content/uploads/2025/02/Untitled-design-29.png",
+    image: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2025/02/photo-32-scaled.jpg",
     path: "/photo-journal"
   },
   {
