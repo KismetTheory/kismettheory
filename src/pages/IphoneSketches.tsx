@@ -3,34 +3,50 @@ import React, { useState } from "react";
 import Sidebar from "@/components/navigation/Sidebar";
 import MobileHeader from "@/components/navigation/MobileHeader";
 import NavigationMenu from "@/components/navigation/NavigationMenu";
-import { cn } from "@/lib/utils";
-
-const sketches = [
-  {
-    id: 1,
-    src: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2021/11/IMG_7217.jpg",
-    title: "Architectural Sketch 1",
-    description: "Digital architectural exploration using iPhone"
-  },
-  {
-    id: 2,
-    src: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2021/11/IMG_7160-1.jpg",
-    title: "Architectural Sketch 2",
-    description: "Urban landscape study on iPhone"
-  },
-  {
-    id: 3,
-    src: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2022/01/IMG_8708.jpg",
-    title: "Architectural Sketch 3",
-    description: "Building perspective study using iPhone"
-  }
-];
+import { useIphoneSketches } from "@/hooks/useIphoneSketches";
+import { WordPressImage } from "@/components/photo-journal/types";
 
 const IphoneSketches = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedSketch, setSelectedSketch] = useState<number | null>(null);
+  const { data: sketches, isLoading, error } = useIphoneSketches();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  // Fallback sketches in case the API call fails
+  const fallbackSketches = [
+    {
+      id: 1,
+      src: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2021/11/IMG_7217.jpg",
+      title: "Architectural Sketch 1",
+      description: "Digital architectural exploration using iPhone"
+    },
+    {
+      id: 2,
+      src: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2021/11/IMG_7160-1.jpg",
+      title: "Architectural Sketch 2",
+      description: "Urban landscape study on iPhone"
+    },
+    {
+      id: 3,
+      src: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2022/01/IMG_8708.jpg",
+      title: "Architectural Sketch 3",
+      description: "Building perspective study using iPhone"
+    }
+  ];
+
+  // Get images from WordPress or fallback to static images
+  const displaySketches = sketches?.length 
+    ? sketches.map(sketch => ({
+        id: sketch.id,
+        src: sketch._embedded?.["wp:featuredmedia"]?.[0]?.source_url || '',
+        title: sketch.title.rendered,
+        description: sketch.content.rendered.replace(/<[^>]*>?/gm, '').substring(0, 100) + '...'
+      }))
+    : fallbackSketches;
+
+  // Filter out any sketches without images
+  const filteredSketches = displaySketches.filter(sketch => sketch.src);
 
   return (
     <div className="min-h-screen bg-background">
@@ -53,8 +69,24 @@ const IphoneSketches = () => {
             A collection of architectural and artistic sketches created on iPhone, exploring the intersection of technology and creativity.
           </p>
 
+          {isLoading && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+              {[1, 2, 3, 4, 5, 6].map((_, idx) => (
+                <div key={idx} className="relative w-[280px] h-[580px] rounded-[45px] bg-card/50 animate-pulse">
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[120px] h-[25px] bg-background/80 rounded-b-[20px]"></div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {error && (
+            <div className="text-red-500 mb-6">
+              Error loading sketches. Using fallback images instead.
+            </div>
+          )}
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {sketches.map((sketch) => (
+            {filteredSketches.map((sketch) => (
               <div
                 key={sketch.id}
                 className="group relative cursor-pointer mx-auto"
@@ -97,8 +129,8 @@ const IphoneSketches = () => {
                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[120px] h-[25px] bg-background rounded-b-[20px] z-10"></div>
                 <div className="relative w-full h-full rounded-[35px] overflow-hidden bg-background">
                   <img
-                    src={sketches.find(s => s.id === selectedSketch)?.src}
-                    alt={sketches.find(s => s.id === selectedSketch)?.title}
+                    src={filteredSketches.find(s => s.id === selectedSketch)?.src}
+                    alt={filteredSketches.find(s => s.id === selectedSketch)?.title}
                     className="w-full h-full object-cover"
                   />
                 </div>
