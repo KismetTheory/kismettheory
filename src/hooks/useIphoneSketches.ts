@@ -9,8 +9,8 @@ export const useIphoneSketches = () => {
     queryFn: async () => {
       try {
         // First fetch the iPhone Sketches page by its slug
-        // Update to use the new IP address
-        const API_BASE_URL = "http://79.170.40.177/wp-json/wp/v2";
+        // Update with the correct full path
+        const API_BASE_URL = "http://79.170.40.177/jamiemarsland.co.uk/wp-json/wp/v2";
         
         console.log("Fetching iPhone sketches using API URL:", API_BASE_URL);
         

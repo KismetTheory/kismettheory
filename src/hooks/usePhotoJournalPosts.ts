@@ -12,8 +12,8 @@ export const usePhotoJournalPosts = () => {
         let page = 1;
         let hasMorePosts = true;
 
-        // Update to use the new IP address
-        const API_BASE_URL = "http://79.170.40.177/wp-json/wp/v2";
+        // Update with the correct full path
+        const API_BASE_URL = "http://79.170.40.177/jamiemarsland.co.uk/wp-json/wp/v2";
         
         console.log("Fetching posts using API URL:", API_BASE_URL);
 
