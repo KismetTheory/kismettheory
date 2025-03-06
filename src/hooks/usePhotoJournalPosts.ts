@@ -10,9 +10,12 @@ export const usePhotoJournalPosts = () => {
       let page = 1;
       let hasMorePosts = true;
 
+      // Using the full domain name for API requests
+      const API_BASE_URL = "https://jamiemarsland.co.uk/wp-json/wp/v2";
+
       while (hasMorePosts) {
         const response = await fetch(
-          `https://jamiemarsland.co.uk/wp-json/wp/v2/posts?_embed&categories=5&per_page=20&page=${page}`
+          `${API_BASE_URL}/posts?_embed&categories=5&per_page=20&page=${page}`
         );
 
         if (response.status === 400) {
