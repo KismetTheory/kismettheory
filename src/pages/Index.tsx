@@ -11,7 +11,7 @@ const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoveredPanel, setHoveredPanel] = useState<number | null>(null);
   const [hoveredMenuItem, setHoveredMenuItem] = useState<number | null>(null);
-  const defaultImage = "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0";
+  const defaultImage = "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2025/02/photo-33-scaled.jpg";
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
