@@ -22,13 +22,17 @@ export const panels = [
     title: "PAINTINGS",
     subtitle: "experiments",
     image: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2024/06/cliff.jpg",
+    path: "#paintings"
   },
   {
     title: "SHOP",
     subtitle: "coming soon",
     image: "https://images.unsplash.com/photo-1542144612-1b3641ec3459",
+    path: "#shop"
   },
 ];
 
-export const menuItems = ["Journal", "Iphone", "Photos", "Paintings", "Rafa Nadal Shop"];
-export const menuPaths = ["/photo-journal", "/iphone-sketches", "/photos", "#paintings", "#shop"];
+// Update menu items to use the exact panel titles
+export const menuItems = panels.map(panel => panel.title);
+// Update menu paths to use the panel paths
+export const menuPaths = panels.map(panel => panel.path || '#');
