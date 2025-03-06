@@ -112,12 +112,8 @@ const IphoneSketches = () => {
                       alt={sketch.title}
                       className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
                     />
-                    {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-0 p-6">
-                        <h3 className="text-xl font-semibold text-white mb-2">{sketch.title}</h3>
-                        <p className="text-gray-300 text-sm">{sketch.description}</p>
-                      </div>
+                    {/* Simple Hover Effect - No Text */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     </div>
                   </div>
                 </div>
