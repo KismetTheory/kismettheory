@@ -22,7 +22,7 @@ export const panels = [
     title: "PAINTINGS",
     subtitle: "experiments",
     image: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2024/06/cliff.jpg",
-    path: "#paintings"
+    path: "/paintings"
   },
   {
     title: "SHOP",
