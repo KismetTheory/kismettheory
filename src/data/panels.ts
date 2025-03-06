@@ -19,7 +19,7 @@ export const panels = [
     path: "/photos"
   },
   {
-    title: "FANS",
+    title: "PAINTINGS",
     subtitle: "Vosotros y yo",
     image: "https://images.unsplash.com/photo-1599586120429-48281b6f0ece",
   },
@@ -30,5 +30,5 @@ export const panels = [
   },
 ];
 
-export const menuItems = ["Journal", "Iphone", "Photos", "Fans", "Rafa Nadal Shop"];
-export const menuPaths = ["/photo-journal", "/iphone-sketches", "/photos", "#fans", "#shop"];
+export const menuItems = ["Journal", "Iphone", "Photos", "Paintings", "Rafa Nadal Shop"];
+export const menuPaths = ["/photo-journal", "/iphone-sketches", "/photos", "#paintings", "#shop"];
