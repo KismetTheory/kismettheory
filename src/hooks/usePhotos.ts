@@ -1,126 +1,74 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { WordPressImage } from "@/components/photo-journal/types";
+import { toast } from "@/hooks/use-toast";
 
-// Hardcoded collection of photos with absolute URLs
-const staticPhotos: WordPressImage[] = [
-  {
-    id: 1,
-    date: "2019-03-01",
-    title: { rendered: "iPhone Capture 140" },
-    content: { rendered: "" },
-    _embedded: {
-      "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:1024/h:1024/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/iPhone-Capture140.jpg",
-        alt_text: "iPhone Capture 140"
-      }]
-    }
-  },
-  {
-    id: 2,
-    date: "2019-03-02",
-    title: { rendered: "Rosie Yoga" },
-    content: { rendered: "" },
-    _embedded: {
-      "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/rosie-yoga.jpg",
-        alt_text: "Rosie Yoga"
-      }]
-    }
-  },
-  {
-    id: 3,
-    date: "2019-03-03",
-    title: { rendered: "View of Kilimanjaro" },
-    content: { rendered: "" },
-    _embedded: {
-      "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:1280/h:891/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/View-of-Kilimanjaro-in-the-distance.jpg",
-        alt_text: "View of Kilimanjaro in the distance"
-      }]
-    }
-  },
-  {
-    id: 4,
-    date: "2019-03-04",
-    title: { rendered: "Saunton" },
-    content: { rendered: "" },
-    _embedded: {
-      "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:1280/h:960/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/Saunton.jpg",
-        alt_text: "Saunton"
-      }]
-    }
-  },
-  {
-    id: 5,
-    date: "2019-03-05",
-    title: { rendered: "iPhone Capture 180" },
-    content: { rendered: "" },
-    _embedded: {
-      "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:1280/h:960/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/iPhone-Capture180.jpg",
-        alt_text: "iPhone Capture 180"
-      }]
-    }
-  },
-  {
-    id: 6,
-    date: "2019-03-06",
-    title: { rendered: "Image 32" },
-    content: { rendered: "" },
-    _embedded: {
-      "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:1280/h:855/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/IMAGE_32.jpg",
-        alt_text: "Image 32"
-      }]
-    }
-  },
-  {
-    id: 7,
-    date: "2019-03-07",
-    title: { rendered: "iPhone Capture 110" },
-    content: { rendered: "" },
-    _embedded: {
-      "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:1280/h:720/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/iPhone-Capture110.jpg",
-        alt_text: "iPhone Capture 110"
-      }]
-    }
-  },
-  {
-    id: 8,
-    date: "2019-03-08",
-    title: { rendered: "Kilimanjaro 1601" },
-    content: { rendered: "" },
-    _embedded: {
-      "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:808/h:1080/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/kili-1601.jpg",
-        alt_text: "Kilimanjaro 1601"
-      }]
-    }
-  },
-  {
-    id: 9,
-    date: "2019-03-09",
-    title: { rendered: "iPhone Capture 9" },
-    content: { rendered: "" },
-    _embedded: {
-      "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:810/h:1080/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/iPhone-Capture9.jpg",
-        alt_text: "iPhone Capture 9"
-      }]
-    }
+// Mock data to use when API is unavailable
+const mockPhotos: WordPressImage[] = Array.from({ length: 20 }, (_, i) => ({
+  id: i + 1,
+  date: new Date(2023, Math.floor(i / 5), (i % 28) + 1).toISOString(),
+  title: { rendered: `Photo ${i + 1}` },
+  content: { rendered: `<p>This is a mock photo ${i + 1}.</p>` },
+  _embedded: {
+    "wp:featuredmedia": [
+      {
+        source_url: `https://picsum.photos/id/${(i * 11) + 200}/800/800`,
+        alt_text: `Mock Photo ${i + 1}`
+      }
+    ]
   }
-];
+}));
 
 export const usePhotos = () => {
-  return useQuery<WordPressImage[]>({
+  return useQuery<WordPressImage[], Error>({
     queryKey: ["photos"],
     queryFn: async () => {
-      console.log('Returning static collection of photos:', staticPhotos.length);
-      return staticPhotos;
+      try {
+        // For demonstration, returning a static collection of photos
+        // This would normally fetch from the WordPress API like usePhotoJournalPosts
+        console.log("Attempting to fetch photos from WordPress API");
+        
+        // Update with the correct full path
+        const API_BASE_URL = "http://79.170.40.177/jamiemarsland.co.uk/wp-json/wp/v2";
+
+        // Try to fetch with a short timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+        
+        try {
+          // In a real implementation, we would fetch photos from the API
+          // For now using a hardcoded category ID that represents "Photos"
+          const response = await fetch(
+            `${API_BASE_URL}/posts?_embed&categories=3&per_page=20`,
+            { signal: controller.signal }
+          );
+          
+          clearTimeout(timeoutId);
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          return data;
+        } catch (error) {
+          clearTimeout(timeoutId);
+          throw error;
+        }
+      } catch (error) {
+        console.error("Error fetching photos, using mock data:", error);
+        toast({
+          title: "Using demo data",
+          description: "We couldn't connect to the WordPress site. Using sample data instead.",
+          variant: "default",
+        });
+        
+        // Return mock data when the API fails
+        return mockPhotos;
+      }
     },
+    retry: 1, // Only retry once to avoid excessive attempts
+    retryDelay: 1000,
     staleTime: 5 * 60 * 1000,
   });
 };

@@ -9,7 +9,6 @@ import PhotoJournal from "./pages/PhotoJournal";
 import IphoneSketches from "./pages/IphoneSketches";
 import Photos from "./pages/Photos";
 import Paintings from "./pages/Paintings";
-import WorldMap from "./pages/WorldMap";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,7 +25,6 @@ const App = () => (
           <Route path="/iphone-sketches" element={<IphoneSketches />} />
           <Route path="/photos" element={<Photos />} />
           <Route path="/paintings" element={<Paintings />} />
-          <Route path="/world-map" element={<WorldMap />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

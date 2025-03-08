@@ -25,12 +25,6 @@ export const panels = [
     path: "/paintings"
   },
   {
-    title: "TRAVELS",
-    subtitle: "world map",
-    image: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?q=80&w=1200",
-    path: "/world-map"
-  },
-  {
     title: "SHOP",
     subtitle: "coming soon",
     image: "https://images.unsplash.com/photo-1542144612-1b3641ec3459",
