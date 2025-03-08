@@ -8,8 +8,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { ArrowLeft, MapPin } from 'lucide-react';
 import { myVisitedLocations } from '@/data/myLocations';
 
-// Mapbox access token
-const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiamFtaWUtbG92YWJsZSIsImEiOiJjbHdhaXZ6dGkyOWZkMmdwMGFvbTFjdHBkIn0.fghBp-6kgBP2D9rO1R64MQ';
+// Hardcoded Mapbox access token
+mapboxgl.accessToken = 'pk.eyJ1IjoiamFtaWUtbG92YWJsZSIsImEiOiJjbHdhaXZ6dGkyOWZkMmdwMGFvbTFjdHBkIn0.fghBp-6kgBP2D9rO1R64MQ';
 
 const WorldMap = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,8 +26,6 @@ const WorldMap = () => {
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
 
-    mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
-    
     try {
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
