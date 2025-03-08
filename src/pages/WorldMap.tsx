@@ -24,6 +24,11 @@ const WorldMap = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
 
+  // Toggle menu function for both MobileHeader and Sidebar
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   useEffect(() => {
     // Check if we already have a token in localStorage
     const savedToken = localStorage.getItem('mapbox_token');
@@ -94,8 +99,8 @@ const WorldMap = () => {
 
   return (
     <div className="min-h-screen bg-background dark:bg-black relative overflow-hidden">
-      <MobileHeader isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      <Sidebar />
+      <MobileHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+      <Sidebar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       
       <main className="pt-20 md:pl-[120px] px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
