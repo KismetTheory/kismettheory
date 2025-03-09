@@ -20,7 +20,7 @@ const PhotoJournal = () => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const { data: posts, error } = usePhotoJournalPosts();
+  const { data: posts, error, isLoading } = usePhotoJournalPosts();
 
   // Filter posts by the current month
   const filteredPosts = posts?.filter(post => {
@@ -32,27 +32,44 @@ const PhotoJournal = () => {
 
   // Handle URL parameter for direct photo access
   useEffect(() => {
-    if (photoId && posts && filteredPosts) {
-      const index = filteredPosts.findIndex(post => post.id.toString() === photoId);
-      if (index !== -1) {
-        setSelectedImageIndex(index);
-      } else if (posts.findIndex(post => post.id.toString() === photoId) !== -1) {
-        // If the photo exists but not in the current month, find its month
-        const photo = posts.find(post => post.id.toString() === photoId);
-        if (photo) {
-          const photoMonth = format(new Date(photo.date), 'yyyy-MM');
-          setCurrentMonth(photoMonth);
-          // The selectedImageIndex will be set in the next render when filteredPosts updates
-        }
+    if (!posts) return; // Wait for posts to load
+    
+    if (photoId) {
+      console.log("Looking for photo with ID:", photoId);
+      // Find the photo in all posts first
+      const postIndex = posts.findIndex(post => post.id.toString() === photoId);
+      
+      if (postIndex !== -1) {
+        const photo = posts[postIndex];
+        console.log("Found photo:", photo.title.rendered);
+        
+        // Set the month to match the photo's month
+        const photoMonth = format(new Date(photo.date), 'yyyy-MM');
+        setCurrentMonth(photoMonth);
+        
+        // After setting the month, we'll handle the selection in the next effect
+      } else {
+        console.log("Photo not found with ID:", photoId);
       }
     }
-  }, [photoId, posts, filteredPosts]);
+  }, [photoId, posts]);
+
+  // After filtering posts by month, find and select the correct photo
+  useEffect(() => {
+    if (photoId && filteredPosts) {
+      const index = filteredPosts.findIndex(post => post.id.toString() === photoId);
+      if (index !== -1) {
+        console.log("Setting selected image index to:", index);
+        setSelectedImageIndex(index);
+      }
+    }
+  }, [photoId, filteredPosts, currentMonth]);
 
   // Update URL when image selection changes
   useEffect(() => {
     if (selectedImageIndex !== null && filteredPosts && filteredPosts[selectedImageIndex]) {
-      const photoId = filteredPosts[selectedImageIndex].id;
-      navigate(`/photo-journal/${photoId}`, { replace: true });
+      const selectedPhotoId = filteredPosts[selectedImageIndex].id;
+      navigate(`/photo-journal/${selectedPhotoId}`, { replace: true });
     } else if (selectedImageIndex === null && photoId) {
       navigate('/photo-journal', { replace: true });
     }
@@ -119,7 +136,7 @@ const PhotoJournal = () => {
         
         {error ? (
           <p className="text-destructive">Error loading photos. Please try again later.</p>
-        ) : !posts ? (
+        ) : isLoading || !posts ? (
           <PhotoGridSkeleton />
         ) : filteredPosts && filteredPosts.length > 0 ? (
           <PhotoGrid
