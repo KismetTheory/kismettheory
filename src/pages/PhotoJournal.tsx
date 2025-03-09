@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from "react";
 import { format, parse, startOfMonth, endOfMonth } from "date-fns";
-import { useParams, useNavigate } from "react-router-dom";
 import Sidebar from "@/components/navigation/Sidebar";
 import MobileHeader from "@/components/navigation/MobileHeader";
 import NavigationMenu from "@/components/navigation/NavigationMenu";
@@ -15,65 +14,10 @@ const PhotoJournal = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   const [currentMonth, setCurrentMonth] = useState(format(new Date(), 'yyyy-MM'));
-  const { photoId } = useParams<{ photoId?: string }>();
-  const navigate = useNavigate();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const { data: posts, error, isLoading } = usePhotoJournalPosts();
-
-  // Filter posts by the current month
-  const filteredPosts = posts?.filter(post => {
-    const postDate = new Date(post.date);
-    const monthStart = startOfMonth(parse(currentMonth, 'yyyy-MM', new Date()));
-    const monthEnd = endOfMonth(monthStart);
-    return postDate >= monthStart && postDate <= monthEnd;
-  });
-
-  // Handle URL parameter for direct photo access
-  useEffect(() => {
-    if (!posts) return; // Wait for posts to load
-    
-    if (photoId) {
-      console.log("Looking for photo with ID:", photoId);
-      // Find the photo in all posts first
-      const postIndex = posts.findIndex(post => post.id.toString() === photoId);
-      
-      if (postIndex !== -1) {
-        const photo = posts[postIndex];
-        console.log("Found photo:", photo.title.rendered);
-        
-        // Set the month to match the photo's month
-        const photoMonth = format(new Date(photo.date), 'yyyy-MM');
-        setCurrentMonth(photoMonth);
-        
-        // After setting the month, we'll handle the selection in the next effect
-      } else {
-        console.log("Photo not found with ID:", photoId);
-      }
-    }
-  }, [photoId, posts]);
-
-  // After filtering posts by month, find and select the correct photo
-  useEffect(() => {
-    if (photoId && filteredPosts) {
-      const index = filteredPosts.findIndex(post => post.id.toString() === photoId);
-      if (index !== -1) {
-        console.log("Setting selected image index to:", index);
-        setSelectedImageIndex(index);
-      }
-    }
-  }, [photoId, filteredPosts, currentMonth]);
-
-  // Update URL when image selection changes
-  useEffect(() => {
-    if (selectedImageIndex !== null && filteredPosts && filteredPosts[selectedImageIndex]) {
-      const selectedPhotoId = filteredPosts[selectedImageIndex].id;
-      navigate(`/photo-journal/${selectedPhotoId}`, { replace: true });
-    } else if (selectedImageIndex === null && photoId) {
-      navigate('/photo-journal', { replace: true });
-    }
-  }, [selectedImageIndex, filteredPosts, navigate, photoId]);
+  const { data: posts, error } = usePhotoJournalPosts();
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (!filteredPosts || selectedImageIndex === null) return;
@@ -90,7 +34,14 @@ const PhotoJournal = () => {
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedImageIndex, filteredPosts]);
+  }, [selectedImageIndex, posts]);
+
+  const filteredPosts = posts?.filter(post => {
+    const postDate = new Date(post.date);
+    const monthStart = startOfMonth(parse(currentMonth, 'yyyy-MM', new Date()));
+    const monthEnd = endOfMonth(monthStart);
+    return postDate >= monthStart && postDate <= monthEnd;
+  });
 
   const selectedImage = selectedImageIndex !== null && filteredPosts ? filteredPosts[selectedImageIndex] : null;
 
@@ -136,7 +87,7 @@ const PhotoJournal = () => {
         
         {error ? (
           <p className="text-destructive">Error loading photos. Please try again later.</p>
-        ) : isLoading || !posts ? (
+        ) : !posts ? (
           <PhotoGridSkeleton />
         ) : filteredPosts && filteredPosts.length > 0 ? (
           <PhotoGrid
