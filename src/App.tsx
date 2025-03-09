@@ -23,6 +23,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/photo-journal" element={<PhotoJournal />} />
+          <Route path="/photo-journal/:photoId" element={<PhotoJournal />} />
           <Route path="/iphone-sketches" element={<IphoneSketches />} />
           <Route path="/photos" element={<Photos />} />
           <Route path="/paintings" element={<Paintings />} />

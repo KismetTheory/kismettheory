@@ -1,8 +1,9 @@
 
 import { Dialog, DialogPortal } from "@/components/ui/dialog";
 import { format } from "date-fns";
-import { X } from "lucide-react";
+import { X, Share2 } from "lucide-react";
 import { WordPressImage } from "./types";
+import { toast } from "@/components/ui/use-toast";
 
 interface PhotoLightboxProps {
   selectedImage: WordPressImage | null;
@@ -45,6 +46,36 @@ const PhotoLightbox = ({ selectedImage, selectedImageIndex, onClose, onNavigate 
   const imageUrl = getImageUrl(selectedImage);
   if (!imageUrl) return null;
 
+  const handleShare = () => {
+    const url = window.location.href;
+    
+    if (navigator.share) {
+      navigator.share({
+        title: selectedImage.title.rendered,
+        url: url
+      })
+      .catch(err => {
+        console.error('Error sharing:', err);
+      });
+    } else {
+      // Fallback for browsers that don't support navigator.share
+      navigator.clipboard.writeText(url).then(() => {
+        toast({
+          title: "Link copied!",
+          description: "The link to this photo has been copied to your clipboard."
+        });
+      })
+      .catch(err => {
+        console.error('Failed to copy URL:', err);
+        toast({
+          variant: "destructive",
+          title: "Failed to copy link",
+          description: "Please try again or copy the URL manually."
+        });
+      });
+    }
+  };
+
   return (
     <Dialog open={selectedImageIndex !== null} onOpenChange={onClose}>
       <DialogPortal>
@@ -63,6 +94,14 @@ const PhotoLightbox = ({ selectedImage, selectedImageIndex, onClose, onNavigate 
               aria-label="Close lightbox"
             >
               <X className="w-6 h-6" />
+            </button>
+
+            <button
+              onClick={handleShare}
+              className="absolute top-4 right-16 z-20 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+              aria-label="Share photo"
+            >
+              <Share2 className="w-6 h-6" />
             </button>
 
             <button
