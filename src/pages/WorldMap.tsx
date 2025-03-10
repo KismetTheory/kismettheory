@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MobileHeader from '@/components/navigation/MobileHeader';
@@ -71,11 +72,6 @@ const WorldMap = () => {
                         <div className="absolute z-10 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg w-48 -translate-x-1/2 left-1/2 -translate-y-full top-0 mb-2">
                           <h3 className="font-bold text-lg">{location.name}</h3>
                           <p className="text-sm text-gray-600 dark:text-gray-300">{location.description}</p>
-                          {location.startDate && location.endDate && (
-                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                              {location.startDate.toLocaleDateString()} - {location.endDate.toLocaleDateString()}
-                            </p>
-                          )}
                         </div>
                       )}
                     </div>
@@ -107,11 +103,6 @@ const WorldMap = () => {
                 <div>
                   <h3 className="font-bold text-lg">{location.name}</h3>
                   <p className="text-gray-600 dark:text-gray-300">{location.description}</p>
-                  {location.startDate && location.endDate && (
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                      {location.startDate.toLocaleDateString()} - {location.endDate.toLocaleDateString()}
-                    </p>
-                  )}
                 </div>
               </div>
             ))}
