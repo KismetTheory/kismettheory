@@ -63,13 +63,14 @@ const WorldMap = () => {
                   >
                     <div className="relative">
                       <MapPin 
-                        className="w-6 h-6 text-[#5CC6D0] drop-shadow-md" 
-                        fill={index === selectedLocation ? "#5CC6D0" : "transparent"}
+                        className="w-6 h-6 text-[#D946EF] dark:text-[#5CC6D0] drop-shadow-lg" 
+                        fill={index === selectedLocation ? "#D946EF" : "rgba(217, 70, 239, 0.3)"}
+                        strokeWidth={2.5}
                       />
                       
                       {/* Info popup when location is selected */}
                       {index === selectedLocation && (
-                        <div className="absolute z-10 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg w-48 -translate-x-1/2 left-1/2 -translate-y-full top-0 mb-2">
+                        <div className="absolute z-10 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg w-48 -translate-x-1/2 left-1/2 -translate-y-full top-0 mb-2 border border-gray-200 dark:border-gray-700">
                           <h3 className="font-bold text-lg">{location.name}</h3>
                           <p className="text-sm text-gray-600 dark:text-gray-300">{location.description}</p>
                         </div>
@@ -86,12 +87,12 @@ const WorldMap = () => {
               <div 
                 key={index} 
                 className={`bg-white dark:bg-gray-800 p-4 rounded-lg shadow flex items-start cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition ${
-                  index === selectedLocation ? 'ring-2 ring-[#5CC6D0]' : ''
+                  index === selectedLocation ? 'ring-2 ring-[#D946EF] dark:ring-[#5CC6D0]' : ''
                 }`}
                 onClick={() => setSelectedLocation(index === selectedLocation ? null : index)}
               >
-                <MapPin className={`w-5 h-5 text-[#5CC6D0] mr-2 mt-1 flex-shrink-0 ${
-                  index === selectedLocation ? 'fill-[#5CC6D0]' : ''
+                <MapPin className={`w-5 h-5 text-[#D946EF] dark:text-[#5CC6D0] mr-2 mt-1 flex-shrink-0 ${
+                  index === selectedLocation ? 'fill-[#D946EF] dark:fill-[#5CC6D0]' : ''
                 }`} />
                 <div>
                   <h3 className="font-bold text-lg">{location.name}</h3>
