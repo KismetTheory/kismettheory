@@ -27,7 +27,7 @@ export const panels = [
   {
     title: "TRAVELS",
     subtitle: "world map",
-    image: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?q=80&w=1200",
+    image: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2025/02/photo-29-scaled.jpg",
     path: "/world-map"
   },
   {
