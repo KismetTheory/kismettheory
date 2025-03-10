@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import MobileHeader from '@/components/navigation/MobileHeader';
 import Sidebar from '@/components/navigation/Sidebar';
 import NavigationMenu from '@/components/navigation/NavigationMenu';
-import { ArrowLeft, Map, MapPin } from 'lucide-react';
+import { ArrowLeft, MapPin } from 'lucide-react';
 import { myVisitedLocations } from '@/data/myLocations';
 
 const WorldMap = () => {
@@ -78,13 +78,6 @@ const WorldMap = () => {
                   </div>
                 );
               })}
-            </div>
-            
-            <div className="absolute bottom-4 right-4 z-10">
-              <div className="flex items-center bg-white dark:bg-gray-800 px-3 py-2 rounded-lg shadow-md text-sm">
-                <Map className="w-4 h-4 mr-2 text-gray-500" />
-                <span className="text-gray-700 dark:text-gray-300">Static world map view</span>
-              </div>
             </div>
           </div>
           
