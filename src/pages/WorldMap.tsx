@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MobileHeader from '@/components/navigation/MobileHeader';
@@ -37,7 +36,7 @@ const WorldMap = () => {
             Back to home
           </Link>
           
-          <h1 className="text-3xl md:text-4xl font-bold mb-6">My Travel Map</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-6">My Travels 2025</h1>
           
           <div className="relative w-full h-[70vh] bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
             {/* Static world map image */}
