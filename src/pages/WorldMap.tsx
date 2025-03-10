@@ -5,7 +5,7 @@ import MobileHeader from '@/components/navigation/MobileHeader';
 import Sidebar from '@/components/navigation/Sidebar';
 import { ArrowLeft, MapPin } from 'lucide-react';
 import { myVisitedLocations } from '@/data/myLocations';
-import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from '@react-google-maps/api';
 
 // Default map container style
 const mapContainerStyle = {
@@ -20,20 +20,45 @@ const center = {
   lng: 100, // Centered more towards Asia to show all locations better
 };
 
+// Define the Google Maps API key
+const GOOGLE_MAPS_API_KEY = "YOUR_GOOGLE_MAPS_API_KEY";
+
 const WorldMap = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState<number | null>(null);
-  const [mapLoaded, setMapLoaded] = useState(false);
+
+  // Use the useJsApiLoader hook to load the Google Maps JavaScript API
+  const { isLoaded, loadError } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: GOOGLE_MAPS_API_KEY
+  });
 
   // Toggle menu function
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Handle map load
-  const onMapLoad = useCallback(() => {
-    setMapLoaded(true);
-  }, []);
+  // Render a map marker with custom styling
+  const renderMarker = (location, index) => {
+    return (
+      <Marker
+        key={index}
+        position={{
+          lat: location.coordinates[1],
+          lng: location.coordinates[0]
+        }}
+        onClick={() => setSelectedLocation(index)}
+        icon={{
+          path: window.google.maps.SymbolPath.CIRCLE,
+          fillColor: '#5CC6D0',
+          fillOpacity: 1,
+          strokeColor: '#ffffff',
+          strokeWeight: 2,
+          scale: 8,
+        }}
+      />
+    );
+  };
 
   return (
     <div className="min-h-screen bg-background dark:bg-black relative overflow-hidden">
@@ -49,18 +74,26 @@ const WorldMap = () => {
           
           <h1 className="text-3xl md:text-4xl font-bold mb-6">My Travel Map</h1>
           
-          {!mapLoaded ? (
+          {loadError && (
+            <div className="rounded-lg bg-red-50 p-6 text-center dark:bg-red-900/20">
+              <h3 className="text-lg font-medium text-red-800 dark:text-red-200">Error Loading Map</h3>
+              <p className="mt-2 text-red-700 dark:text-red-300">
+                There was an error loading the Google Maps API. Please make sure you've provided a valid API key.
+              </p>
+            </div>
+          )}
+
+          {!isLoaded && !loadError ? (
             <div className="flex justify-center items-center h-[60vh]">
               <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#5CC6D0]"></div>
             </div>
           ) : null}
           
-          <LoadScript googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY" onLoad={() => setMapLoaded(true)}>
+          {isLoaded && !loadError && (
             <GoogleMap
               mapContainerStyle={mapContainerStyle}
               center={center}
               zoom={2}
-              onLoad={onMapLoad}
               options={{
                 mapTypeControl: false,
                 fullscreenControl: true,
@@ -103,7 +136,7 @@ const WorldMap = () => {
                 </InfoWindow>
               )}
             </GoogleMap>
-          </LoadScript>
+          )}
           
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {myVisitedLocations.map((location, index) => (
