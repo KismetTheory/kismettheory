@@ -50,15 +50,16 @@ const WorldMap = () => {
                 const leftPosition = ((location.coordinates[0] + 180) / 360) * 100;
                 const topPosition = ((90 - location.coordinates[1]) / 180) * 100;
                 
-                // Improved popup positioning logic based on map location
+                // Improved popup positioning logic based on map location and location name
                 const isTopOfMap = topPosition < 30;
                 const isBottomOfMap = topPosition > 70;
                 const isPortugal = location.name === "Portugal";
+                const isSingapore = location.name === "Singapore";
                 
                 // Calculate popup position
                 let popupPosition;
-                if (isPortugal) {
-                  // Special case for Portugal - place popup right underneath the pin with no gap
+                if (isPortugal || isSingapore) {
+                  // Special case for Portugal and Singapore - place popup right underneath the pin with no gap
                   popupPosition = "top-6 mt-0"; // Position directly below pin with no gap
                 } else if (isTopOfMap) {
                   // For markers near the top of the map, place popup below
