@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MobileHeader from '@/components/navigation/MobileHeader';
 import Sidebar from '@/components/navigation/Sidebar';
+import NavigationMenu from '@/components/navigation/NavigationMenu';
 import { ArrowLeft, Map, MapPin } from 'lucide-react';
 import { myVisitedLocations } from '@/data/myLocations';
 
@@ -17,11 +18,20 @@ const WorldMap = () => {
 
   return (
     <div className="min-h-screen bg-background dark:bg-black relative overflow-hidden">
-      <MobileHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       <Sidebar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+      <MobileHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+      <NavigationMenu isMenuOpen={isMenuOpen} />
       
-      <main className="pt-20 md:pl-[120px] px-4 md:px-8">
-        <div className="max-w-7xl mx-auto">
+      <main 
+        className={`w-full md:w-[calc(100vw-120px)] min-h-screen transition-transform duration-300 ${
+          isMenuOpen 
+            ? 'translate-x-full md:translate-x-[300px]' 
+            : 'translate-x-0'
+        } ${
+          'md:ml-[120px]'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto pt-20 md:pt-0 px-4 md:px-8">
           <Link to="/" className="flex items-center text-primary mb-6 hover:underline">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to home
