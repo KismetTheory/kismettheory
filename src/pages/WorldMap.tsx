@@ -14,10 +14,10 @@ const mapContainerStyle = {
   borderRadius: '0.5rem',
 };
 
-// Default center for the map (center of the world)
+// Center on a point that shows all our locations well
 const center = {
   lat: 20,
-  lng: 0,
+  lng: 100, // Centered more towards Asia to show all locations better
 };
 
 const WorldMap = () => {
@@ -47,7 +47,7 @@ const WorldMap = () => {
             Back to home
           </Link>
           
-          <h1 className="text-3xl md:text-4xl font-bold mb-6">Places I've Visited</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-6">My Travel Map</h1>
           
           {!mapLoaded ? (
             <div className="flex justify-center items-center h-[60vh]">

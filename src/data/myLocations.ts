@@ -10,52 +10,31 @@ export interface MyLocation {
 
 export const myVisitedLocations: MyLocation[] = [
   { 
-    name: "London",
-    coordinates: [-0.1278, 51.5074],
-    description: "UK - Business trip and sightseeing",
-    startDate: new Date('2023-03-15'),
-    endDate: new Date('2023-03-20')
+    name: "Singapore",
+    coordinates: [103.8198, 1.3521],
+    description: "Singapore - Urban photography and street scenes",
+    startDate: new Date('2023-05-10'),
+    endDate: new Date('2023-05-17')
   },
   { 
-    name: "Paris",
-    coordinates: [2.3522, 48.8566],
-    description: "France - Photography expedition",
-    startDate: new Date('2023-06-10'),
-    endDate: new Date('2023-06-17')
+    name: "Hong Kong",
+    coordinates: [114.1694, 22.3193],
+    description: "Hong Kong - City skylines and harbor views",
+    startDate: new Date('2023-07-22'),
+    endDate: new Date('2023-08-01')
   },
   { 
-    name: "New York",
-    coordinates: [-74.0060, 40.7128],
-    description: "USA - Art exhibition",
-    startDate: new Date('2022-11-05'),
-    endDate: new Date('2022-11-15')
+    name: "Manila",
+    coordinates: [120.9842, 14.5995],
+    description: "Philippines - Cultural documentation and coastal scenes",
+    startDate: new Date('2022-04-12'),
+    endDate: new Date('2022-04-19')
   },
   { 
-    name: "Tokyo",
-    coordinates: [139.6917, 35.6895],
-    description: "Japan - Street photography tour",
-    startDate: new Date('2022-09-20'),
-    endDate: new Date('2022-10-01')
-  },
-  { 
-    name: "Barcelona",
-    coordinates: [2.1734, 41.3851],
-    description: "Spain - Architecture study",
-    startDate: new Date('2022-05-08'),
-    endDate: new Date('2022-05-14')
-  },
-  { 
-    name: "Cape Town",
-    coordinates: [18.4241, -33.9249],
-    description: "South Africa - Landscape photography",
-    startDate: new Date('2023-01-10'),
-    endDate: new Date('2023-01-22')
-  },
-  { 
-    name: "Sydney",
-    coordinates: [151.2093, -33.8688],
-    description: "Australia - Coastal scenes",
-    startDate: new Date('2021-12-01'),
-    endDate: new Date('2021-12-15')
+    name: "Portugal",
+    coordinates: [-8.2245, 39.3999],
+    description: "Portugal - Architecture and coastal landscapes",
+    startDate: new Date('2022-08-15'),
+    endDate: new Date('2022-08-28')
   }
 ];
