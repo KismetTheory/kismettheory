@@ -50,9 +50,9 @@ const WorldMap = () => {
                 const leftPosition = ((location.coordinates[0] + 180) / 360) * 100;
                 const topPosition = ((90 - location.coordinates[1]) / 180) * 100;
                 
-                // Determine if popup should appear below instead of above
-                // For markers in the top 20% of the map, place popup below
-                const isTopOfMap = topPosition < 20;
+                // Improved popup positioning logic
+                // For markers in the top 30% of the map or Portugal specifically, place popup below
+                const isTopOfMap = topPosition < 30 || location.name === "Portugal";
                 
                 return (
                   <div 
@@ -74,7 +74,7 @@ const WorldMap = () => {
                       {/* Info popup when location is selected */}
                       {index === selectedLocation && (
                         <div 
-                          className={`absolute z-10 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg w-48 -translate-x-1/2 left-1/2
+                          className={`absolute z-10 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg w-60 -translate-x-1/2 left-1/2
                             ${isTopOfMap 
                               ? 'translate-y-full top-full mt-2' // Show below marker
                               : '-translate-y-full top-0 mb-2'   // Show above marker
