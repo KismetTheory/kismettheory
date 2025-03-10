@@ -58,8 +58,8 @@ const WorldMap = () => {
                 // Calculate popup position
                 let popupPosition;
                 if (isPortugal) {
-                  // Special case for Portugal - place popup above and adjust position
-                  popupPosition = "translate-y-[-110%] top-0 mb-2";
+                  // Special case for Portugal - place popup below the pin
+                  popupPosition = "translate-y-full top-full mt-2";
                 } else if (isTopOfMap) {
                   // For markers near the top of the map, place popup below
                   popupPosition = "translate-y-full top-full mt-2";
