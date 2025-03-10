@@ -50,9 +50,26 @@ const WorldMap = () => {
                 const leftPosition = ((location.coordinates[0] + 180) / 360) * 100;
                 const topPosition = ((90 - location.coordinates[1]) / 180) * 100;
                 
-                // Improved popup positioning logic
-                // For markers in the top 30% of the map or Portugal specifically, place popup below
-                const isTopOfMap = topPosition < 30 || location.name === "Portugal";
+                // Improved popup positioning logic based on map location
+                const isTopOfMap = topPosition < 30;
+                const isBottomOfMap = topPosition > 70;
+                const isPortugal = location.name === "Portugal";
+                
+                // Calculate popup position
+                let popupPosition;
+                if (isPortugal) {
+                  // Special case for Portugal - place popup above and adjust position
+                  popupPosition = "translate-y-[-110%] top-0 mb-2";
+                } else if (isTopOfMap) {
+                  // For markers near the top of the map, place popup below
+                  popupPosition = "translate-y-full top-full mt-2";
+                } else if (isBottomOfMap) {
+                  // For markers near the bottom of the map, place popup above with more space
+                  popupPosition = "translate-y-[-110%] top-0 mb-2";
+                } else {
+                  // Default position for markers in the middle area
+                  popupPosition = "translate-y-[-100%] top-0 mb-2";
+                }
                 
                 return (
                   <div 
@@ -74,11 +91,8 @@ const WorldMap = () => {
                       {/* Info popup when location is selected */}
                       {index === selectedLocation && (
                         <div 
-                          className={`absolute z-10 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg w-60 -translate-x-1/2 left-1/2
-                            ${isTopOfMap 
-                              ? 'translate-y-full top-full mt-2' // Show below marker
-                              : '-translate-y-full top-0 mb-2'   // Show above marker
-                            } border border-gray-200 dark:border-gray-700`}
+                          className={`absolute z-10 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg w-60 -translate-x-1/2 left-1/2 
+                            ${popupPosition} border border-gray-200 dark:border-gray-700 max-h-[200px] overflow-y-auto`}
                         >
                           <h3 className="font-bold text-lg">{location.name}</h3>
                           <p className="text-sm text-gray-600 dark:text-gray-300">{location.description}</p>
