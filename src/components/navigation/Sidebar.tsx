@@ -37,7 +37,10 @@ const Sidebar = ({
     <aside className="fixed left-0 top-0 h-full w-[120px] bg-background text-foreground z-30 hidden md:block" role="complementary" aria-label="Sidebar navigation">
       <div className="h-full flex flex-col items-center">
         <div className="mt-6">
-          <Link to="/" className="dark:text-[#5CC6D0] dark:hover:text-white text-black hover:text-[#5CC6D0] transition-colors">
+          <Link 
+            to="/" 
+            className="dark:text-[#5CC6D0] dark:hover:text-white text-black hover:text-[#5CC6D0] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5CC6D0] focus-visible:rounded-sm focus-visible:ring-offset-2"
+          >
             <div className="text-center">
               <div className="text-small font-sans">Jamie</div>
               <div className="text-small font-sans">Marsland</div>
@@ -47,7 +50,7 @@ const Sidebar = ({
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
           <button 
             onClick={toggleMenu} 
-            className="dark:text-[#5CC6D0] dark:hover:text-white text-black hover:text-[#5CC6D0] transition-colors flex flex-col items-center" 
+            className="dark:text-[#5CC6D0] dark:hover:text-white text-black hover:text-[#5CC6D0] transition-colors flex flex-col items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5CC6D0] focus-visible:rounded-sm focus-visible:ring-offset-2" 
             aria-expanded={isMenuOpen} 
             aria-controls="main-menu" 
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -65,7 +68,7 @@ const Sidebar = ({
         <div className="absolute bottom-8">
           <button
             onClick={toggleTheme}
-            className="dark:text-[#5CC6D0] dark:hover:text-white text-black hover:text-[#5CC6D0] transition-colors"
+            className="dark:text-[#5CC6D0] dark:hover:text-white text-black hover:text-[#5CC6D0] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5CC6D0] focus-visible:rounded-sm focus-visible:ring-offset-2"
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           >
             {theme === 'dark' ? (

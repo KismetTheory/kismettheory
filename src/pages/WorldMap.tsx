@@ -32,7 +32,7 @@ const WorldMap = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto pt-20 md:pt-0 px-4 md:px-8">
-          <Link to="/" className="flex items-center text-primary mb-6 hover:underline">
+          <Link to="/" className="flex items-center text-primary mb-6 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5CC6D0] focus-visible:rounded-sm focus-visible:ring-offset-2">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to home
           </Link>
@@ -83,17 +83,28 @@ const WorldMap = () => {
                     onClick={() => setSelectedLocation(index === selectedLocation ? null : index)}
                   >
                     <div className="relative">
-                      <MapPin 
-                        className="w-6 h-6 text-[#D946EF] dark:text-[#5CC6D0] drop-shadow-lg" 
-                        fill={index === selectedLocation ? "#D946EF" : "rgba(217, 70, 239, 0.3)"}
-                        strokeWidth={2.5}
-                      />
+                      <button
+                        className="bg-transparent border-none p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5CC6D0] focus-visible:rounded-full focus-visible:ring-offset-2"
+                        aria-label={`Location: ${location.name}`}
+                        aria-expanded={index === selectedLocation}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedLocation(index === selectedLocation ? null : index);
+                        }}
+                      >
+                        <MapPin 
+                          className="w-6 h-6 text-[#D946EF] dark:text-[#5CC6D0] drop-shadow-lg" 
+                          fill={index === selectedLocation ? "#D946EF" : "rgba(217, 70, 239, 0.3)"}
+                          strokeWidth={2.5}
+                        />
+                      </button>
                       
                       {/* Info popup when location is selected */}
                       {index === selectedLocation && (
                         <div 
                           className={`absolute z-10 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg w-60 -translate-x-1/2 left-1/2 
                             ${popupPosition} border border-gray-200 dark:border-gray-700 max-h-[200px] overflow-y-auto`}
+                          role="tooltip"
                         >
                           <h3 className="font-bold text-lg">{location.name}</h3>
                           <p className="text-sm text-gray-600 dark:text-gray-300">{location.description}</p>
@@ -108,12 +119,14 @@ const WorldMap = () => {
           
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {myVisitedLocations.map((location, index) => (
-              <div 
+              <button 
                 key={index} 
-                className={`bg-white dark:bg-gray-800 p-4 rounded-lg shadow flex items-start cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition ${
+                className={`bg-white dark:bg-gray-800 p-4 rounded-lg shadow flex items-start cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition text-left w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5CC6D0] focus-visible:ring-offset-2 ${
                   index === selectedLocation ? 'ring-2 ring-[#D946EF] dark:ring-[#5CC6D0]' : ''
                 }`}
                 onClick={() => setSelectedLocation(index === selectedLocation ? null : index)}
+                aria-label={`Select location: ${location.name}`}
+                aria-pressed={index === selectedLocation}
               >
                 <MapPin className={`w-5 h-5 text-[#D946EF] dark:text-[#5CC6D0] mr-2 mt-1 flex-shrink-0 ${
                   index === selectedLocation ? 'fill-[#D946EF] dark:fill-[#5CC6D0]' : ''
@@ -122,7 +135,7 @@ const WorldMap = () => {
                   <h3 className="font-bold text-lg">{location.name}</h3>
                   <p className="text-gray-600 dark:text-gray-300">{location.description}</p>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
