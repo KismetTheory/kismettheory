@@ -105,18 +105,5 @@
         </div>
       </article>
     </div>
-    
-    <!-- This script redirects to the React app for non-crawler visitors -->
-    <script>
-      // Check if the user agent is likely a search engine crawler
-      function isSearchBot() {
-        return /bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent);
-      }
-      
-      // If not a search engine, redirect to the React app version
-      if (!isSearchBot()) {
-        window.location.href = '/youtube-shorts-article';
-      }
-    </script>
   </body>
 </html>
