@@ -29,6 +29,8 @@ const App = () => (
           <Route path="/paintings" element={<Paintings />} />
           <Route path="/world-map" element={<WorldMap />} />
           <Route path="/youtube-shorts-article" element={<YouTubeShorts />} />
+          {/* Add alternate URL without trailing slash to handle both cases */}
+          <Route path="youtube-shorts-article" element={<Navigate to="/youtube-shorts-article" replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
