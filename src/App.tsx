@@ -11,6 +11,7 @@ import Photos from "./pages/Photos";
 import Paintings from "./pages/Paintings";
 import WorldMap from "./pages/WorldMap";
 import NotFound from "./pages/NotFound";
+import YouTubeShorts from "./pages/YouTubeShorts";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,8 @@ const App = () => (
           <Route path="/photos" element={<Photos />} />
           <Route path="/paintings" element={<Paintings />} />
           <Route path="/world-map" element={<WorldMap />} />
+          <Route path="/youtube-shorts-article" element={<YouTubeShorts />} />
+          <Route path="/youtube-shorts" element={<YouTubeShorts />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
