@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import PhotoJournal from "./pages/PhotoJournal";
 import IphoneSketches from "./pages/IphoneSketches";
@@ -28,18 +28,7 @@ const App = () => (
           <Route path="/photos" element={<Photos />} />
           <Route path="/paintings" element={<Paintings />} />
           <Route path="/world-map" element={<WorldMap />} />
-          
-          {/* YouTube Shorts Article with all possible path variations */}
           <Route path="/youtube-shorts-article" element={<YouTubeShorts />} />
-          <Route path="youtube-shorts-article" element={<YouTubeShorts />} />
-          <Route path="/youtube-shorts-article/" element={<YouTubeShorts />} />
-          <Route path="youtube-shorts-article/" element={<YouTubeShorts />} />
-          
-          {/* Add explicit redirect for base domain with this path */}
-          <Route path="https://jamiemarsland.com/youtube-shorts-article" element={<YouTubeShorts />} />
-          <Route path="https://jamiemarsland.com/youtube-shorts-article/" element={<YouTubeShorts />} />
-          
-          {/* Catch-all for 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

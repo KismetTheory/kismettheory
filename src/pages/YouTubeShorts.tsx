@@ -1,26 +1,10 @@
 
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
 
 const YouTubeShorts = () => {
-  useEffect(() => {
-    // Enhanced logging to help with debugging
-    console.log("YouTube Shorts article page mounted");
-    console.log("Current URL:", window.location.href);
-    
-    // Log the current path to help with debugging
-    console.log("Current path:", window.location.pathname);
-  }, []);
-
   return (
     <div className="max-w-3xl mx-auto px-4 py-16 bg-white dark:bg-gray-900 min-h-screen">
-      <Helmet>
-        <title>Can Poor-Performing YouTube Shorts Affect Views for Longer Form Content?</title>
-        <meta name="description" content="Analysis of how YouTube Shorts performance can impact long-form video views and engagement on the same channel." />
-        <link rel="canonical" href="https://jamiemarsland.com/youtube-shorts-article" />
-      </Helmet>
-      
       <article className="prose dark:prose-invert max-w-none">
         <h1 className="text-3xl font-bold mb-6">Can Poor-Performing YouTube Shorts Affect Views for Longer Form Content?</h1>
         
