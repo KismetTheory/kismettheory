@@ -28,9 +28,12 @@ const App = () => (
           <Route path="/photos" element={<Photos />} />
           <Route path="/paintings" element={<Paintings />} />
           <Route path="/world-map" element={<WorldMap />} />
+          {/* Primary route with leading slash */}
           <Route path="/youtube-shorts-article" element={<YouTubeShorts />} />
-          {/* Add alternate URL without trailing slash to handle both cases */}
-          <Route path="youtube-shorts-article" element={<Navigate to="/youtube-shorts-article" replace />} />
+          {/* Alternative route without leading slash - this is critical */}
+          <Route path="youtube-shorts-article" element={<YouTubeShorts />} />
+          {/* For SEO consistency, also handle with trailing slash */}
+          <Route path="/youtube-shorts-article/" element={<YouTubeShorts />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
