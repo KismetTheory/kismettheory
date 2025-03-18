@@ -5,8 +5,12 @@ import { Helmet } from "react-helmet";
 
 const YouTubeShorts = () => {
   useEffect(() => {
-    // Log when this page is mounted to help with debugging
+    // Enhanced logging to help with debugging
     console.log("YouTube Shorts article page mounted");
+    console.log("Current URL:", window.location.href);
+    
+    // Log the current path to help with debugging
+    console.log("Current path:", window.location.pathname);
   }, []);
 
   return (
@@ -14,7 +18,6 @@ const YouTubeShorts = () => {
       <Helmet>
         <title>Can Poor-Performing YouTube Shorts Affect Views for Longer Form Content?</title>
         <meta name="description" content="Analysis of how YouTube Shorts performance can impact long-form video views and engagement on the same channel." />
-        {/* Update canonical URL to match production domain */}
         <link rel="canonical" href="https://jamiemarsland.com/youtube-shorts-article" />
       </Helmet>
       

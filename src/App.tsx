@@ -28,11 +28,18 @@ const App = () => (
           <Route path="/photos" element={<Photos />} />
           <Route path="/paintings" element={<Paintings />} />
           <Route path="/world-map" element={<WorldMap />} />
-          {/* YouTube Shorts Article - handle all possible path variations */}
+          
+          {/* YouTube Shorts Article with all possible path variations */}
           <Route path="/youtube-shorts-article" element={<YouTubeShorts />} />
           <Route path="youtube-shorts-article" element={<YouTubeShorts />} />
           <Route path="/youtube-shorts-article/" element={<YouTubeShorts />} />
           <Route path="youtube-shorts-article/" element={<YouTubeShorts />} />
+          
+          {/* Add explicit redirect for base domain with this path */}
+          <Route path="https://jamiemarsland.com/youtube-shorts-article" element={<YouTubeShorts />} />
+          <Route path="https://jamiemarsland.com/youtube-shorts-article/" element={<YouTubeShorts />} />
+          
+          {/* Catch-all for 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
