@@ -4,7 +4,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useEffect } from "react";
 import Index from "./pages/Index";
 import PhotoJournal from "./pages/PhotoJournal";
 import IphoneSketches from "./pages/IphoneSketches";
@@ -15,23 +14,6 @@ import NotFound from "./pages/NotFound";
 import YouTubeShorts from "./pages/YouTubeShorts";
 
 const queryClient = new QueryClient();
-
-// Helper function to check if the user agent is likely a search engine crawler
-const isSearchBot = () => {
-  return typeof navigator !== 'undefined' && 
-    /bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent);
-};
-
-// Component to handle SEO-friendly redirects for content pages
-const SEORedirect = ({ path }: { path: string }) => {
-  useEffect(() => {
-    if (isSearchBot()) {
-      window.location.href = path;
-    }
-  }, [path]);
-  
-  return null;
-};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -46,15 +28,7 @@ const App = () => (
           <Route path="/photos" element={<Photos />} />
           <Route path="/paintings" element={<Paintings />} />
           <Route path="/world-map" element={<WorldMap />} />
-          <Route 
-            path="/youtube-shorts-article" 
-            element={
-              <>
-                <SEORedirect path="/youtube-shorts-article.html" />
-                <YouTubeShorts />
-              </>
-            } 
-          />
+          <Route path="/youtube-shorts-article" element={<YouTubeShorts />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
