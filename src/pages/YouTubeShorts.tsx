@@ -14,8 +14,8 @@ const YouTubeShorts = () => {
       <Helmet>
         <title>Can Poor-Performing YouTube Shorts Affect Views for Longer Form Content?</title>
         <meta name="description" content="Analysis of how YouTube Shorts performance can impact long-form video views and engagement on the same channel." />
-        {/* Update canonical URL to work with both slash and non-slash versions */}
-        <link rel="canonical" href="https://jamiemarsland.lovable.app/youtube-shorts-article" />
+        {/* Update canonical URL to match production domain */}
+        <link rel="canonical" href="https://jamiemarsland.com/youtube-shorts-article" />
       </Helmet>
       
       <article className="prose dark:prose-invert max-w-none">
