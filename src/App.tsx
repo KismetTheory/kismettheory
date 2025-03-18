@@ -22,16 +22,14 @@ const isSearchBot = () => {
     /bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent);
 };
 
-// Improved SEO component that serves static HTML for search engines
-const SEOPage = ({ htmlPath }: { htmlPath: string }) => {
+// Component to handle SEO-friendly redirects for content pages
+const SEORedirect = ({ path }: { path: string }) => {
   useEffect(() => {
     if (isSearchBot()) {
-      // For search engines, serve the static HTML
-      window.location.replace(htmlPath);
+      window.location.href = path;
     }
-  }, [htmlPath]);
+  }, [path]);
   
-  // For regular users, render the React component
   return null;
 };
 
@@ -52,7 +50,7 @@ const App = () => (
             path="/youtube-shorts-article" 
             element={
               <>
-                <SEOPage htmlPath="/youtube-shorts-article.html" />
+                <SEORedirect path="/youtube-shorts-article.html" />
                 <YouTubeShorts />
               </>
             } 
