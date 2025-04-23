@@ -11,7 +11,7 @@ const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoveredPanel, setHoveredPanel] = useState<number | null>(null);
   const [hoveredMenuItem, setHoveredMenuItem] = useState<number | null>(null);
-  const defaultImage = "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2025/02/photo-33-scaled.jpg";
+  const defaultImage = "https://jamiemarsland.co.uk/wp-content/uploads/2025/03/photo-3-scaled.jpg";
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -29,7 +29,13 @@ const Index = () => {
     <div className="flex min-h-screen bg-black" role="main">
       <Sidebar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       <MobileHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
-      <NavigationMenu isMenuOpen={isMenuOpen} />
+      <NavigationMenu 
+        isMenuOpen={isMenuOpen} 
+        menuItems={menuItems}
+        menuPaths={menuPaths}
+        onMouseEnter={(index) => setHoveredMenuItem(index)}
+        onMouseLeave={() => setHoveredMenuItem(null)}
+      />
 
       <main 
         className={`fixed w-full md:w-[calc(100vw-120px)] h-screen transition-transform duration-300 overflow-y-auto md:overflow-hidden ${
