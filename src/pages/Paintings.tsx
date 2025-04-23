@@ -14,13 +14,13 @@ const Paintings = () => {
   const paintings = [
     {
       id: 1,
-      src: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2024/06/cliff.jpg",
+      src: "https://jamiemarsland.co.uk/wp-content/uploads/2024/06/cliff.jpg",
       title: "Cliff Painting",
       description: "Oil painting of a cliff landscape"
     },
     {
       id: 2,
-      src: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2024/06/lake.jpg",
+      src: "https://jamiemarsland.co.uk/wp-content/uploads/2024/06/lake.jpg",
       title: "Lake Painting",
       description: "Oil painting of a serene lake"
     }
