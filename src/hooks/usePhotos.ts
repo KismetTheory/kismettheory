@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { WordPressImage } from "@/components/photo-journal/types";
 
-// Hardcoded collection of photos with absolute URLs
+// Hardcoded collection of photos with direct URLs instead of Optimole-wrapped ones
 const staticPhotos: WordPressImage[] = [
   {
     id: 1,
@@ -11,7 +11,7 @@ const staticPhotos: WordPressImage[] = [
     content: { rendered: "" },
     _embedded: {
       "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:1024/h:1024/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/iPhone-Capture140.jpg",
+        source_url: "https://jamiemarsland.co.uk/wp-content/uploads/2019/03/iPhone-Capture140.jpg",
         alt_text: "iPhone Capture 140"
       }]
     }
@@ -23,7 +23,7 @@ const staticPhotos: WordPressImage[] = [
     content: { rendered: "" },
     _embedded: {
       "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/rosie-yoga.jpg",
+        source_url: "https://jamiemarsland.co.uk/wp-content/uploads/2019/03/rosie-yoga.jpg",
         alt_text: "Rosie Yoga"
       }]
     }
@@ -35,7 +35,7 @@ const staticPhotos: WordPressImage[] = [
     content: { rendered: "" },
     _embedded: {
       "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:1280/h:891/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/View-of-Kilimanjaro-in-the-distance.jpg",
+        source_url: "https://jamiemarsland.co.uk/wp-content/uploads/2019/03/View-of-Kilimanjaro-in-the-distance.jpg",
         alt_text: "View of Kilimanjaro in the distance"
       }]
     }
@@ -47,7 +47,7 @@ const staticPhotos: WordPressImage[] = [
     content: { rendered: "" },
     _embedded: {
       "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:1280/h:960/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/Saunton.jpg",
+        source_url: "https://jamiemarsland.co.uk/wp-content/uploads/2019/03/Saunton.jpg",
         alt_text: "Saunton"
       }]
     }
@@ -59,7 +59,7 @@ const staticPhotos: WordPressImage[] = [
     content: { rendered: "" },
     _embedded: {
       "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:1280/h:960/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/iPhone-Capture180.jpg",
+        source_url: "https://jamiemarsland.co.uk/wp-content/uploads/2019/03/iPhone-Capture180.jpg",
         alt_text: "iPhone Capture 180"
       }]
     }
@@ -71,7 +71,7 @@ const staticPhotos: WordPressImage[] = [
     content: { rendered: "" },
     _embedded: {
       "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:1280/h:855/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/IMAGE_32.jpg",
+        source_url: "https://jamiemarsland.co.uk/wp-content/uploads/2019/03/IMAGE_32.jpg",
         alt_text: "Image 32"
       }]
     }
@@ -83,7 +83,7 @@ const staticPhotos: WordPressImage[] = [
     content: { rendered: "" },
     _embedded: {
       "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:1280/h:720/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/iPhone-Capture110.jpg",
+        source_url: "https://jamiemarsland.co.uk/wp-content/uploads/2019/03/iPhone-Capture110.jpg",
         alt_text: "iPhone Capture 110"
       }]
     }
@@ -95,7 +95,7 @@ const staticPhotos: WordPressImage[] = [
     content: { rendered: "" },
     _embedded: {
       "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:808/h:1080/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/kili-1601.jpg",
+        source_url: "https://jamiemarsland.co.uk/wp-content/uploads/2019/03/kili-1601.jpg",
         alt_text: "Kilimanjaro 1601"
       }]
     }
@@ -107,7 +107,7 @@ const staticPhotos: WordPressImage[] = [
     content: { rendered: "" },
     _embedded: {
       "wp:featuredmedia": [{
-        source_url: "https://mlkwtxmsxa0d.i.optimole.com/w:810/h:1080/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2019/03/iPhone-Capture9.jpg",
+        source_url: "https://jamiemarsland.co.uk/wp-content/uploads/2019/03/iPhone-Capture9.jpg",
         alt_text: "iPhone Capture 9"
       }]
     }
