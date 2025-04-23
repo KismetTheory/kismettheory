@@ -1,5 +1,7 @@
 
-export const panels = [
+import { Panel } from '@/types/panel'; // Assuming we have a type definition for panels
+
+export const panels: Panel[] = [
   {
     title: "JOURNAL",
     subtitle: "daily pics",
