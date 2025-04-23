@@ -32,7 +32,7 @@ export const myVisitedLocations: MyLocation[] = [
   },
   { 
     name: "Portugal",
-    coordinates: [-8.2245, 39.3999],
+    coordinates: [-9.1393, 38.7223], // Updated coordinates to Lisbon, Portugal
     description: "Population: 10.3 million | Weather: Mediterranean, avg 15-25°C | The oldest country in Europe with the same defined borders and the world's largest cork producer.",
     startDate: new Date('2022-08-15'),
     endDate: new Date('2022-08-28')
