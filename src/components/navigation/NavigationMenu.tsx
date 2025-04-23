@@ -1,25 +1,31 @@
-
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { menuItems, menuPaths } from "@/data/panels";
 
 interface NavigationMenuProps {
   isMenuOpen: boolean;
+  menuItems?: string[];
+  menuPaths?: string[];
+  onMouseEnter?: (index: number) => void;
+  onMouseLeave?: () => void;
 }
 
-const NavigationMenu = ({ isMenuOpen }: NavigationMenuProps) => {
+const NavigationMenu = ({ 
+  isMenuOpen,
+  menuItems: propMenuItems = menuItems,
+  menuPaths: propMenuPaths = menuPaths,
+  onMouseEnter = () => {},
+  onMouseLeave = () => {}
+}: NavigationMenuProps) => {
   const [hoveredMenuItem, setHoveredMenuItem] = useState<number | null>(null);
   const navRef = useRef<HTMLElement>(null);
 
-  // Handle tab focus - when menu closes, move focus out of the menu
   useEffect(() => {
     if (!isMenuOpen && navRef.current) {
-      // Find all focusable elements in the menu
       const focusableElements = navRef.current.querySelectorAll(
         'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
       );
 
-      // When menu closes, blur any focused element within the menu
       const focused = document.activeElement;
       if (focused && Array.from(focusableElements).includes(focused as Element)) {
         (focused as HTMLElement).blur();
@@ -42,14 +48,14 @@ const NavigationMenu = ({ isMenuOpen }: NavigationMenuProps) => {
     >
       <div className="h-full flex items-center justify-center pt-16 md:pt-0">
         <ul className="space-y-6 w-full px-12">
-          {menuItems.map((item, index) => (
+          {propMenuItems.map((item, index) => (
             <li key={index} className="flex justify-center">
-              {menuPaths[index].startsWith('#') ? (
+              {propMenuPaths[index].startsWith('#') ? (
                 <Link
                   to="/"
                   className="text-[1.8rem] leading-none font-extrabold dark:text-white dark:hover:text-[#5CC6D0] text-black hover:text-[#5CC6D0] transition-colors whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5CC6D0] focus-visible:ring-offset-2 focus-visible:rounded-sm"
-                  onMouseEnter={() => setHoveredMenuItem(index)}
-                  onMouseLeave={() => setHoveredMenuItem(null)}
+                  onMouseEnter={() => onMouseEnter(index)}
+                  onMouseLeave={() => onMouseLeave()}
                   onFocus={() => setHoveredMenuItem(index)}
                   onBlur={() => setHoveredMenuItem(null)}
                   tabIndex={isMenuOpen ? 0 : -1}
@@ -58,10 +64,10 @@ const NavigationMenu = ({ isMenuOpen }: NavigationMenuProps) => {
                 </Link>
               ) : (
                 <Link
-                  to={menuPaths[index]}
+                  to={propMenuPaths[index]}
                   className="text-[1.8rem] leading-none font-extrabold dark:text-white dark:hover:text-[#5CC6D0] text-black hover:text-[#5CC6D0] transition-colors whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5CC6D0] focus-visible:ring-offset-2 focus-visible:rounded-sm"
-                  onMouseEnter={() => setHoveredMenuItem(index)}
-                  onMouseLeave={() => setHoveredMenuItem(null)}
+                  onMouseEnter={() => onMouseEnter(index)}
+                  onMouseLeave={() => onMouseLeave()}
                   onFocus={() => setHoveredMenuItem(index)}
                   onBlur={() => setHoveredMenuItem(null)}
                   tabIndex={isMenuOpen ? 0 : -1}

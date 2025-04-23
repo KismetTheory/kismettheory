@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { panels, menuItems, menuPaths } from "@/data/panels";
 import Panel from "@/components/home/Panel";
@@ -11,7 +10,7 @@ const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoveredPanel, setHoveredPanel] = useState<number | null>(null);
   const [hoveredMenuItem, setHoveredMenuItem] = useState<number | null>(null);
-  const defaultImage = "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2025/02/photo-33-scaled.jpg";
+  const defaultImage = "https://jamiemarsland.co.uk/wp-content/uploads/2025/03/photo-3-scaled.jpg";
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
