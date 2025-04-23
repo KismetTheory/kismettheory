@@ -7,7 +7,7 @@ interface BackgroundProps {
 
 const Background = ({ defaultImage, currentImage, opacity }: BackgroundProps) => {
   return (
-    <div className="absolute inset-0 md:fixed z-0 overflow-hidden" aria-hidden="true">
+    <div className="absolute inset-0 md:fixed overflow-hidden" aria-hidden="true">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{

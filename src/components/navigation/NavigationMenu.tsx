@@ -1,16 +1,13 @@
 
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
+import { menuItems, menuPaths } from "@/data/panels";
 
 interface NavigationMenuProps {
   isMenuOpen: boolean;
-  menuItems: string[];
-  menuPaths: string[];
-  onMouseEnter: (index: number) => void;
-  onMouseLeave: () => void;
 }
 
-const NavigationMenu = ({ isMenuOpen, menuItems, menuPaths, onMouseEnter, onMouseLeave }: NavigationMenuProps) => {
+const NavigationMenu = ({ isMenuOpen }: NavigationMenuProps) => {
   const [hoveredMenuItem, setHoveredMenuItem] = useState<number | null>(null);
   const navRef = useRef<HTMLElement>(null);
 
@@ -51,22 +48,10 @@ const NavigationMenu = ({ isMenuOpen, menuItems, menuPaths, onMouseEnter, onMous
                 <Link
                   to="/"
                   className="text-[1.8rem] leading-none font-extrabold dark:text-white dark:hover:text-[#5CC6D0] text-black hover:text-[#5CC6D0] transition-colors whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5CC6D0] focus-visible:ring-offset-2 focus-visible:rounded-sm"
-                  onMouseEnter={() => {
-                    setHoveredMenuItem(index);
-                    onMouseEnter(index);
-                  }}
-                  onMouseLeave={() => {
-                    setHoveredMenuItem(null);
-                    onMouseLeave();
-                  }}
-                  onFocus={() => {
-                    setHoveredMenuItem(index);
-                    onMouseEnter(index);
-                  }}
-                  onBlur={() => {
-                    setHoveredMenuItem(null);
-                    onMouseLeave();
-                  }}
+                  onMouseEnter={() => setHoveredMenuItem(index)}
+                  onMouseLeave={() => setHoveredMenuItem(null)}
+                  onFocus={() => setHoveredMenuItem(index)}
+                  onBlur={() => setHoveredMenuItem(null)}
                   tabIndex={isMenuOpen ? 0 : -1}
                 >
                   {item}
@@ -75,22 +60,10 @@ const NavigationMenu = ({ isMenuOpen, menuItems, menuPaths, onMouseEnter, onMous
                 <Link
                   to={menuPaths[index]}
                   className="text-[1.8rem] leading-none font-extrabold dark:text-white dark:hover:text-[#5CC6D0] text-black hover:text-[#5CC6D0] transition-colors whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5CC6D0] focus-visible:ring-offset-2 focus-visible:rounded-sm"
-                  onMouseEnter={() => {
-                    setHoveredMenuItem(index);
-                    onMouseEnter(index);
-                  }}
-                  onMouseLeave={() => {
-                    setHoveredMenuItem(null);
-                    onMouseLeave();
-                  }}
-                  onFocus={() => {
-                    setHoveredMenuItem(index);
-                    onMouseEnter(index);
-                  }}
-                  onBlur={() => {
-                    setHoveredMenuItem(null);
-                    onMouseLeave();
-                  }}
+                  onMouseEnter={() => setHoveredMenuItem(index)}
+                  onMouseLeave={() => setHoveredMenuItem(null)}
+                  onFocus={() => setHoveredMenuItem(index)}
+                  onBlur={() => setHoveredMenuItem(null)}
                   tabIndex={isMenuOpen ? 0 : -1}
                 >
                   {item}

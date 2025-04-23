@@ -1,11 +1,9 @@
 
-import { Panel } from '@/types/panel';
-
-export const panels: Panel[] = [
+export const panels = [
   {
     title: "JOURNAL",
     subtitle: "daily pics",
-    image: "https://jamiemarsland.co.uk/wp-content/uploads/2025/03/photo-3-scaled.jpg",
+    image: "https://jamiemarsland.co.uk/wp-content/uploads/2025/02/photo-32-scaled.jpg",
     path: "/photo-journal"
   },
   {

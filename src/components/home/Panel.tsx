@@ -14,7 +14,7 @@ const Panel = ({ title, subtitle, image, path, onMouseEnter, onMouseLeave }: Pan
   const content = (
     <>
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center md:hidden"
         style={{ backgroundImage: `url(${image})` }}
         aria-hidden="true"
       >
