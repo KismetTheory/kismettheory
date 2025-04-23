@@ -3,13 +3,13 @@ export const panels = [
   {
     title: "JOURNAL",
     subtitle: "daily pics",
-    image: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2025/02/photo-32-scaled.jpg",
+    image: "https://jamiemarsland.co.uk/wp-content/uploads/2025/02/photo-32-scaled.jpg",
     path: "/photo-journal"
   },
   {
     title: "IPHONE",
     subtitle: "sketches",
-    image: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2025/02/photo-18-scaled.jpg",
+    image: "https://jamiemarsland.co.uk/wp-content/uploads/2025/02/photo-18-scaled.jpg",
     path: "/iphone-sketches"
   },
   {
@@ -21,13 +21,13 @@ export const panels = [
   {
     title: "PAINTINGS",
     subtitle: "experiments",
-    image: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2024/06/cliff.jpg",
+    image: "https://jamiemarsland.co.uk/wp-content/uploads/2024/06/cliff.jpg",
     path: "/paintings"
   },
   {
     title: "TRAVELS",
     subtitle: "world map",
-    image: "https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2025/02/photo-29-scaled.jpg",
+    image: "https://jamiemarsland.co.uk/wp-content/uploads/2025/02/photo-29-scaled.jpg",
     path: "/world-map"
   },
   {
