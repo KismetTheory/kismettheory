@@ -42,8 +42,8 @@ const Sidebar = ({
             className="dark:text-[#5CC6D0] dark:hover:text-white text-black hover:text-[#5CC6D0] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5CC6D0] focus-visible:rounded-sm focus-visible:ring-offset-2"
           >
             <div className="text-center">
-              <div className="text-small font-sans">Jamie</div>
-              <div className="text-small font-sans">Marsland</div>
+              <div className="text-small font-sans">Kismet</div>
+              <div className="text-small font-sans">Theory</div>
             </div>
           </Link>
         </div>

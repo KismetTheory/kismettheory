@@ -15,8 +15,8 @@ const MobileHeader = ({ isMenuOpen, toggleMenu }: MobileHeaderProps) => {
         className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5CC6D0] focus-visible:rounded-sm focus-visible:ring-offset-2"
       >
         <div className="text-center dark:text-[#5CC6D0] dark:hover:text-white text-black hover:text-[#5CC6D0] transition-colors">
-          <div className="text-lg font-sans">Jamie</div>
-          <div className="text-lg font-sans">Marsland</div>
+          <div className="text-lg font-sans">Kismet</div>
+          <div className="text-lg font-sans">Theory</div>
         </div>
       </Link>
       <button
