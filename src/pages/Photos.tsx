@@ -6,28 +6,44 @@ import NavigationMenu from "@/components/navigation/NavigationMenu";
 import PhotoGrid from "@/components/photos/PhotoGrid";
 import PhotoLightbox from "@/components/photo-journal/PhotoLightbox";
 import PhotoGridSkeleton from "@/components/photos/PhotoGridSkeleton";
+import { useKismetTheoryMedia } from "@/hooks/useKismetTheoryMedia";
 import { usePhotos } from "@/hooks/usePhotos";
 import { useToast } from "@/hooks/use-toast";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 const Photos = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const [useKismetTheory, setUseKismetTheory] = useState(true);
   const { toast } = useToast();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const { data: posts, error, isLoading } = usePhotos();
+  const { data: localPhotos, error: localError, isLoading: isLocalLoading } = usePhotos();
+  const { 
+    data: kismetPhotos, 
+    error: kismetError, 
+    isLoading: isKismetLoading 
+  } = useKismetTheoryMedia();
+
+  // Use either Kismet Theory media or local photos based on toggle
+  const posts = useKismetTheory ? kismetPhotos : localPhotos;
+  const error = useKismetTheory ? kismetError : localError;
+  const isLoading = useKismetTheory ? isKismetLoading : isLocalLoading;
 
   useEffect(() => {
     if (error) {
       toast({
-        title: "Error loading photos",
+        title: useKismetTheory 
+          ? "Error loading photos from Kismet Theory" 
+          : "Error loading local photos",
         description: "Please try again later",
         variant: "destructive",
       });
       console.error("Error loading photos:", error);
     }
-  }, [error, toast]);
+  }, [error, toast, useKismetTheory]);
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (!posts || selectedImageIndex === null) return;
@@ -62,6 +78,17 @@ const Photos = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
           <h1 className="text-3xl font-bold">Photos</h1>
+          
+          <div className="flex items-center gap-2">
+            <Switch
+              id="source-toggle"
+              checked={useKismetTheory}
+              onCheckedChange={setUseKismetTheory}
+            />
+            <Label htmlFor="source-toggle">
+              {useKismetTheory ? "Kismet Theory Media" : "Local Photos"}
+            </Label>
+          </div>
         </div>
         
         {isLoading ? (
@@ -74,7 +101,11 @@ const Photos = () => {
         ) : !posts || posts.length === 0 ? (
           <div className="text-muted-foreground py-12 text-center">
             <p>No photos found.</p>
-            <p className="mt-2 text-sm">The WordPress API didn't return any photo posts.</p>
+            <p className="mt-2 text-sm">
+              {useKismetTheory 
+                ? "The Kismet Theory WordPress API didn't return any media items." 
+                : "The WordPress API didn't return any photo posts."}
+            </p>
           </div>
         ) : (
           <PhotoGrid

@@ -30,9 +30,12 @@ const PhotoGrid = ({ posts, onImageClick }: PhotoGridProps) => {
                 src={imageUrl}
                 alt={imageAlt}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
               />
             </div>
-            {/* Title display has been removed from here */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <h3 className="text-white font-medium truncate">{post.title.rendered}</h3>
+            </div>
           </div>
         );
       })}

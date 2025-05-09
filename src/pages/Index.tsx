@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { panels, menuItems, menuPaths } from "@/data/panels";
 import Panel from "@/components/home/Panel";
@@ -56,6 +57,20 @@ const Index = () => {
               onMouseLeave={() => setHoveredPanel(null)}
             />
           ))}
+        </div>
+        
+        <div className="absolute bottom-4 left-0 right-0 flex justify-center z-20">
+          <div className="bg-black/60 backdrop-blur-sm px-4 py-2 rounded-lg">
+            <p className="text-white text-sm">
+              Now featuring media from{" "}
+              <a 
+                href="/photos" 
+                className="text-primary hover:underline font-medium"
+              >
+                Kismet Theory
+              </a>
+            </p>
+          </div>
         </div>
       </main>
     </div>
