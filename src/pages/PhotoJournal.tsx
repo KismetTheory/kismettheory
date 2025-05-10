@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { format, parse, startOfMonth, endOfMonth } from "date-fns";
 import Sidebar from "@/components/navigation/Sidebar";
@@ -8,15 +9,22 @@ import PhotoLightbox from "@/components/photo-journal/PhotoLightbox";
 import PhotoGridSkeleton from "@/components/photo-journal/PhotoGridSkeleton";
 import MonthNavigator from "@/components/photo-journal/MonthNavigator";
 import { usePhotoJournalPosts } from "@/hooks/usePhotoJournalPosts";
+import EventsCalendar from "@/components/events/EventsCalendar";
+import EventSubmissionForm from "@/components/events/EventSubmissionForm";
+import EventGallery from "@/components/events/EventGallery";
+
 const PhotoJournal = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   const [currentMonth, setCurrentMonth] = useState(format(new Date(), 'yyyy-MM'));
+  
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
   const {
     data: posts,
     error
   } = usePhotoJournalPosts();
+
   const handleKeyDown = (e: KeyboardEvent) => {
     if (!filteredPosts || selectedImageIndex === null) return;
     if (e.key === 'ArrowRight') {
@@ -27,23 +35,29 @@ const PhotoJournal = () => {
       setSelectedImageIndex(null);
     }
   };
+
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedImageIndex, posts]);
+
   const filteredPosts = posts?.filter(post => {
     const postDate = new Date(post.date);
     const monthStart = startOfMonth(parse(currentMonth, 'yyyy-MM', new Date()));
     const monthEnd = endOfMonth(monthStart);
     return postDate >= monthStart && postDate <= monthEnd;
   });
+
   const selectedImage = selectedImageIndex !== null && filteredPosts ? filteredPosts[selectedImageIndex] : null;
+
   const navigateImage = (direction: 'prev' | 'next') => {
     if (!filteredPosts || selectedImageIndex === null) return;
     const newIndex = direction === 'next' ? (selectedImageIndex + 1) % filteredPosts.length : (selectedImageIndex - 1 + filteredPosts.length) % filteredPosts.length;
     setSelectedImageIndex(newIndex);
   };
+
   const availableMonths: string[] = posts ? Array.from(new Set(posts.map(post => format(new Date(post.date), 'yyyy-MM')))).sort((a, b) => b.localeCompare(a)) : [];
+
   const navigateMonth = (direction: 'prev' | 'next') => {
     const currentIndex = availableMonths.indexOf(currentMonth);
     if (currentIndex === -1) return;
@@ -51,26 +65,94 @@ const PhotoJournal = () => {
     setCurrentMonth(availableMonths[newIndex]);
     setSelectedImageIndex(null);
   };
-  const mainContent = <div className="min-h-screen bg-background text-foreground p-8">
-      <div className="max-w-7xl mx-auto">
+
+  const mainContent = (
+    <div className="min-h-screen bg-background text-foreground p-4 md:p-8">
+      <div className="max-w-7xl mx-auto space-y-8">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-          <h1 className="text-3xl font-bold">Events</h1>
-          {!error && availableMonths.length > 0 && <MonthNavigator currentMonth={currentMonth} availableMonths={availableMonths} onNavigate={navigateMonth} />}
+          <h1 className="text-3xl md:text-4xl font-bold text-primary">Events</h1>
+          {!error && availableMonths.length > 0 && (
+            <MonthNavigator 
+              currentMonth={currentMonth} 
+              availableMonths={availableMonths} 
+              onNavigate={navigateMonth} 
+            />
+          )}
         </div>
         
-        {error ? <p className="text-destructive">Error loading photos. Please try again later.</p> : !posts ? <PhotoGridSkeleton /> : filteredPosts && filteredPosts.length > 0 ? <PhotoGrid posts={filteredPosts} onImageClick={index => setSelectedImageIndex(index)} /> : <p className="text-muted-foreground py-12 text-center">No photos found for this month.</p>}
+        {/* Events Calendar */}
+        <div className="mb-10">
+          {error ? (
+            <p className="text-destructive">Error loading events. Please try again later.</p>
+          ) : !posts ? (
+            <PhotoGridSkeleton />
+          ) : (
+            <EventsCalendar posts={posts} />
+          )}
+        </div>
+        
+        {/* Photo Grid / Monthly Events */}
+        <div className="mb-10">
+          <h2 className="text-2xl font-bold mb-6 text-primary">Monthly Events</h2>
+          {error ? (
+            <p className="text-destructive">Error loading photos. Please try again later.</p>
+          ) : !posts ? (
+            <PhotoGridSkeleton />
+          ) : filteredPosts && filteredPosts.length > 0 ? (
+            <PhotoGrid posts={filteredPosts} onImageClick={index => setSelectedImageIndex(index)} />
+          ) : (
+            <p className="text-muted-foreground py-12 text-center">No events found for this month.</p>
+          )}
+        </div>
+        
+        {/* Two Column Layout for Form and Gallery */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+          {/* Event Submission Form */}
+          <div>
+            <EventSubmissionForm />
+          </div>
+          
+          {/* Event Gallery */}
+          <div>
+            {posts && (
+              <EventGallery 
+                posts={posts} 
+                onImageClick={(index) => {
+                  // Find the actual index in the filtered posts
+                  const postId = posts[index].id;
+                  const filteredIndex = filteredPosts?.findIndex(post => post.id === postId) ?? -1;
+                  if (filteredIndex !== -1) {
+                    setSelectedImageIndex(filteredIndex);
+                  }
+                }} 
+              />
+            )}
+          </div>
+        </div>
       </div>
 
-      <PhotoLightbox selectedImage={selectedImage} selectedImageIndex={selectedImageIndex} onClose={() => setSelectedImageIndex(null)} onNavigate={navigateImage} />
-    </div>;
-  return <div className="flex min-h-screen bg-background">
+      <PhotoLightbox 
+        selectedImage={selectedImage}
+        selectedImageIndex={selectedImageIndex}
+        onClose={() => setSelectedImageIndex(null)}
+        onNavigate={navigateImage} 
+      />
+    </div>
+  );
+
+  return (
+    <div className="flex min-h-screen bg-background">
       <Sidebar toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
       <MobileHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       <NavigationMenu isMenuOpen={isMenuOpen} />
       
-      <main className={`w-full md:w-[calc(100vw-120px)] min-h-screen transition-transform duration-300 ${isMenuOpen ? 'translate-x-full md:translate-x-[300px]' : 'translate-x-0'} ${'md:ml-[120px]'}`}>
+      <main className={`w-full md:w-[calc(100vw-120px)] min-h-screen transition-transform duration-300 ${
+        isMenuOpen ? 'translate-x-full md:translate-x-[300px]' : 'translate-x-0'
+      } ${'md:ml-[120px]'}`}>
         {mainContent}
       </main>
-    </div>;
+    </div>
+  );
 };
+
 export default PhotoJournal;
