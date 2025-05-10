@@ -74,7 +74,7 @@ const EventsCalendar = ({ posts }: EventsCalendarProps) => {
                   <div key={event.id} className="p-3 bg-muted rounded-lg border border-border">
                     <h4 className="font-medium" dangerouslySetInnerHTML={{ __html: event.title.rendered }} />
                     <div className="text-sm text-muted-foreground mt-1" 
-                         dangerouslySetInnerHTML={{ __html: event.excerpt?.rendered || '' }} />
+                         dangerouslySetInnerHTML={{ __html: event.content.rendered || '' }} />
                   </div>
                 ))
               ) : (
