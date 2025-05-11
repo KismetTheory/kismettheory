@@ -3,10 +3,8 @@ import React, { useState } from "react";
 import Sidebar from "@/components/navigation/Sidebar";
 import MobileHeader from "@/components/navigation/MobileHeader";
 import NavigationMenu from "@/components/navigation/NavigationMenu";
-import SocialBanner from "@/components/social/SocialBanner";
-import FeaturedLinks from "@/components/social/FeaturedLinks";
 
-const SocialEngagement = () => {
+const Charity = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -14,16 +12,16 @@ const SocialEngagement = () => {
   const mainContent = (
     <div className="min-h-screen bg-background text-foreground p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-          <h1 className="text-3xl font-bold">Social Engagement</h1>
-        </div>
-        
-        {/* Social Links Banner */}
-        <SocialBanner />
-        
-        {/* Featured Links Section */}
-        <div className="mt-12">
-          <FeaturedLinks />
+        <h1 className="text-3xl font-bold mb-6">Finn's Brand Lucky Charity</h1>
+        <div className="bg-muted p-8 rounded-lg">
+          <h2 className="text-2xl font-bold mb-4">About Our Charity Initiative</h2>
+          <p className="text-lg mb-4">
+            Finn's Brand Lucky is dedicated to making a difference in our community. 
+            Our charity initiatives focus on providing support where it's needed most.
+          </p>
+          <p className="text-lg">
+            More information on how to get involved coming soon.
+          </p>
         </div>
       </div>
     </div>
@@ -44,4 +42,4 @@ const SocialEngagement = () => {
   );
 };
 
-export default SocialEngagement;
+export default Charity;
