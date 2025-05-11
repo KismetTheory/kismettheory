@@ -26,7 +26,7 @@ export const panels = [
   },
   {
     title: "CONTACT",
-    subtitle: "get in touch",
+    subtitle: "questions & customs",
     image: "https://jamiemarsland.co.uk/wp-content/uploads/2025/02/photo-29-scaled.jpg",
     path: "/contact"
   }
