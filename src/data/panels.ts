@@ -26,9 +26,9 @@ export const panels = [
   },
   {
     title: "CONTACT",
-    subtitle: "world map",
+    subtitle: "get in touch",
     image: "https://jamiemarsland.co.uk/wp-content/uploads/2025/02/photo-29-scaled.jpg",
-    path: "/world-map"
+    path: "/contact"
   }
 ];
 

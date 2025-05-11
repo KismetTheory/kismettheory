@@ -10,7 +10,7 @@ import PhotoJournal from "./pages/PhotoJournal";
 import IphoneSketches from "./pages/IphoneSketches";
 import SocialEngagement from "./pages/Photos"; // Renamed but kept the file name
 import Paintings from "./pages/Paintings";
-import WorldMap from "./pages/WorldMap";
+import Contact from "./pages/WorldMap"; // Renamed but kept the file name
 import NotFound from "./pages/NotFound";
 import YouTubeShorts from "./pages/YouTubeShorts";
 import TarotReadings from "./pages/TarotReadings";
@@ -36,7 +36,8 @@ const App = () => (
             <Route path="/iphone-sketches" element={<IphoneSketches />} />
             <Route path="/photos" element={<SocialEngagement />} />
             <Route path="/paintings" element={<Paintings />} />
-            <Route path="/world-map" element={<WorldMap />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/world-map" element={<Contact />} /> {/* Keep the old route for backward compatibility */}
             <Route path="/youtube-shorts-article" element={<YouTubeShorts />} />
             <Route path="/youtube-shorts" element={<YouTubeShorts />} />
             <Route path="/tarot-readings" element={<TarotReadings />} />
