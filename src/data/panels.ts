@@ -2,9 +2,9 @@
 export const panels = [
   {
     title: "SHOP",
-    subtitle: "coming soon",
+    subtitle: "local vendors",
     image: "https://images.unsplash.com/photo-1542144612-1b3641ec3459",
-    path: "#shop"
+    path: "/shop"
   },
   {
     title: "EVENTS",

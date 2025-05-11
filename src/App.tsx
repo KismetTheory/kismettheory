@@ -16,6 +16,10 @@ import YouTubeShorts from "./pages/YouTubeShorts";
 import TarotReadings from "./pages/TarotReadings";
 import Charity from "./pages/Charity";
 import Spotlight from "./pages/Spotlight";
+import Shop from "./pages/Shop";
+import Jewelry from "./pages/shop/Jewelry";
+import EnergyDecor from "./pages/shop/EnergyDecor";
+import RecRoom from "./pages/shop/RecRoom";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +42,10 @@ const App = () => (
             <Route path="/tarot-readings" element={<TarotReadings />} />
             <Route path="/charity" element={<Charity />} />
             <Route path="/spotlight" element={<Spotlight />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/shop/jewelry" element={<Jewelry />} />
+            <Route path="/shop/energy-decor" element={<EnergyDecor />} />
+            <Route path="/shop/rec-room" element={<RecRoom />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
