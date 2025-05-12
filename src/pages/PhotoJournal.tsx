@@ -91,43 +91,30 @@ const PhotoJournal = () => {
           )}
         </div>
         
-        {/* Photo Grid / Monthly Events */}
+        {/* Recent Events Gallery - Moved up in the order */}
         <div className="mb-10">
-          <h2 className="text-2xl font-bold mb-6 text-primary">Monthly Events</h2>
+          <h2 className="text-2xl font-bold mb-6 text-primary">Recent Events</h2>
           {error ? (
-            <p className="text-destructive">Error loading photos. Please try again later.</p>
+            <p className="text-destructive">Error loading recent events. Please try again later.</p>
           ) : !posts ? (
             <PhotoGridSkeleton />
-          ) : filteredPosts && filteredPosts.length > 0 ? (
-            <PhotoGrid posts={filteredPosts} onImageClick={index => setSelectedImageIndex(index)} />
           ) : (
-            <p className="text-muted-foreground py-12 text-center">No events found for this month.</p>
+            <EventGallery 
+              posts={posts} 
+              onImageClick={(index) => {
+                const postId = posts[index].id;
+                const filteredIndex = filteredPosts?.findIndex(post => post.id === postId) ?? -1;
+                if (filteredIndex !== -1) {
+                  setSelectedImageIndex(filteredIndex);
+                }
+              }} 
+            />
           )}
         </div>
         
-        {/* Two Column Layout for Form and Gallery */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-          {/* Event Submission Form */}
-          <div>
-            <EventSubmissionForm />
-          </div>
-          
-          {/* Event Gallery */}
-          <div>
-            {posts && (
-              <EventGallery 
-                posts={posts} 
-                onImageClick={(index) => {
-                  // Find the actual index in the filtered posts
-                  const postId = posts[index].id;
-                  const filteredIndex = filteredPosts?.findIndex(post => post.id === postId) ?? -1;
-                  if (filteredIndex !== -1) {
-                    setSelectedImageIndex(filteredIndex);
-                  }
-                }} 
-              />
-            )}
-          </div>
+        {/* Event Submission Form */}
+        <div className="mb-10">
+          <EventSubmissionForm />
         </div>
       </div>
 
