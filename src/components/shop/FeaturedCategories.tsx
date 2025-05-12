@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, DigitalMerch } from "lucide-react";
+import { ArrowRight, FileDigit } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -86,7 +86,7 @@ const FeaturedCategories: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-end p-4">
                   {category.title === "Digital Merch" ? (
-                    <DigitalMerch className="text-white h-8 w-8" />
+                    <FileDigit className="text-white h-8 w-8" />
                   ) : (
                     <ArrowRight className="text-white h-8 w-8" />
                   )}
