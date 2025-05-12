@@ -20,6 +20,8 @@ import Shop from "./pages/Shop";
 import Jewelry from "./pages/shop/Jewelry";
 import EnergyDecor from "./pages/shop/EnergyDecor";
 import RecRoom from "./pages/shop/RecRoom";
+import AdultRec from "./pages/shop/AdultRec";
+import DigitalMerch from "./pages/shop/DigitalMerch";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +49,8 @@ const App = () => (
             <Route path="/shop/jewelry" element={<Jewelry />} />
             <Route path="/shop/energy-decor" element={<EnergyDecor />} />
             <Route path="/shop/rec-room" element={<RecRoom />} />
+            <Route path="/shop/adult-rec" element={<AdultRec />} />
+            <Route path="/shop/digital-merch" element={<DigitalMerch />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
