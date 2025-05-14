@@ -5,7 +5,7 @@ import CategoryLayout from "@/components/shop/CategoryLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { ArrowRight, Crystal, Sparkles, Wand2, Home } from "lucide-react";
+import { ArrowRight, Gem, Sparkles, Wand2, Home } from "lucide-react";
 import { getRandomAffirmation, type Affirmation } from "@/data/affirmations";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -20,7 +20,7 @@ const EnergyDecor = () => {
   const categories = [
     {
       title: "Crystals & Accessories",
-      icon: Crystal,
+      icon: Gem,
       description: "Ethically sourced crystals, crystal jewelry, and accessories to enhance your energy and spiritual practice.",
       image: "https://images.unsplash.com/photo-1618221118493-9cfa1a1c00da?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=500"
     },
