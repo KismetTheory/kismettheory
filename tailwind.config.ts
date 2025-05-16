@@ -30,11 +30,11 @@ export default {
           foreground: "#FFFFFF",
         },
         accent: {
-          DEFAULT: "#C9A96E",
+          DEFAULT: "#FEC6A1", // Brightened from C9A96E to a soft orange
           foreground: "#111111",
         },
         muted: {
-          DEFAULT: "#F5F5F5",
+          DEFAULT: "#FEF7CD", // Brightened from F5F5F5 to a soft yellow
           foreground: "#666666",
         },
       },
