@@ -17,6 +17,7 @@ import TarotReadings from "./pages/TarotReadings";
 import Charity from "./pages/Charity";
 import Spotlight from "./pages/Spotlight";
 import Shop from "./pages/Shop";
+import Customs from "./pages/Customs"; // Added new import
 import Jewelry from "./pages/shop/Jewelry";
 import EnergyDecor from "./pages/shop/EnergyDecor";
 import RecRoom from "./pages/shop/RecRoom";
@@ -46,6 +47,7 @@ const App = () => (
             <Route path="/charity" element={<Charity />} />
             <Route path="/spotlight" element={<Spotlight />} />
             <Route path="/shop" element={<Shop />} />
+            <Route path="/customs" element={<Customs />} /> {/* Added new route */}
             <Route path="/shop/jewelry" element={<Jewelry />} />
             <Route path="/shop/energy-decor" element={<EnergyDecor />} />
             <Route path="/shop/rec-room" element={<RecRoom />} />
