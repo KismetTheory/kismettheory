@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CategoryLayout from "@/components/shop/CategoryLayout";
@@ -108,7 +107,7 @@ const EnergyDecor = () => {
           </p>
           <div className="flex justify-center">
             <Button asChild size="lg" className="px-8">
-              <Link to="/contact">Order Custom Pieces</Link>
+              <Link to="/customs">Order Custom Pieces</Link>
             </Button>
           </div>
         </div>

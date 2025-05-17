@@ -38,7 +38,7 @@ const Shop = () => {
             </p>
             <div className="flex justify-center mt-4">
               <Button asChild variant="outline" className="bg-white/80 hover:bg-white">
-                <Link to="/contact">Explore Custom Options</Link>
+                <Link to="/customs">Explore Custom Options</Link>
               </Button>
             </div>
           </div>
