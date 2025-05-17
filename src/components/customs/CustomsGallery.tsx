@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { GalleryHorizontal, Image, TagIcon } from "lucide-react";
+import { Gallery, Image, TagIcon } from "lucide-react";
 
 // Sample gallery data (replace with actual images later)
 const galleryItems = [
@@ -19,7 +19,7 @@ const CustomsGallery = () => {
   return (
     <div className="w-full">
       <div className="flex items-center gap-2 mb-4">
-        <GalleryHorizontal className="h-5 w-5 text-accent" />
+        <Gallery className="h-5 w-5 text-accent" />
         <h3 className="text-xl font-semibold">All Our Custom Projects!</h3>
       </div>
       
