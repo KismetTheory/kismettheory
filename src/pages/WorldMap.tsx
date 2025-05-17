@@ -1,17 +1,10 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MobileHeader from '@/components/navigation/MobileHeader';
 import Sidebar from '@/components/navigation/Sidebar';
 import NavigationMenu from '@/components/navigation/NavigationMenu';
 import { ArrowLeft, Mail, Phone, MapPin, MessageSquare, HelpCircle, BookOpen } from 'lucide-react';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 const WorldMap = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -19,29 +12,19 @@ const WorldMap = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
-  return (
-    <div className="min-h-screen bg-background dark:bg-black relative overflow-hidden">
+  return <div className="min-h-screen bg-background dark:bg-black relative overflow-hidden">
       <Sidebar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       <MobileHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       <NavigationMenu isMenuOpen={isMenuOpen} />
       
-      <main 
-        className={`w-full md:w-[calc(100vw-120px)] min-h-screen transition-transform duration-300 ${
-          isMenuOpen 
-            ? 'translate-x-full md:translate-x-[300px]' 
-            : 'translate-x-0'
-        } ${
-          'md:ml-[120px]'
-        }`}
-      >
+      <main className={`w-full md:w-[calc(100vw-120px)] min-h-screen transition-transform duration-300 ${isMenuOpen ? 'translate-x-full md:translate-x-[300px]' : 'translate-x-0'} ${'md:ml-[120px]'}`}>
         <div className="max-w-7xl mx-auto pt-20 md:pt-6 px-4 md:px-8 pb-16">
           <Link to="/" className="flex items-center text-primary mb-6 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5CC6D0] focus-visible:rounded-sm focus-visible:ring-offset-2">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to home
           </Link>
           
-          <h1 className="text-3xl md:text-4xl font-bold mb-6">Contact/Customs/Questions</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-6">Contact/Questions</h1>
           
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
@@ -56,10 +39,7 @@ const WorldMap = () => {
                   <Mail className="w-5 h-5 text-[#D946EF] dark:text-[#5CC6D0] mr-3 mt-1" />
                   <div>
                     <h3 className="font-semibold">Email</h3>
-                    <a 
-                      href="mailto:kismetcrew@gmail.com" 
-                      className="text-[#D946EF] dark:text-[#5CC6D0] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5CC6D0] focus-visible:rounded-sm focus-visible:ring-offset-2"
-                    >
+                    <a href="mailto:kismetcrew@gmail.com" className="text-[#D946EF] dark:text-[#5CC6D0] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5CC6D0] focus-visible:rounded-sm focus-visible:ring-offset-2">
                       kismetcrew@gmail.com
                     </a>
                   </div>
@@ -69,10 +49,7 @@ const WorldMap = () => {
                   <Phone className="w-5 h-5 text-[#D946EF] dark:text-[#5CC6D0] mr-3 mt-1" />
                   <div>
                     <h3 className="font-semibold">Phone (For Customs and Questions)</h3>
-                    <a 
-                      href="tel:+13028581535" 
-                      className="text-[#D946EF] dark:text-[#5CC6D0] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5CC6D0] focus-visible:rounded-sm focus-visible:ring-offset-2"
-                    >
+                    <a href="tel:+13028581535" className="text-[#D946EF] dark:text-[#5CC6D0] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5CC6D0] focus-visible:rounded-sm focus-visible:ring-offset-2">
                       (302) 858-1535
                     </a>
                   </div>
@@ -96,54 +73,31 @@ const WorldMap = () => {
                   <label htmlFor="name" className="block text-sm font-medium mb-1">
                     Name
                   </label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-[#5CC6D0]"
-                    placeholder="Your name"
-                  />
+                  <input type="text" id="name" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-[#5CC6D0]" placeholder="Your name" />
                 </div>
                 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-1">
                     Email
                   </label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-[#5CC6D0]"
-                    placeholder="Your email"
-                  />
+                  <input type="email" id="email" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-[#5CC6D0]" placeholder="Your email" />
                 </div>
                 
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium mb-1">
                     Subject
                   </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-[#5CC6D0]"
-                    placeholder="Subject"
-                  />
+                  <input type="text" id="subject" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-[#5CC6D0]" placeholder="Subject" />
                 </div>
                 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium mb-1">
                     Message
                   </label>
-                  <textarea
-                    id="message"
-                    rows={5}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-[#5CC6D0]"
-                    placeholder="Your message"
-                  />
+                  <textarea id="message" rows={5} className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-[#5CC6D0]" placeholder="Your message" />
                 </div>
                 
-                <button
-                  type="submit"
-                  className="w-full md:w-auto px-6 py-2 bg-[#D946EF] dark:bg-[#5CC6D0] text-white rounded-md hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#5CC6D0] focus:ring-offset-2"
-                >
+                <button type="submit" className="w-full md:w-auto px-6 py-2 bg-[#D946EF] dark:bg-[#5CC6D0] text-white rounded-md hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#5CC6D0] focus:ring-offset-2">
                   Send Message
                 </button>
               </form>
@@ -301,8 +255,6 @@ const WorldMap = () => {
           </div>
         </div>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default WorldMap;
