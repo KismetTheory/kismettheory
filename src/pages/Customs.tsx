@@ -6,7 +6,7 @@ import NavigationMenu from "@/components/navigation/NavigationMenu";
 import CustomsForm from "@/components/customs/CustomsForm";
 import CustomsGallery from "@/components/customs/CustomsGallery";
 import { Link } from "react-router-dom";
-import { TagIcon, Hand, Ring, Upload, Send } from "lucide-react";
+import { CircleEllipsis, Hand, Upload, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Customs = () => {
@@ -53,7 +53,7 @@ const Customs = () => {
         {/* Rings Section */}
         <div className="mb-16 p-6 md:p-8 rounded-lg bg-gradient-to-r from-accent/10 to-white dark:to-black/10 border border-accent/20 animate-fade-up">
           <div className="flex items-center gap-3 mb-4">
-            <Ring className="h-6 w-6 text-accent" />
+            <CircleEllipsis className="h-6 w-6 text-accent" />
             <h2 className="text-2xl font-bold">Woven & Copper Rings</h2>
           </div>
           
