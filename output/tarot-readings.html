@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tarot Readings - Kismet Theory</title>
+    <meta name="description" content="Tarot Card Readings" />
+    <meta name="author" content="Lovable" />
+    <meta property="og:image" content="og-image.png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.462.0/dist/umd/lucide.min.js"></script>
+  </head>
+  <body class="dark">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-content">
+        <div class="sidebar-logo">
+          <a href="index.html">
+            <div class="logo-text">
+              <div>Kismet</div>
+              <div>Theory</div>
+            </div>
+          </a>
+        </div>
+        <div class="sidebar-menu-toggle">
+          <button id="menu-toggle" aria-label="Toggle menu">
+            <span class="menu-text">MENU</span>
+            <i data-lucide="menu"></i>
+          </button>
+        </div>
+        <div class="theme-toggle">
+          <button id="theme-button" aria-label="Toggle theme">
+            <i data-lucide="moon"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+    
+    <header class="mobile-header">
+      <a href="index.html" class="mobile-logo">
+        <div>Kismet</div>
+        <div>Theory</div>
+      </a>
+      <button id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </header>
+    
+    <nav id="navigation-menu" class="nav-menu">
+      <ul class="menu-items">
+        <li><a href="shop.html">SHOP</a></li>
+        <li><a href="photos.html">EVENTS</a></li>
+        <li><a href="tarot-readings.html">TAROT</a></li>
+        <li><a href="charity.html">CHARITY</a></li>
+        <li><a href="spotlight.html">SPOTLIGHT</a></li>
+      </ul>
+    </nav>
+    
+    <main id="main-content" class="page-content">
+      <div class="container">
+        <h1>Tarot Card Readings</h1>
+        
+        <!-- Tarot Explanation Section -->
+        <div class="card">
+          <div class="card-content">
+            <div class="card-header">
+              <i data-lucide="book-open"></i>
+              <h2>What is Tarot?</h2>
+            </div>
+            <div class="prose">
+              <p>
+                Tarot is a system of divination that uses a deck of 78 cards, each with symbolic imagery 
+                and meaning. Dating back to the mid-15th century in Europe, tarot cards were originally 
+                created as playing cards and later evolved into tools for divination and spiritual guidance.
+              </p>
+              <p>
+                The standard tarot deck consists of 22 Major Arcana cards representing life's karmic and 
+                spiritual lessons, and 56 Minor Arcana cards reflecting the trials and tribulations that we 
+                experience on a daily basis. Through the interpretation of these cards, tarot readers aim to 
+                provide insights into past, present, and future situations.
+              </p>
+              <p>
+                Today, tarot reading is practiced worldwide as a means of self-discovery, personal growth, 
+                and guidance through life's challenges. While some view it as mystical divination, others 
+                see it as a psychological tool that helps access the subconscious mind.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog Section - Coming Soon -->
+        <div class="card card-gradient-purple">
+          <div class="card-content">
+            <div class="card-header">
+              <i data-lucide="rss"></i>
+              <h2>Tarot Blog</h2>
+            </div>
+            <div class="text-center py-6">
+              <h3 class="subtitle">Coming Soon</h3>
+              <p>
+                Our tarot blog will feature card interpretations, spreads, and spiritual insights.
+                Subscribe to be notified when we publish our first articles.
+              </p>
+              <button class="btn btn-outline" disabled>
+                Subscribe for Updates
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Store Link Section -->
+        <div class="card card-gradient-amber">
+          <div class="card-content">
+            <div class="card-header">
+              <i data-lucide="link"></i>
+              <h2>Divination Store</h2>
+            </div>
+            <div class="text-center py-4">
+              <p>
+                Explore our collection of tarot decks, oracle cards, and divination tools.
+                Find the perfect deck to begin or enhance your spiritual journey.
+              </p>
+              <a href="shop/energy-decor.html" class="btn btn-primary">
+                Visit Divination Store
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Schedule Widget -->
+        <div class="card">
+          <div class="card-content">
+            <div class="card-header">
+              <i data-lucide="calendar-days"></i>
+              <h2>Schedule a Reading</h2>
+            </div>
+            <div class="grid-cols-2">
+              <div class="schedule-info">
+                <p>
+                  Select a date for your tarot reading session. Our experienced readers 
+                  are available for both in-person and online consultations.
+                </p>
+                <p>
+                  Once you've selected a date, we'll follow up with available time slots
+                  and confirmation details.
+                </p>
+                <div class="button-group">
+                  <button class="btn btn-primary" disabled>
+                    Schedule Now (Coming Soon)
+                  </button>
+                  <a href="contact.html" class="btn btn-outline">
+                    Contact for Custom Appointments
+                  </a>
+                </div>
+              </div>
+              <div class="calendar-container">
+                <div class="calendar" id="booking-calendar">
+                  <!-- Calendar will be inserted by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/datepicker.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

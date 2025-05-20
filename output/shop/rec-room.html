@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Rec Room - Kismet Theory</title>
+    <meta name="description" content="Kismet Theory Rec Room Products" />
+    <meta name="author" content="Lovable" />
+    <meta property="og:image" content="../og-image.png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.462.0/dist/umd/lucide.min.js"></script>
+  </head>
+  <body class="dark">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-content">
+        <div class="sidebar-logo">
+          <a href="../index.html">
+            <div class="logo-text">
+              <div>Kismet</div>
+              <div>Theory</div>
+            </div>
+          </a>
+        </div>
+        <div class="sidebar-menu-toggle">
+          <button id="menu-toggle" aria-label="Toggle menu">
+            <span class="menu-text">MENU</span>
+            <i data-lucide="menu"></i>
+          </button>
+        </div>
+        <div class="theme-toggle">
+          <button id="theme-button" aria-label="Toggle theme">
+            <i data-lucide="moon"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+    
+    <header class="mobile-header">
+      <a href="../index.html" class="mobile-logo">
+        <div>Kismet</div>
+        <div>Theory</div>
+      </a>
+      <button id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </header>
+    
+    <nav id="navigation-menu" class="nav-menu">
+      <ul class="menu-items">
+        <li><a href="../shop.html">SHOP</a></li>
+        <li><a href="../photos.html">EVENTS</a></li>
+        <li><a href="../tarot-readings.html">TAROT</a></li>
+        <li><a href="../charity.html">CHARITY</a></li>
+        <li><a href="../spotlight.html">SPOTLIGHT</a></li>
+      </ul>
+    </nav>
+    
+    <main id="main-content" class="page-content">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="../shop.html">Shop</a> / <span>The Rec Room</span>
+        </div>
+        
+        <h1>The Rec Room</h1>
+        
+        <div class="card">
+          <div class="card-content">
+            <div class="text-center py-12">
+              <h2 class="text-2xl font-bold mb-4">Coming Soon</h2>
+              <p class="text-lg text-muted-foreground">
+                Our rec room collection will be available soon. Check back later for fun items for your recreational space.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Custom Options Section -->
+        <div class="card card-gradient-blue mt-8">
+          <div class="card-content">
+            <div class="card-header">
+              <i data-lucide="brush"></i>
+              <h2>Custom Recreation Options</h2>
+            </div>
+            <p class="mb-6">
+              We can also make custom molds and many many fun color combinations for your recreational needs. 
+              Let us know what you're looking for, and we'll craft something unique for your space!
+            </p>
+            <div class="text-center">
+              <a href="../customs.html" class="btn btn-primary">
+                Explore Custom Options
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <script src="../script.js"></script>
+    <style>
+      /* Additional styles for the shop category pages */
+      .breadcrumb {
+        margin-bottom: 1rem;
+        font-size: 0.875rem;
+        color: var(--color-muted-foreground);
+      }
+      
+      .breadcrumb a {
+        color: var(--color-accent);
+      }
+      
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+      
+      .card-gradient-blue {
+        background-image: linear-gradient(to right, rgba(59, 130, 246, 0.05), rgba(16, 185, 129, 0.05));
+      }
+      
+      .text-muted-foreground {
+        color: var(--color-muted-foreground);
+      }
+      
+      .text-2xl {
+        font-size: 1.5rem;
+        line-height: 2rem;
+      }
+      
+      .text-lg {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+      }
+    </style>
+  </body>
+</html>
