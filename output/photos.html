@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events - Kismet Theory</title>
+    <meta name="description" content="Kismet Theory Events" />
+    <meta name="author" content="Lovable" />
+    <meta property="og:image" content="og-image.png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.462.0/dist/umd/lucide.min.js"></script>
+  </head>
+  <body class="dark">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-content">
+        <div class="sidebar-logo">
+          <a href="index.html">
+            <div class="logo-text">
+              <div>Kismet</div>
+              <div>Theory</div>
+            </div>
+          </a>
+        </div>
+        <div class="sidebar-menu-toggle">
+          <button id="menu-toggle" aria-label="Toggle menu">
+            <span class="menu-text">MENU</span>
+            <i data-lucide="menu"></i>
+          </button>
+        </div>
+        <div class="theme-toggle">
+          <button id="theme-button" aria-label="Toggle theme">
+            <i data-lucide="moon"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+    
+    <header class="mobile-header">
+      <a href="index.html" class="mobile-logo">
+        <div>Kismet</div>
+        <div>Theory</div>
+      </a>
+      <button id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </header>
+    
+    <nav id="navigation-menu" class="nav-menu">
+      <ul class="menu-items">
+        <li><a href="shop.html">SHOP</a></li>
+        <li><a href="photos.html">EVENTS</a></li>
+        <li><a href="tarot-readings.html">TAROT</a></li>
+        <li><a href="charity.html">CHARITY</a></li>
+        <li><a href="spotlight.html">SPOTLIGHT</a></li>
+      </ul>
+    </nav>
+    
+    <main id="main-content" class="page-content">
+      <div class="container">
+        <h1 class="text-3xl font-bold mb-6">Social Engagement</h1>
+        
+        <!-- Social Links Banner -->
+        <div class="card mb-8">
+          <div class="card-content">
+            <h2 class="text-center text-2xl font-bold mb-6">Connect With Us</h2>
+            
+            <div class="grid-cols-2 md:grid-cols-4 grid gap-4">
+              <a href="https://www.facebook.com/Created4Kismet" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-lg flex flex-col items-center justify-center transition-all transform hover:scale-105">
+                <i data-lucide="facebook" class="mb-2"></i>
+                <span class="text-sm font-medium">Facebook</span>
+              </a>
+              
+              <a href="https://www.instagram.com/created4kismet" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 hover:opacity-90 text-white p-4 rounded-lg flex flex-col items-center justify-center transition-all transform hover:scale-105">
+                <i data-lucide="instagram" class="mb-2"></i>
+                <span class="text-sm font-medium">Instagram</span>
+              </a>
+              
+              <a href="https://www.tiktok.com/@created4kismet" target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-900 text-white p-4 rounded-lg flex flex-col items-center justify-center transition-all transform hover:scale-105">
+                <i data-lucide="video" class="mb-2"></i>
+                <span class="text-sm font-medium">TikTok</span>
+              </a>
+              
+              <a href="https://www.youtube.com/kismettheory" target="_blank" rel="noopener noreferrer" class="bg-red-600 hover:bg-red-700 text-white p-4 rounded-lg flex flex-col items-center justify-center transition-all transform hover:scale-105">
+                <i data-lucide="youtube" class="mb-2"></i>
+                <span class="text-sm font-medium">YouTube</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Featured Links Section -->
+        <div class="mt-12">
+          <h2 class="text-2xl font-bold mb-8 text-center">Featured</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg transition-transform hover:shadow-xl hover:-translate-y-1">
+              <a href="tarot-readings.html" class="group">
+                <div class="relative aspect-[4/3] overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1633142205996-9382eccdd19b?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Tarot Card Readings" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-end p-4">
+                    <i data-lucide="arrow-right" class="text-white"></i>
+                  </div>
+                </div>
+                <div class="p-5">
+                  <h3 class="text-xl font-bold mb-2">Tarot Card Readings</h3>
+                  <p class="text-gray-600 dark:text-gray-300">Tarot card readings coming soon</p>
+                </div>
+              </a>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg transition-transform hover:shadow-xl hover:-translate-y-1">
+              <a href="charity.html" class="group">
+                <div class="relative aspect-[4/3] overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1598978554684-11651c08fa6d?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Finn's Brand Lucky" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-end p-4">
+                    <i data-lucide="arrow-right" class="text-white"></i>
+                  </div>
+                </div>
+                <div class="p-5">
+                  <h3 class="text-xl font-bold mb-2">Finn's Brand Lucky</h3>
+                  <p class="text-gray-600 dark:text-gray-300">Charity</p>
+                </div>
+              </a>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg transition-transform hover:shadow-xl hover:-translate-y-1">
+              <a href="spotlight.html" class="group">
+                <div class="relative aspect-[4/3] overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1573152958734-1922c188fba3?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Kismet" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-end p-4">
+                    <i data-lucide="arrow-right" class="text-white"></i>
+                  </div>
+                </div>
+                <div class="p-5">
+                  <h3 class="text-xl font-bold mb-2">Kismet</h3>
+                  <p class="text-gray-600 dark:text-gray-300">The Spotlight</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Charity - Kismet Theory</title>
+    <meta name="description" content="Kismet Theory Charity Initiatives" />
+    <meta name="author" content="Lovable" />
+    <meta property="og:image" content="og-image.png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.462.0/dist/umd/lucide.min.js"></script>
+  </head>
+  <body class="dark">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-content">
+        <div class="sidebar-logo">
+          <a href="index.html">
+            <div class="logo-text">
+              <div>Kismet</div>
+              <div>Theory</div>
+            </div>
+          </a>
+        </div>
+        <div class="sidebar-menu-toggle">
+          <button id="menu-toggle" aria-label="Toggle menu">
+            <span class="menu-text">MENU</span>
+            <i data-lucide="menu"></i>
+          </button>
+        </div>
+        <div class="theme-toggle">
+          <button id="theme-button" aria-label="Toggle theme">
+            <i data-lucide="moon"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+    
+    <header class="mobile-header">
+      <a href="index.html" class="mobile-logo">
+        <div>Kismet</div>
+        <div>Theory</div>
+      </a>
+      <button id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </header>
+    
+    <nav id="navigation-menu" class="nav-menu">
+      <ul class="menu-items">
+        <li><a href="shop.html">SHOP</a></li>
+        <li><a href="photos.html">EVENTS</a></li>
+        <li><a href="tarot-readings.html">TAROT</a></li>
+        <li><a href="charity.html">CHARITY</a></li>
+        <li><a href="spotlight.html">SPOTLIGHT</a></li>
+      </ul>
+    </nav>
+    
+    <main id="main-content" class="page-content">
+      <div class="container">
+        <h1 class="text-3xl font-bold mb-6">Finn's Brand Lucky Charity</h1>
+        
+        <!-- Explanation Section -->
+        <div class="card mb-8 card-gradient-purple">
+          <div class="card-content">
+            <div class="flex items-start gap-4">
+              <i data-lucide="clover" class="text-accent"></i>
+              <div>
+                <h2 class="text-2xl font-bold mb-3">Our Charity Initiative</h2>
+                <p class="text-lg mb-4">
+                  At Finn's Brand Lucky, we're committed to giving back to our community. 
+                  Any product purchased from our collection that contains a clover icon 
+                  in its description will have its proceeds donated to Delmar Elementary School
+                  to support field trips for children.
+                </p>
+                <p class="text-lg mb-4">
+                  Look for the <i data-lucide="clover" class="inline text-accent mx-1" style="height: 16px; width: 16px;"></i> symbol in our product 
+                  descriptions to identify items that contribute to this cause.
+                </p>
+                <p class="text-lg">
+                  Together, we can make a meaningful difference in children's educational experiences.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Donation Tracker -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">Donation Impact</h2>
+          <div class="card">
+            <div class="card-content">
+              <div class="mb-6">
+                <h3 class="font-bold mb-2">Funds Raised So Far</h3>
+                <div class="h-4 w-full bg-muted rounded-full mb-2">
+                  <div class="h-4 bg-accent rounded-full" style="width: 45%;"></div>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span>$2,250 of $5,000 goal</span>
+                  <span>45%</span>
+                </div>
+              </div>
+              
+              <div class="mb-6">
+                <h3 class="font-bold mb-2">Impact So Far</h3>
+                <ul class="space-y-2">
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="text-green-500"></i>
+                    <span>3 class field trips funded</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="text-green-500"></i>
+                    <span>75 children benefited</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="text-green-500"></i>
+                    <span>5 educational programs supported</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 class="font-bold mb-2">Thank You to Our Contributors</h3>
+                <div class="flex flex-wrap gap-2">
+                  <span class="bg-muted px-3 py-1 rounded-full text-sm">John D.</span>
+                  <span class="bg-muted px-3 py-1 rounded-full text-sm">Maria S.</span>
+                  <span class="bg-muted px-3 py-1 rounded-full text-sm">The Thompson Family</span>
+                  <span class="bg-muted px-3 py-1 rounded-full text-sm">Anonymous</span>
+                  <span class="bg-muted px-3 py-1 rounded-full text-sm">Clara W.</span>
+                  <span class="bg-muted px-3 py-1 rounded-full text-sm">And 32 others</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gallery Section -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">Charity Gallery</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="aspect-square overflow-hidden rounded-lg">
+              <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Children in school" class="w-full h-full object-cover">
+            </div>
+            <div class="aspect-square overflow-hidden rounded-lg">
+              <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Field trip" class="w-full h-full object-cover">
+            </div>
+            <div class="aspect-square overflow-hidden rounded-lg">
+              <img src="https://images.unsplash.com/photo-1526976668912-1a811878dd37?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Donation event" class="w-full h-full object-cover">
+            </div>
+          </div>
+        </div>
+        
+        <!-- Donation Form -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">Make a Donation</h2>
+          <div class="card">
+            <div class="card-content">
+              <form class="space-y-4">
+                <div>
+                  <label for="fullName" class="block mb-1">Full Name</label>
+                  <input type="text" id="fullName" class="w-full p-2 border border-border rounded bg-background" placeholder="Your name">
+                </div>
+                <div>
+                  <label for="email" class="block mb-1">Email</label>
+                  <input type="email" id="email" class="w-full p-2 border border-border rounded bg-background" placeholder="Your email">
+                </div>
+                <div>
+                  <label for="amount" class="block mb-1">Donation Amount</label>
+                  <div class="flex gap-2">
+                    <button type="button" class="px-4 py-2 border border-border rounded bg-muted hover:bg-accent hover:text-white transition-colors">$10</button>
+                    <button type="button" class="px-4 py-2 border border-border rounded bg-muted hover:bg-accent hover:text-white transition-colors">$25</button>
+                    <button type="button" class="px-4 py-2 border border-border rounded bg-muted hover:bg-accent hover:text-white transition-colors">$50</button>
+                    <button type="button" class="px-4 py-2 border border-border rounded bg-muted hover:bg-accent hover:text-white transition-colors">$100</button>
+                    <input type="text" id="amount" class="w-full p-2 border border-border rounded bg-background" placeholder="Custom amount">
+                  </div>
+                </div>
+                <div>
+                  <label for="message" class="block mb-1">Message (Optional)</label>
+                  <textarea id="message" rows="3" class="w-full p-2 border border-border rounded bg-background" placeholder="Your message"></textarea>
+                </div>
+                <div>
+                  <label class="flex items-center gap-2">
+                    <input type="checkbox" class="rounded">
+                    <span>Make this donation anonymous</span>
+                  </label>
+                </div>
+                <div>
+                  <button type="submit" class="btn btn-primary">Donate Now</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <script src="script.js"></script>
+  </body>
+</html>

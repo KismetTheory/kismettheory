@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adult Recreation - Kismet Theory</title>
+    <meta name="description" content="Kismet Theory Adult Recreation Products (21+)" />
+    <meta name="author" content="Lovable" />
+    <meta property="og:image" content="../og-image.png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.462.0/dist/umd/lucide.min.js"></script>
+  </head>
+  <body class="dark">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-content">
+        <div class="sidebar-logo">
+          <a href="../index.html">
+            <div class="logo-text">
+              <div>Kismet</div>
+              <div>Theory</div>
+            </div>
+          </a>
+        </div>
+        <div class="sidebar-menu-toggle">
+          <button id="menu-toggle" aria-label="Toggle menu">
+            <span class="menu-text">MENU</span>
+            <i data-lucide="menu"></i>
+          </button>
+        </div>
+        <div class="theme-toggle">
+          <button id="theme-button" aria-label="Toggle theme">
+            <i data-lucide="moon"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+    
+    <header class="mobile-header">
+      <a href="../index.html" class="mobile-logo">
+        <div>Kismet</div>
+        <div>Theory</div>
+      </a>
+      <button id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </header>
+    
+    <nav id="navigation-menu" class="nav-menu">
+      <ul class="menu-items">
+        <li><a href="../shop.html">SHOP</a></li>
+        <li><a href="../photos.html">EVENTS</a></li>
+        <li><a href="../tarot-readings.html">TAROT</a></li>
+        <li><a href="../charity.html">CHARITY</a></li>
+        <li><a href="../spotlight.html">SPOTLIGHT</a></li>
+      </ul>
+    </nav>
+    
+    <main id="main-content" class="page-content">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="../shop.html">Shop</a> / <span>Adult Recreation</span>
+        </div>
+        
+        <div class="card mb-6">
+          <div class="card-content">
+            <div class="flex items-center justify-center mb-4">
+              <i data-lucide="alert-circle" class="mr-2 text-accent"></i>
+              <h2 class="text-xl font-bold">Age Verification Required</h2>
+            </div>
+            <p class="text-center mb-4">
+              You must be 21 years or older to view this content.
+            </p>
+            <div class="flex justify-center gap-4">
+              <button class="btn btn-primary" id="age-verify-button">I am 21 or older</button>
+              <a href="../shop.html" class="btn btn-outline">Go Back</a>
+            </div>
+          </div>
+        </div>
+        
+        <div id="adult-content" class="hidden">
+          <h1>Adult Recreation</h1>
+          
+          <div class="card card-gradient-amber mb-6">
+            <div class="card-content">
+              <div class="card-header">
+                <i data-lucide="info"></i>
+                <h2>About Our Adult Recreation Products</h2>
+              </div>
+              <p>
+                Our adult recreation products are designed for those 21 and over. All items are handcrafted with 
+                high-quality materials and designed with both aesthetics and functionality in mind.
+              </p>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+            <div class="card">
+              <div class="aspect-square overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Glass Piece" class="w-full h-full object-cover">
+              </div>
+              <div class="card-content">
+                <h3 class="font-bold text-lg mb-2">Handblown Glass Pipe</h3>
+                <p class="mb-2 text-muted-foreground">Artisanal blue and purple swirl design</p>
+                <div class="flex justify-between items-center mt-4">
+                  <span class="font-bold">$65.00</span>
+                  <button class="btn btn-primary">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="aspect-square overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1597242580483-1c4066f85496?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Storage Container" class="w-full h-full object-cover">
+              </div>
+              <div class="card-content">
+                <h3 class="font-bold text-lg mb-2">Hand-Carved Storage Box</h3>
+                <p class="mb-2 text-muted-foreground">Wooden box with celestial design and lock</p>
+                <div class="flex justify-between items-center mt-4">
+                  <span class="font-bold">$42.50</span>
+                  <button class="btn btn-primary">Add to Cart</button>
+                </div>
+                <div class="mt-2 text-sm text-muted-foreground">
+                  <i data-lucide="clover" class="inline mr-1" style="width: 16px; height: 16px;"></i> Part of Finn's Lucky collection. (KT)
+                </div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="aspect-square overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1567427643552-a2a7ee0c54d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Rolling Tray" class="w-full h-full object-cover">
+              </div>
+              <div class="card-content">
+                <h3 class="font-bold text-lg mb-2">Artisan Rolling Tray</h3>
+                <p class="mb-2 text-muted-foreground">Resin and wood with cosmic galaxy pattern</p>
+                <div class="flex justify-between items-center mt-4">
+                  <span class="font-bold">$38.99</span>
+                  <button class="btn btn-primary">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Custom Options Section -->
+          <div class="card card-gradient-amber mt-8">
+            <div class="card-content">
+              <div class="card-header">
+                <i data-lucide="brush"></i>
+                <h2>Custom Adult Recreation Options</h2>
+              </div>
+              <p class="mb-6">
+                Looking for something unique? We specialize in custom glass work and personalized accessories. 
+                Contact us to discuss your specific needs.
+              </p>
+              <div class="text-center">
+                <a href="../customs.html" class="btn btn-primary">
+                  Explore Custom Options
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <script src="../script.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const ageVerifyButton = document.getElementById('age-verify-button');
+        const adultContent = document.getElementById('adult-content');
+        
+        // Check if age has been verified before
+        const isAgeVerified = localStorage.getItem('age-verified');
+        
+        if (isAgeVerified === 'true') {
+          adultContent.classList.remove('hidden');
+        }
+        
+        ageVerifyButton.addEventListener('click', function() {
+          adultContent.classList.remove('hidden');
+          localStorage.setItem('age-verified', 'true');
+        });
+      });
+    </script>
+    <style>
+      /* Additional styles for the shop category pages */
+      .breadcrumb {
+        margin-bottom: 1rem;
+        font-size: 0.875rem;
+        color: var(--color-muted-foreground);
+      }
+      
+      .breadcrumb a {
+        color: var(--color-accent);
+      }
+      
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+      
+      .card-gradient-amber {
+        background-image: linear-gradient(to right, rgba(245, 158, 11, 0.05), rgba(249, 115, 22, 0.05));
+      }
+      
+      .text-muted-foreground {
+        color: var(--color-muted-foreground);
+      }
+      
+      .hidden {
+        display: none;
+      }
+    </style>
+  </body>
+</html>
