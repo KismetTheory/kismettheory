@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meet Your Makers - Kismet Theory</title>
+    <meta name="description" content="Meet the artists and creators behind Kismet Theory" />
+    <meta name="author" content="Lovable" />
+    <meta property="og:image" content="og-image.png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.462.0/dist/umd/lucide.min.js"></script>
+  </head>
+  <body class="dark">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-content">
+        <div class="sidebar-logo">
+          <a href="index.html">
+            <div class="logo-text">
+              <div>Kismet</div>
+              <div>Theory</div>
+            </div>
+          </a>
+        </div>
+        <div class="sidebar-menu-toggle">
+          <button id="menu-toggle" aria-label="Toggle menu">
+            <span class="menu-text">MENU</span>
+            <i data-lucide="menu"></i>
+          </button>
+        </div>
+        <div class="theme-toggle">
+          <button id="theme-button" aria-label="Toggle theme">
+            <i data-lucide="moon"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+    
+    <header class="mobile-header">
+      <a href="index.html" class="mobile-logo">
+        <div>Kismet</div>
+        <div>Theory</div>
+      </a>
+      <button id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </header>
+    
+    <nav id="navigation-menu" class="nav-menu">
+      <ul class="menu-items">
+        <li><a href="shop.html">SHOP</a></li>
+        <li><a href="photos.html">EVENTS</a></li>
+        <li><a href="tarot-readings.html">TAROT</a></li>
+        <li><a href="charity.html">CHARITY</a></li>
+        <li><a href="spotlight.html">SPOTLIGHT</a></li>
+      </ul>
+    </nav>
+    
+    <main id="main-content" class="page-content">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="index.html">Home</a> / <span>Meet Your Makers</span>
+        </div>
+        
+        <h1 class="text-4xl font-bold mb-8">Meet Your Makers</h1>
+        
+        <!-- About Us Section -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold mb-6">About Us</h2>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+              <p class="text-lg text-muted-foreground mb-4">
+                We are Kismet Theory, a collective of artists, musicians, writers, and creators brought together by a shared vision: to lift each other up and build a vibrant creative community.
+              </p>
+              <p class="text-lg text-muted-foreground mb-4">
+                Founded in 2023, our mission is to provide a platform for local talent to showcase their work, collaborate across disciplines, and engage with the community through events, workshops, and creative initiatives.
+              </p>
+              <p class="text-lg text-muted-foreground">
+                Whether you're an established artist or just beginning your creative journey, we welcome you to join our growing family of makers and visionaries.
+              </p>
+            </div>
+            <div class="relative rounded-lg overflow-hidden h-[300px] md:h-auto">
+              <img 
+                src="https://jamiemarsland.co.uk/wp-content/uploads/2025/02/photo-18-scaled.jpg" 
+                alt="Kismet Theory Collective" 
+                class="w-full h-full object-cover"
+              />
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                <span class="badge badge-secondary mb-2">Est. 2023</span>
+                <h3 class="text-white text-xl font-bold">The Collective</h3>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Artist Categories -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold mb-6">Local Artists</h2>
+          
+          <!-- Artist Category Tabs -->
+          <div class="flex flex-wrap gap-2 mb-8">
+            <button class="artist-tab active" data-category="djs">
+              <i data-lucide="music" style="width: 16px; height: 16px; margin-right: 8px;"></i>
+              DJs / Producers
+            </button>
+            <button class="artist-tab" data-category="comedians">
+              <i data-lucide="mic" style="width: 16px; height: 16px; margin-right: 8px;"></i>
+              Comedians
+            </button>
+            <button class="artist-tab" data-category="singers">
+              <i data-lucide="mic" style="width: 16px; height: 16px; margin-right: 8px;"></i>
+              Singers
+            </button>
+            <button class="artist-tab" data-category="bands">
+              <i data-lucide="music" style="width: 16px; height: 16px; margin-right: 8px;"></i>
+              Bands
+            </button>
+            <button class="artist-tab" data-category="writers">
+              <i data-lucide="pen-tool" style="width: 16px; height: 16px; margin-right: 8px;"></i>
+              Writers
+            </button>
+            <button class="artist-tab" data-category="painters">
+              <i data-lucide="paintbrush" style="width: 16px; height: 16px; margin-right: 8px;"></i>
+              Painters
+            </button>
+          </div>
+          
+          <!-- DJs / Producers -->
+          <div class="artist-category active" id="djs">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div class="card">
+                <div class="relative h-64">
+                  <img 
+                    src="https://jamiemarsland.co.uk/wp-content/uploads/2025/05/photo-10-scaled.jpg" 
+                    alt="DJ Harmony" 
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="card-content">
+                  <h3 class="text-xl font-semibold mb-2">DJ Harmony</h3>
+                  <p class="text-muted-foreground mb-4">Electronic music producer specializing in ambient soundscapes and deep techno.</p>
+                  <button class="btn btn-outline w-full">View Profile</button>
+                </div>
+              </div>
+              
+              <div class="card">
+                <div class="relative h-64">
+                  <img 
+                    src="https://jamiemarsland.co.uk/wp-content/uploads/2025/05/photo-3-scaled.jpg" 
+                    alt="Producer Ray" 
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="card-content">
+                  <h3 class="text-xl font-semibold mb-2">Producer Ray</h3>
+                  <p class="text-muted-foreground mb-4">House and techno producer with a focus on analog synths and groovy basslines.</p>
+                  <button class="btn btn-outline w-full">View Profile</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Comedians -->
+          <div class="artist-category" id="comedians" style="display: none;">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div class="card">
+                <div class="relative h-64">
+                  <img 
+                    src="https://jamiemarsland.co.uk/wp-content/uploads/2025/05/photo-4.jpg" 
+                    alt="Lisa Jokes" 
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="card-content">
+                  <h3 class="text-xl font-semibold mb-2">Lisa Jokes</h3>
+                  <p class="text-muted-foreground mb-4">Stand-up comedian known for observational comedy and quick wit.</p>
+                  <button class="btn btn-outline w-full">View Profile</button>
+                </div>
+              </div>
+              
+              <div class="card">
+                <div class="relative h-64">
+                  <img 
+                    src="https://jamiemarsland.co.uk/wp-content/uploads/2025/05/photo-7-scaled.jpg" 
+                    alt="Mike Laugh" 
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="card-content">
+                  <h3 class="text-xl font-semibold mb-2">Mike Laugh</h3>
+                  <p class="text-muted-foreground mb-4">Improv specialist and comedy writer for various local shows.</p>
+                  <button class="btn btn-outline w-full">View Profile</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Singers -->
+          <div class="artist-category" id="singers" style="display: none;">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div class="card">
+                <div class="relative h-64">
+                  <img 
+                    src="https://jamiemarsland.co.uk/wp-content/uploads/2025/05/photo-1-scaled.jpg" 
+                    alt="Melody Voice" 
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="card-content">
+                  <h3 class="text-xl font-semibold mb-2">Melody Voice</h3>
+                  <p class="text-muted-foreground mb-4">R&B vocalist with a four-octave range and soulful delivery.</p>
+                  <button class="btn btn-outline w-full">View Profile</button>
+                </div>
+              </div>
+              
+              <div class="card">
+                <div class="relative h-64">
+                  <img 
+                    src="https://jamiemarsland.co.uk/wp-content/uploads/2025/05/photo-5-scaled.jpg" 
+                    alt="Harmony Blues" 
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="card-content">
+                  <h3 class="text-xl font-semibold mb-2">Harmony Blues</h3>
+                  <p class="text-muted-foreground mb-4">Jazz singer specializing in classic standards and original compositions.</p>
+                  <button class="btn btn-outline w-full">View Profile</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Bands -->
+          <div class="artist-category" id="bands" style="display: none;">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div class="card">
+                <div class="relative h-64">
+                  <img 
+                    src="https://jamiemarsland.co.uk/wp-content/uploads/2025/05/photo-6-scaled.jpg" 
+                    alt="The Locals" 
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="card-content">
+                  <h3 class="text-xl font-semibold mb-2">The Locals</h3>
+                  <p class="text-muted-foreground mb-4">Indie rock quartet with influences from 90s alternative and modern indie.</p>
+                  <button class="btn btn-outline w-full">View Profile</button>
+                </div>
+              </div>
+              
+              <div class="card">
+                <div class="relative h-64">
+                  <img 
+                    src="https://jamiemarsland.co.uk/wp-content/uploads/2025/05/photo-8-scaled.jpg" 
+                    alt="Street Symphony" 
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="card-content">
+                  <h3 class="text-xl font-semibold mb-2">Street Symphony</h3>
+                  <p class="text-muted-foreground mb-4">Folk-rock band known for intricate harmonies and storytelling lyrics.</p>
+                  <button class="btn btn-outline w-full">View Profile</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Writers -->
+          <div class="artist-category" id="writers" style="display: none;">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div class="card">
+                <div class="relative h-64">
+                  <img 
+                    src="https://jamiemarsland.co.uk/wp-content/uploads/2025/05/photo-9-scaled.jpg" 
+                    alt="Prose Master" 
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="card-content">
+                  <h3 class="text-xl font-semibold mb-2">Prose Master</h3>
+                  <p class="text-muted-foreground mb-4">Short story writer focusing on magical realism and urban fantasy.</p>
+                  <button class="btn btn-outline w-full">View Profile</button>
+                </div>
+              </div>
+              
+              <div class="card">
+                <div class="relative h-64">
+                  <img 
+                    src="https://jamiemarsland.co.uk/wp-content/uploads/2025/05/photo-scaled.jpg" 
+                    alt="Lyrical Poet" 
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="card-content">
+                  <h3 class="text-xl font-semibold mb-2">Lyrical Poet</h3>
+                  <p class="text-muted-foreground mb-4">Published poet with three collections and numerous awards.</p>
+                  <button class="btn btn-outline w-full">View Profile</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Painters -->
+          <div class="artist-category" id="painters" style="display: none;">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div class="card">
+                <div class="relative h-64">
+                  <img 
+                    src="https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2021/11/IMG_7217.jpg" 
+                    alt="Vivid Colors" 
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="card-content">
+                  <h3 class="text-xl font-semibold mb-2">Vivid Colors</h3>
+                  <p class="text-muted-foreground mb-4">Abstract painter working primarily with acrylics and mixed media.</p>
+                  <button class="btn btn-outline w-full">View Profile</button>
+                </div>
+              </div>
+              
+              <div class="card">
+                <div class="relative h-64">
+                  <img 
+                    src="https://mlkwtxmsxa0d.i.optimole.com/w:auto/h:auto/q:mauto/f:best/https://jamiemarsland.co.uk/wp-content/uploads/2021/11/IMG_7160-1.jpg" 
+                    alt="Urban Sketcher" 
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="card-content">
+                  <h3 class="text-xl font-semibold mb-2">Urban Sketcher</h3>
+                  <p class="text-muted-foreground mb-4">Architectural artist capturing city scenes in ink and watercolor.</p>
+                  <button class="btn btn-outline w-full">View Profile</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Join Our Collective -->
+        <section class="mb-16">
+          <div class="card card-gradient-purple">
+            <div class="card-content">
+              <h2 class="text-3xl font-bold mb-6">Join Our Collective</h2>
+              <p class="text-muted-foreground mb-8">
+                Are you a local artist looking to connect, collaborate, and grow with like-minded creators? 
+                Submit your details below to be featured on our platform and participate in upcoming events.
+              </p>
+              
+              <form class="space-y-6 max-w-2xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label for="artist-name" class="block text-sm font-medium mb-1">Full Name</label>
+                    <input type="text" id="artist-name" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Your name" />
+                  </div>
+                  
+                  <div>
+                    <label for="artist-email" class="block text-sm font-medium mb-1">Email</label>
+                    <input type="email" id="artist-email" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="your.email@example.com" />
+                  </div>
+                </div>
+                
+                <div>
+                  <label for="artist-type" class="block text-sm font-medium mb-1">Artist Type</label>
+                  <select id="artist-type" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <option value="">Select artist type</option>
+                    <option value="djs">DJ / Producer</option>
+                    <option value="comedians">Comedian</option>
+                    <option value="singers">Singer</option>
+                    <option value="bands">Band</option>
+                    <option value="writers">Writer</option>
+                    <option value="painters">Painter</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label for="artist-bio" class="block text-sm font-medium mb-1">Bio</label>
+                  <textarea id="artist-bio" rows="4" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Tell us about yourself and your artistic practice (max 500 characters)"></textarea>
+                </div>
+                
+                <div>
+                  <label for="social-link" class="block text-sm font-medium mb-1">Social Media or Portfolio Link (Optional)</label>
+                  <input type="url" id="social-link" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="https://..." />
+                </div>
+                
+                <div>
+                  <label for="join-message" class="block text-sm font-medium mb-1">Message</label>
+                  <textarea id="join-message" rows="4" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Why would you like to join our collective?"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Submit Application</button>
+              </form>
+            </div>
+          </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
+          <div class="space-y-4">
+            <details class="bg-white/5 p-4 rounded-lg">
+              <summary class="font-semibold cursor-pointer">How can I join Kismet Theory?</summary>
+              <div class="mt-4 text-muted-foreground">
+                Fill out the submission form above with your details and portfolio. Our team reviews applications monthly and will reach out if your work aligns with our collective.
+              </div>
+            </details>
+            
+            <details class="bg-white/5 p-4 rounded-lg">
+              <summary class="font-semibold cursor-pointer">Do you host regular events?</summary>
+              <div class="mt-4 text-muted-foreground">
+                Yes! We organize monthly showcases, workshops, and collaborative sessions. Check our Events page for upcoming dates and opportunities to participate.
+              </div>
+            </details>
+            
+            <details class="bg-white/5 p-4 rounded-lg">
+              <summary class="font-semibold cursor-pointer">Is there a membership fee?</summary>
+              <div class="mt-4 text-muted-foreground">
+                We currently don't charge a membership fee. We operate on a collaborative basis where members contribute their skills, time, and resources to support the collective's initiatives.
+              </div>
+            </details>
+            
+            <details class="bg-white/5 p-4 rounded-lg">
+              <summary class="font-semibold cursor-pointer">Can I collaborate with other artists in the collective?</summary>
+              <div class="mt-4 text-muted-foreground">
+                Absolutely! Fostering collaboration between different artistic disciplines is one of our core values. We regularly facilitate networking opportunities and collaborative projects.
+              </div>
+            </details>
+          </div>
+        </section>
+      </div>
+    </main>
+    
+    <script src="script.js"></script>
+    <script>
+      // Artist category tab functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const tabs = document.querySelectorAll('.artist-tab');
+        const categories = document.querySelectorAll('.artist-category');
+        
+        tabs.forEach(tab => {
+          tab.addEventListener('click', function() {
+            const category = this.dataset.category;
+            
+            // Remove active class from all tabs and categories
+            tabs.forEach(t => t.classList.remove('active'));
+            categories.forEach(c => {
+              c.classList.remove('active');
+              c.style.display = 'none';
+            });
+            
+            // Add active class to clicked tab and corresponding category
+            this.classList.add('active');
+            const targetCategory = document.getElementById(category);
+            if (targetCategory) {
+              targetCategory.classList.add('active');
+              targetCategory.style.display = 'block';
+            }
+          });
+        });
+      });
+    </script>
+    
+    <style>
+      .artist-tab {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 0.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--color-muted-foreground);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      
+      .artist-tab:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--color-foreground);
+      }
+      
+      .artist-tab.active {
+        background: var(--color-accent);
+        color: white;
+        border-color: var(--color-accent);
+      }
+      
+      .artist-category {
+        margin-top: 2rem;
+      }
+      
+      .card-gradient-purple {
+        background-image: linear-gradient(to right, rgba(168, 85, 247, 0.05), rgba(236, 72, 153, 0.05));
+      }
+      
+      .badge-secondary {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.75rem;
+        display: inline-block;
+      }
+    </style>
+  </body>
+</html>
