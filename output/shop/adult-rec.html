@@ -10,7 +10,6 @@
     <meta property="og:image" content="../og-image.png" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="../styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/lucide@0.462.0/dist/umd/lucide.min.js"></script>
   </head>
   <body class="dark">
     <aside id="sidebar" class="sidebar">
@@ -26,12 +25,12 @@
         <div class="sidebar-menu-toggle">
           <button id="menu-toggle" aria-label="Toggle menu">
             <span class="menu-text">MENU</span>
-            <i data-lucide="menu"></i>
+            <span class="icon" aria-hidden="true">☰</span>
           </button>
         </div>
         <div class="theme-toggle">
           <button id="theme-button" aria-label="Toggle theme">
-            <i data-lucide="moon"></i>
+            <span class="icon" aria-hidden="true">☾</span>
           </button>
         </div>
       </div>
@@ -43,7 +42,7 @@
         <div>Theory</div>
       </a>
       <button id="mobile-menu-toggle" aria-label="Toggle mobile menu">
-        <i data-lucide="menu"></i>
+        <span class="icon" aria-hidden="true">☰</span>
       </button>
     </header>
     
@@ -66,7 +65,7 @@
         <div class="card mb-6">
           <div class="card-content">
             <div class="flex items-center justify-center mb-4">
-              <i data-lucide="alert-circle" class="mr-2 text-accent"></i>
+              <span class="icon mr-2 text-accent" aria-hidden="true">⚠</span>
               <h2 class="text-xl font-bold">Age Verification Required</h2>
             </div>
             <p class="text-center mb-4">
@@ -85,7 +84,7 @@
           <div class="card card-gradient-amber mb-6">
             <div class="card-content">
               <div class="card-header">
-                <i data-lucide="info"></i>
+                <span class="icon" aria-hidden="true">i</span>
                 <h2>About Our Adult Recreation Products</h2>
               </div>
               <p>
@@ -122,7 +121,7 @@
                   <button class="btn btn-primary">Add to Cart</button>
                 </div>
                 <div class="mt-2 text-sm text-muted-foreground">
-                  <i data-lucide="clover" class="inline mr-1" style="width: 16px; height: 16px;"></i> Part of Finn's Lucky collection. (KT)
+                  <span class="icon inline mr-1" aria-hidden="true">☘</span> Part of Finn's Lucky collection. (KT)
                 </div>
               </div>
             </div>
@@ -146,7 +145,7 @@
           <div class="card card-gradient-amber mt-8">
             <div class="card-content">
               <div class="card-header">
-                <i data-lucide="brush"></i>
+                <span class="icon" aria-hidden="true">🖌</span>
                 <h2>Custom Adult Recreation Options</h2>
               </div>
               <p class="mb-6">

@@ -1,9 +1,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize Lucide icons
-  lucide.createIcons();
-  
-  // Get DOM elements
+  // Initialize local UI state
+// Get DOM elements
   const menuToggle = document.getElementById('menu-toggle');
   const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
   const themeButton = document.getElementById('theme-button');
@@ -24,11 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (themeButton) {
       themeButton.innerHTML = '';
       const iconName = isDarkTheme ? 'sun' : 'moon';
-      const icon = document.createElement('i');
-      icon.setAttribute('data-lucide', iconName);
-      themeButton.appendChild(icon);
-      lucide.createIcons();
-    }
+      themeButton.appendChild(createIcon(iconName));
+}
     
     // Store theme preference
     localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
@@ -42,11 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (themeButton) {
       themeButton.innerHTML = '';
       const iconName = isDarkTheme ? 'sun' : 'moon';
-      const icon = document.createElement('i');
-      icon.setAttribute('data-lucide', iconName);
-      themeButton.appendChild(icon);
-      lucide.createIcons();
-    }
+      themeButton.appendChild(createIcon(iconName));
+}
   }
   
   // Menu toggle functionality
@@ -61,30 +53,22 @@ document.addEventListener('DOMContentLoaded', function() {
     if (menuToggle) {
       menuToggle.innerHTML = '';
       if (isMenuOpen) {
-        const icon = document.createElement('i');
-        icon.setAttribute('data-lucide', 'x');
-        menuToggle.appendChild(icon);
+        menuToggle.appendChild(createIcon('x'));
       } else {
         const text = document.createElement('span');
         text.className = 'menu-text';
         text.textContent = 'MENU';
         menuToggle.appendChild(text);
         
-        const icon = document.createElement('i');
-        icon.setAttribute('data-lucide', 'menu');
-        menuToggle.appendChild(icon);
+        menuToggle.appendChild(createIcon('menu'));
       }
-      lucide.createIcons();
-    }
+}
     
     // Update mobile menu toggle icon
     if (mobileMenuToggle) {
       mobileMenuToggle.innerHTML = '';
-      const icon = document.createElement('i');
-      icon.setAttribute('data-lucide', isMenuOpen ? 'x' : 'menu');
-      mobileMenuToggle.appendChild(icon);
-      lucide.createIcons();
-    }
+      mobileMenuToggle.appendChild(createIcon(isMenuOpen ? 'x' : 'menu'));
+}
   };
   
   // Event listeners for menu toggles
@@ -108,12 +92,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Initialize calendar for booking if available
+  // The standalone preview does not process bookings, so show a local status instead.
   const bookingCalendar = document.getElementById('booking-calendar');
-  if (bookingCalendar && typeof Datepicker !== 'undefined') {
-    new Datepicker(bookingCalendar, {
-      minDate: new Date(),
-      format: 'mm/dd/yyyy'
-    });
+  if (bookingCalendar) {
+    bookingCalendar.textContent = 'Online scheduling is coming soon.';
   }
 });
