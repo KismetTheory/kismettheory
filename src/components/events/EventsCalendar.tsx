@@ -4,7 +4,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
 import { WordPressImage } from "@/components/photo-journal/types";
-import { InfoCircledIcon } from "@radix-ui/react-icons";
+import { wordpressHtmlToText } from "@/lib/wordpress";
 
 interface EventsCalendarProps {
   posts: WordPressImage[];
@@ -43,8 +43,8 @@ const EventsCalendar = ({ posts }: EventsCalendarProps) => {
   const isKismetEvent = (post: WordPressImage) => {
     // This is a placeholder implementation
     // You might want to check for a specific category or tag in the WordPress post
-    return post.title.rendered.toLowerCase().includes('kismet') || 
-           (post.content.rendered && post.content.rendered.toLowerCase().includes('kismet'));
+    return wordpressHtmlToText(post.title.rendered).toLowerCase().includes('kismet') ||
+           wordpressHtmlToText(post.content.rendered).toLowerCase().includes('kismet');
   };
 
   return (
@@ -114,9 +114,10 @@ const EventsCalendar = ({ posts }: EventsCalendarProps) => {
                         : 'bg-muted border-border'
                     }`}
                   >
-                    <h4 className="font-medium" dangerouslySetInnerHTML={{ __html: event.title.rendered }} />
-                    <div className="text-sm text-muted-foreground mt-1" 
-                         dangerouslySetInnerHTML={{ __html: event.content.rendered || '' }} />
+                    <h4 className="font-medium">{wordpressHtmlToText(event.title.rendered)}</h4>
+                    <div className="text-sm text-muted-foreground mt-1">
+                      {wordpressHtmlToText(event.content.rendered)}
+                    </div>
                   </div>
                 ))
               ) : (
