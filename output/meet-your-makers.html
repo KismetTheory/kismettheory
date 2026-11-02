@@ -10,7 +10,6 @@
     <meta property="og:image" content="og-image.png" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/lucide@0.462.0/dist/umd/lucide.min.js"></script>
   </head>
   <body class="dark">
     <aside id="sidebar" class="sidebar">
@@ -26,12 +25,12 @@
         <div class="sidebar-menu-toggle">
           <button id="menu-toggle" aria-label="Toggle menu">
             <span class="menu-text">MENU</span>
-            <i data-lucide="menu"></i>
+            <span class="icon" aria-hidden="true">☰</span>
           </button>
         </div>
         <div class="theme-toggle">
           <button id="theme-button" aria-label="Toggle theme">
-            <i data-lucide="moon"></i>
+            <span class="icon" aria-hidden="true">☾</span>
           </button>
         </div>
       </div>
@@ -43,7 +42,7 @@
         <div>Theory</div>
       </a>
       <button id="mobile-menu-toggle" aria-label="Toggle mobile menu">
-        <i data-lucide="menu"></i>
+        <span class="icon" aria-hidden="true">☰</span>
       </button>
     </header>
     
@@ -101,27 +100,27 @@
           <!-- Artist Category Tabs -->
           <div class="flex flex-wrap gap-2 mb-8">
             <button class="artist-tab active" data-category="djs">
-              <i data-lucide="music" style="width: 16px; height: 16px; margin-right: 8px;"></i>
+              <span class="icon" aria-hidden="true">♫</span>
               DJs / Producers
             </button>
             <button class="artist-tab" data-category="comedians">
-              <i data-lucide="mic" style="width: 16px; height: 16px; margin-right: 8px;"></i>
+              <span class="icon" aria-hidden="true">🎙</span>
               Comedians
             </button>
             <button class="artist-tab" data-category="singers">
-              <i data-lucide="mic" style="width: 16px; height: 16px; margin-right: 8px;"></i>
+              <span class="icon" aria-hidden="true">🎙</span>
               Singers
             </button>
             <button class="artist-tab" data-category="bands">
-              <i data-lucide="music" style="width: 16px; height: 16px; margin-right: 8px;"></i>
+              <span class="icon" aria-hidden="true">♫</span>
               Bands
             </button>
             <button class="artist-tab" data-category="writers">
-              <i data-lucide="pen-tool" style="width: 16px; height: 16px; margin-right: 8px;"></i>
+              <span class="icon" aria-hidden="true">✎</span>
               Writers
             </button>
             <button class="artist-tab" data-category="painters">
-              <i data-lucide="paintbrush" style="width: 16px; height: 16px; margin-right: 8px;"></i>
+              <span class="icon" aria-hidden="true">🖌</span>
               Painters
             </button>
           </div>
