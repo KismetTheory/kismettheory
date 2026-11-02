@@ -10,7 +10,7 @@ This is a static HTML version of the Kismet Theory website, converted from the o
 - `shop.html` - Shop overview page
 - `shop/rec-room.html` - Example of a shop category page
 - `styles.css` - All CSS styles for the site
-- `script.js` - JavaScript functionality for menus, theme toggle, etc.
+- `script.js` - Local JavaScript functionality for menus, theme toggle, and static preview states
 
 ## Features
 
@@ -39,9 +39,9 @@ To convert this to a WordPress theme:
 
 ## Additional Information
 
-- The site uses the Lucide icon library
-- Font used is Inter from Google Fonts
-- The calendar functionality on the Tarot page uses vanillajs-datepicker (should be added if needed)
+- Static HTML pages use local browser scripts only; they do not load third-party executable code.
+- Icons use local text fallbacks and the Tarot scheduling panel shows its built-in coming-soon message.
+- Font used is Inter from Google Fonts.
 
 ## License
 
