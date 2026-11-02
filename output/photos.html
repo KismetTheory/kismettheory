@@ -10,7 +10,6 @@
     <meta property="og:image" content="og-image.png" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/lucide@0.462.0/dist/umd/lucide.min.js"></script>
   </head>
   <body class="dark">
     <aside id="sidebar" class="sidebar">
@@ -26,12 +25,12 @@
         <div class="sidebar-menu-toggle">
           <button id="menu-toggle" aria-label="Toggle menu">
             <span class="menu-text">MENU</span>
-            <i data-lucide="menu"></i>
+            <span class="icon" aria-hidden="true">☰</span>
           </button>
         </div>
         <div class="theme-toggle">
           <button id="theme-button" aria-label="Toggle theme">
-            <i data-lucide="moon"></i>
+            <span class="icon" aria-hidden="true">☾</span>
           </button>
         </div>
       </div>
@@ -43,7 +42,7 @@
         <div>Theory</div>
       </a>
       <button id="mobile-menu-toggle" aria-label="Toggle mobile menu">
-        <i data-lucide="menu"></i>
+        <span class="icon" aria-hidden="true">☰</span>
       </button>
     </header>
     
@@ -68,25 +67,25 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
               <a href="https://www.facebook.com/Created4Kismet" target="_blank" rel="noopener noreferrer" 
                  class="flex flex-col items-center justify-center p-4 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-all transform hover:scale-105 hover:shadow-lg">
-                <i data-lucide="facebook" class="w-6 h-6 mb-2"></i>
+                <span class="icon w-6 h-6 mb-2" aria-hidden="true">f</span>
                 <span class="text-sm font-medium">Facebook</span>
               </a>
               
               <a href="https://www.instagram.com/created4kismet" target="_blank" rel="noopener noreferrer"
                  class="flex flex-col items-center justify-center p-4 rounded-lg bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 hover:opacity-90 text-white transition-all transform hover:scale-105 hover:shadow-lg">
-                <i data-lucide="instagram" class="w-6 h-6 mb-2"></i>
+                <span class="icon w-6 h-6 mb-2" aria-hidden="true">◎</span>
                 <span class="text-sm font-medium">Instagram</span>
               </a>
               
               <a href="https://www.tiktok.com/@created4kismet" target="_blank" rel="noopener noreferrer"
                  class="flex flex-col items-center justify-center p-4 rounded-lg bg-black hover:bg-gray-900 text-white transition-all transform hover:scale-105 hover:shadow-lg">
-                <i data-lucide="music" class="w-6 h-6 mb-2"></i>
+                <span class="icon w-6 h-6 mb-2" aria-hidden="true">♫</span>
                 <span class="text-sm font-medium">TikTok</span>
               </a>
               
               <a href="https://www.youtube.com/kismettheory" target="_blank" rel="noopener noreferrer"
                  class="flex flex-col items-center justify-center p-4 rounded-lg bg-red-600 hover:bg-red-700 text-white transition-all transform hover:scale-105 hover:shadow-lg">
-                <i data-lucide="youtube" class="w-6 h-6 mb-2"></i>
+                <span class="icon w-6 h-6 mb-2" aria-hidden="true">▶</span>
                 <span class="text-sm font-medium">YouTube</span>
               </a>
             </div>
@@ -106,7 +105,7 @@
                          alt="Tarot Card Readings" 
                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-end p-4">
-                      <i data-lucide="arrow-right" class="text-white w-8 h-8"></i>
+                      <span class="icon text-white w-8 h-8" aria-hidden="true">→</span>
                     </div>
                   </div>
                   <div class="p-5">
@@ -124,7 +123,7 @@
                          alt="Finn's Brand Lucky" 
                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-end p-4">
-                      <i data-lucide="arrow-right" class="text-white w-8 h-8"></i>
+                      <span class="icon text-white w-8 h-8" aria-hidden="true">→</span>
                     </div>
                   </div>
                   <div class="p-5">
@@ -142,7 +141,7 @@
                          alt="Kismet" 
                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-end p-4">
-                      <i data-lucide="arrow-right" class="text-white w-8 h-8"></i>
+                      <span class="icon text-white w-8 h-8" aria-hidden="true">→</span>
                     </div>
                   </div>
                   <div class="p-5">
