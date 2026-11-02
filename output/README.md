@@ -26,6 +26,10 @@ This is a static HTML version of the Kismet Theory website, converted from the o
 2. Make sure to maintain the file structure
 3. The site should work without any additional setup
 
+## Event Submission Preview
+
+The event submission controls in `photo-journal.html` are intentionally disabled in this standalone static preview. They do not collect, send, or store visitor information. Before enabling submissions, connect the form to a dedicated HTTPS POST handler that validates requests and provides an explicit success or error response.
+
 ## Converting to WordPress
 
 To convert this to a WordPress theme:
