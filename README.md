@@ -36,6 +36,14 @@ npm i
 npm run dev
 ```
 
+By default, the development server binds to `127.0.0.1` and is reachable only from the machine running it. If you need to test on a trusted local network, explicitly choose that machine's LAN address:
+
+```sh
+VITE_HOST=192.168.1.50 npm run dev
+```
+
+Do not expose the development server to an untrusted network or the public internet.
+
 **Edit a file directly in GitHub**
 
 - Navigate to the desired file(s).
